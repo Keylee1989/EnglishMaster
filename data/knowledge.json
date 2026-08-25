@@ -1,0 +1,724 @@
+{
+  "qa": [
+    {
+      "id": "q1",
+      "keywords": ["自然拼读", "phonics", "发音", "拼读", "入门"],
+      "question": "什么是自然拼读(Phonics)？",
+      "answer": "自然拼读(Phonics)是学习字母和发音对应关系的方法。通过掌握字母和字母组合的发音规律，可以'看词读音、听音写词'。建议从26个字母的基础发音开始学，再过渡到CVC单词(辅音-元音-辅音，如cat/pig/sun)，最后学字母组合(sh/ch/th等)。这是英语国家儿童识字的主要方法，对零基础学习者也非常适用。",
+      "category": "拼读",
+      "level": 0
+    },
+    {
+      "id": "q2",
+      "keywords": ["26个字母", "字母发音", "字母", "abc", "基础"],
+      "question": "26个英文字母的发音是什么？",
+      "answer": "26个字母各有名称音和基础发音。常见单词首字母发音：A /eɪ/ apple苹果，B /biː/ book书，C /siː/ cat猫，D /diː/ dog狗，E /iː/ egg鸡蛋，F /ɛf/ fish鱼，G /dʒiː/ goat山羊，H /eɪtʃ/ hat帽子，I /aɪ/ ice冰，J /dʒeɪ/ juice果汁，K /keɪ/ kite风筝，L /ɛl/ lion狮子，M /ɛm/ moon月亮，N /ɛn/ nose鼻子，O /oʊ/ orange橙子，P /piː/ pig猪，Q /kjuː/ queen女王，R /ɑːr/ rabbit兔子，S /ɛs/ sun太阳，T /tiː/ tree树，U /juː/ umbrella雨伞，V /viː/ van面包车，W /ˈdʌbəljuː/ watch手表，X /ɛks/ fox狐狸，Y /waɪ/ yellow黄色，Z /ziː/ zebra斑马。",
+      "category": "拼读",
+      "level": 0
+    },
+    {
+      "id": "q3",
+      "keywords": ["元音", "元音字母", "aeiou", "短元音", "长元音"],
+      "question": "英语的元音字母有哪些？短元音和长元音有什么区别？",
+      "answer": "英语有5个元音字母：A, E, I, O, U(有时Y也作元音)。每个元音字母有短音和长音两种：A短音/æ/(cat)长音/eɪ/(cake)；E短音/ɛ/(bed)长音/iː/(he)；I短音/ɪ/(sit)长音/aɪ/(kite)；O短音/ɒ/(dog)长音/oʊ/(go)；U短音/ʌ/(cup)长音/juː/(cute)。规律：在CVC结构(如cat/pig)中元音通常发短音；在CV结构(如he/go)或带Magic E的词(如cake/kite)中元音发长音(即字母本身名称音)。",
+      "category": "拼读",
+      "level": 1
+    },
+    {
+      "id": "q4",
+      "keywords": ["辅音", "辅音字母", "consonant"],
+      "question": "什么是辅音字母？有哪些？",
+      "answer": "除A/E/I/O/U外，其余21个字母都是辅音字母：B,C,D,F,G,H,J,K,L,M,N,P,Q,R,S,T,V,W,X,Y,Z。辅音发音时气流受到阻碍。部分辅音字母在不同单词中发音不同：C在cat中发/k/(硬c)，在city中发/s/(软c)；G在goat中发/g/(硬g)，在gym中发/dʒ/(软g)。一般规律：C/G在a/o/u或辅音前发硬音，在e/i/y前发软音。",
+      "category": "拼读",
+      "level": 1
+    },
+    {
+      "id": "q5",
+      "keywords": ["CVC", "辅音元音辅音", "拼读规则", "短元音"],
+      "question": "什么是CVC单词？怎么读？",
+      "answer": "CVC单词是'辅音+元音+辅音'结构的单词，是最基础的拼读练习。例如cat(c-a-t)、pig(p-i-g)、sun(s-u-n)。读法：先读辅音，再读短元音，最后读辅音，三个音连起来。如 cat = /k/+/æ/+/t/ = /kæt/。CVC结构中元音通常发短音。常见CVC词族：-at族(cat/bat/hat/mat/rat)，-an族(man/fan/pan/ran)，-ig族(pig/big/dig/wig)。掌握CVC拼读后能轻松读出上百个基础词。",
+      "category": "拼读",
+      "level": 1
+    },
+    {
+      "id": "q6",
+      "keywords": ["魔法E", "magic e", "长元音", "无声e", "词尾e"],
+      "question": "什么是魔法E (Magic E) 规则？",
+      "answer": "Magic E规则：以'元音+辅音+e'结尾的单词中，词尾的e不发音(无声e)，但它会让前面的元音发长音(即字母名称音)。例如：cap→cape(帽子→海角)，kit→kite(装备→风筝)，hop→hope(跳→希望)，pin→pine(大头针→松树)。规律：对比短词(发短元音)和加了e的长词(发长元音)：bit/bite、cut/cute、twin/twine。这是英语最常见的拼读规律之一，掌握后能读出大量新词。",
+      "category": "拼读",
+      "level": 1
+    },
+    {
+      "id": "q7",
+      "keywords": ["sh", "ch", "th", "ph", "字母组合", "辅音组合", "digraph"],
+      "question": "字母组合 sh/ch/th/ph/wh 怎么发音？",
+      "answer": "这些是辅音字母组合(digraph)，两个字母发一个音：sh发/ʃ/(she/ship/fish)；ch发/tʃ/(chair/chip/church)；th有两种发音：清音/θ/(think/three/bath)和浊音/ð/(this/that/with)；ph发/f/(phone/photo/graph)；wh发/w/(what/when/where)或/h/(who/whose)。建议用对照词组练习：she/see、chair/care、think/tink。多读多听自然能区分。",
+      "category": "拼读",
+      "level": 1
+    },
+    {
+      "id": "q8",
+      "keywords": ["oo", "字母组合", "长音", "短音"],
+      "question": "字母组合 oo 怎么发音？",
+      "answer": "oo组合有两种发音：长音/uː/(moon/food/tooth/school)和短音/ʊ/(book/look/good/foot)。规律不完全规则，需记忆：①多数情况下发长音/uː/，如moon, food, room, zoo；②常见短音词需特殊记忆：book, look, good, foot, wood, stood。技巧：oo后跟d/k/t时多短音(good/book/foot)；其他情况多长音。建议结合例句练习：The moon is bright. / I read a good book.",
+      "category": "拼读",
+      "level": 2
+    },
+    {
+      "id": "q9",
+      "keywords": ["ee", "ea", "ai", "ay", "元音组合", "vowel team"],
+      "question": "字母组合 ee/ea/ai/ay 怎么发音？",
+      "answer": "这些是元音组合(vowel team)，两元音一起发一个长音：ee发/iː/(tree/see/green)；ea多发/iː/(eat/read/sea)，少数发/eɪ/(great/break)或/ɛ/(head/bread)；ai发/eɪ/(rain/train/wait)；ay发/eɪ/(day/play/say)。规律：'两元音走一起，第一个发音'(When two vowels go walking, the first one does the talking)。例如ai中a发名称音，i不发音。掌握后能读出大量单词。",
+      "category": "拼读",
+      "level": 2
+    },
+    {
+      "id": "q10",
+      "keywords": ["r控制", "r控制元音", "ar", "er", "ir", "or", "ur"],
+      "question": "什么是R控制的元音 (ar/er/ir/or/ur)？",
+      "answer": "当元音字母后跟r时，元音发音会改变，称为R控制元音：ar发/ɑːr/(car/star/farm)；er发/ər/(her/water/mother)；ir发/ɜːr/(bird/girl/shirt)；or发/ɔːr/(for/born/corn)；ur发/ɜːr/(turn/fur/surf)。规律：er/ir/ur发音相同(都是/ɜːr/)，靠记忆区分拼写。常见词：car, star, water, bird, work, turn。R控制元音是英语拼读的难点之一，多读多练即可。",
+      "category": "拼读",
+      "level": 2
+    },
+    {
+      "id": "q11",
+      "keywords": ["辅音连缀", "blends", "bl", "br", "st", "str"],
+      "question": "什么是辅音连缀(blends)？怎么读？",
+      "answer": "辅音连缀是两个或三个辅音连在一起，每个辅音仍发自己的音(不像sh/ch合并)。常见：bl-/br-/cl-/cr-/dr-/fl-/fr-/gl-/gr-/pl-/pr-/sl-/sm-/sn-/sp-/st-/sk-/sw-/tr-/str-/spr-/scr-。例：blue(bl+ue)、bread(br+ead)、green(gr+een)、street(str+eet)、slow(sl+ow)。读法：把两个辅音连起来发，不要加元音(不是bʊluː，是bluː)。从慢速练习开始，逐渐加快即可。",
+      "category": "拼读",
+      "level": 2
+    },
+    {
+      "id": "q12",
+      "keywords": ["音标", "IPA", "国际音标", "发音符号"],
+      "question": "什么是英语音标(IPA)？需要学吗？",
+      "answer": "音标(IPA, International Phonetic Alphabet)是记录发音的符号系统，相当于发音的'拼音'。如cat的音标是/kæt/，see是/siː/。学音标的好处：①查字典能准确发音；②区分同字母不同音(c在cat和city)。零基础学习者可先学自然拼读(够用80%常用词)，再学音标补足不规则部分。建议学D.J.音标(英式)或K.K.音标(美式)，重点是元音/辅音符号、长音符号ː、重音符号ˈ。不必死记硬背，结合单词学更高效。",
+      "category": "拼读",
+      "level": 1
+    },
+    {
+      "id": "q13",
+      "keywords": ["a发音", "字母a", "多种发音"],
+      "question": "字母a有几种发音？",
+      "answer": "字母a在不同单词中发音不同：①/eɪ/(长音/name/cake/table)；②/æ/(短音/cat/map/apple)；③/ɑː/(在r前或ss前/car/class/father)；④/ə/(非重读/about/sofa)；⑤/ɒ/(在w前/wash/want)。常见规律：a+e发/eɪ/(cake)；a在闭音节(CVC)发/æ/(cat)；ar发/ɑː/(car)；a在w/y前常发/ɒ/(wash)。多读多听自然就能区分。",
+      "category": "拼读",
+      "level": 2
+    },
+    {
+      "id": "q14",
+      "keywords": ["c发音", "g发音", "软音", "硬音"],
+      "question": "字母c和g的硬音软音怎么区分？",
+      "answer": "c和g都有硬音和软音两种：c硬音/k/(在a/o/u或辅音前：cat/cup/class)；c软音/s/(在e/i/y前：city/center/cycle)。g硬音/g/(在a/o/u或辅音前：goat/gas/glass)；g软音/dʒ/(在e/i/y前：gym/giant/page)。例外：give, gift, girl 等少数词虽在i前仍发硬音，需单独记忆。口诀：c和g，aou前发硬音，eiy前发软音。",
+      "category": "拼读",
+      "level": 2
+    },
+    {
+      "id": "q15",
+      "keywords": ["拼读练习", "如何练拼读", "拼读方法"],
+      "question": "零基础怎么练习自然拼读？",
+      "answer": "拼读练习步骤：①先学26个字母的名称音和基础发音(用单词卡：A-apple, B-book)；②学5个短元音/æ//ɛ//ɪ//ɒ//ʌ/(用CVC词族：-at/-en/-ig/-og/-un)；③学常见辅音组合(sh/ch/th/ck/ng)；④学Magic E规则(cap→cape)；⑤学元音组合(ee/ea/ai/ay/oo)；⑥学R控制元音(ar/er/ir/or/ur)。每学一条规律做'看词读音→听音写词'练习。可用本App的'自然拼读'模块逐项练习。每天15分钟，1-2个月可掌握基础拼读。",
+      "category": "拼读",
+      "level": 0
+    },
+    {
+      "id": "q16",
+      "keywords": ["词性", "parts of speech", "名词", "动词", "形容词"],
+      "question": "英语有哪些词性？",
+      "answer": "英语主要有8大词性：①名词(n. noun)：人/事物/概念，如book, teacher；②代词(pron. pronoun)：代替名词，如I, he, this；③动词(v. verb)：表动作或状态，如run, is, eat；④形容词(adj. adjective)：修饰名词，如big, happy；⑤副词(adv. adverb)：修饰动词/形容词/其他副词，如quickly, very；⑥介词(prep. preposition)：表关系，如in, on, at；⑦连词(conj. conjunction)：连接词句，如and, but, because；⑧感叹词(int. interjection)：表情感，如oh, wow。此外还有冠词(a/an/the)，常归入形容词。学单词时记词性很重要，决定其在句子中的用法。",
+      "category": "词汇",
+      "level": 1
+    },
+    {
+      "id": "q17",
+      "keywords": ["名词复数", "复数", "plurals", "加s", "加es"],
+      "question": "名词变复数有什么规则？",
+      "answer": "可数名词变复数规则：①一般加-s (books/cats/dogs)；②以s/sh/ch/x结尾加-es (buses/watches/boxes)；③辅音+y结尾，变y为i加-es (city→cities, baby→babies)；元音+y直接加-s (boys/days)；④以f/fe结尾，变f为v加-es (leaf→leaves, knife→knives)；⑤部分以o结尾加-es (tomato→tomatoes, potato)，外来词加-s (photos/pianos)；⑥不规则：man→men, woman→women, child→children, foot→feet, tooth→teeth, mouse→mice, goose→geese, ox→oxen；⑦单复数同形：sheep/deer/fish/Chinese/Japanese。",
+      "category": "词汇",
+      "level": 1
+    },
+    {
+      "id": "q18",
+      "keywords": ["不可数名词", "uncountable", "water", "milk"],
+      "question": "什么是不可数名词？怎么用？",
+      "answer": "不可数名词表示不能数的事物(物质/抽象)：water水、milk牛奶、rice米饭、bread面包、money钱、time时间、information信息、advice建议、news新闻、furniture家具、knowledge知识。特点：①没有复数形式(不能说waters)；②不能用a/an(不能说a water)；③要量化时用'量词+of'：a glass of water, two pieces of bread, three bottles of milk；④可用some/any/much/(a) little修饰。对比可数：an apple vs some water。常见错：'a news'❌ → 'a piece of news'✓；'many money'❌ → 'much money'✓。",
+      "category": "词汇",
+      "level": 2
+    },
+    {
+      "id": "q19",
+      "keywords": ["比较级", "最高级", "er", "est", "more", "most"],
+      "question": "形容词比较级和最高级怎么变？",
+      "answer": "变化规则：①单音节加-er/-est (tall→taller→tallest)；②以e结尾加-r/-st (large→larger→largest)；③辅音+y变i加-er/-est (happy→happier→happiest)；④重读闭音节双写尾字母 (big→bigger→biggest, hot→hotter→hottest)；⑤多音节和部分双音节前加more/most (beautiful→more beautiful→most beautiful)。⑥不规则：good/well→better→best；bad/ill→worse→worst；many/much→more→most；little→less→least；far→farther/further→farthest/furthest；old→older/elder→oldest/eldest。用法：比较级+than (She is taller than me)；同级比较 as+原级+as (He runs as fast as you)；最高级前加the (the best)。",
+      "category": "词汇",
+      "level": 2
+    },
+    {
+      "id": "q20",
+      "keywords": ["a", "an", "the", "冠词", "区别"],
+      "question": "a和an怎么区分？the什么时候用？",
+      "answer": "不定冠词a/an：表泛指'一个'，用于单数可数名词前。a用于辅音音素前(a book, a university因u发/juː/是辅音)；an用于元音音素前(an apple, an hour因h不发音)。判断看发音而非字母。定冠词the：表特指(说话双方都知道的、上文提过的、独一无二的事物)。如 the sun(独一无二)、the book you gave me(特指)。不用冠词的情况：①复数/不可数表泛指(I like apples/water)；②三餐、球类、学科前(have breakfast, play football, study English)；③专有名词前(China, Beijing)。但乐器前用the(play the piano)。",
+      "category": "词汇",
+      "level": 2
+    },
+    {
+      "id": "q21",
+      "keywords": ["some", "any", "区别"],
+      "question": "some和any有什么区别？",
+      "answer": "some和any都表示'一些'，可修饰可数复数和不可数名词。区别：①some用于肯定句(I have some apples. / There is some water.)；②any用于否定句和疑问句(I don't have any apples. / Do you have any money?)；③some也可用于请求/邀请的疑问句(Would you like some tea? / Can I have some water?)，期待对方回答'yes'。注意：some/any后接可数复数+复数动词，接不可数+单数动词。例：Some water is in the cup. / Some books are on the desk.",
+      "category": "词汇",
+      "level": 2
+    },
+    {
+      "id": "q22",
+      "keywords": ["much", "many", "区别", "a lot of"],
+      "question": "much/many/a lot of 怎么用？",
+      "answer": "区分关键看修饰的名词可数还是不可数：①many修饰可数名词复数(many books, many people)；②much修饰不可数名词(much water, much money, much time)；③a lot of / lots of 两者均可(a lot of books, a lot of water)，常用于肯定句。口诀：many数数(many apples)，much量度(much water)。在疑问句和否定句中常用many/much：How many apples? How much money? I don't have much time. 注意：a lot of 较口语化，正式写作中肯定句也可用many/much。",
+      "category": "词汇",
+      "level": 2
+    },
+    {
+      "id": "q23",
+      "keywords": ["good", "well", "区别"],
+      "question": "good和well有什么区别？",
+      "answer": "good是形容词，修饰名词，表示'好的'(a good book, He is a good student)；well作副词修饰动词，表示'好地'(He plays basketball well. / She sings well.)。注意：well也可作形容词，表示'身体健康'(I feel well. = 我感觉身体好)。常见错：'He plays good.' ❌ → 'He plays well.' ✓(副词修饰动词)。比较级：good/well的比较级都是better，最高级都是best。例：She is a good singer. / She sings well. / She is the best singer I know.",
+      "category": "词汇",
+      "level": 3
+    },
+    {
+      "id": "q24",
+      "keywords": ["make", "do", "区别"],
+      "question": "make和do怎么区分？",
+      "answer": "do强调'执行、做'动作本身，make强调'制造、产生'结果。常见搭配：do + 任务/活动/工作：do homework做作业, do housework做家务, do sports做运动, do business做生意, do a favor帮忙, do one's best尽力。make + 创造/产出物：make a cake做蛋糕, make money赚钱, make a decision做决定, make a mistake犯错, make friends交朋友, make a phone call打电话。固定搭配需记忆：do the dishes洗碗, make the bed铺床。口诀：do做事情，make造东西。对比：I do exercise. / I make a cake.",
+      "category": "词汇",
+      "level": 3
+    },
+    {
+      "id": "q25",
+      "keywords": ["say", "tell", "speak", "talk", "区别"],
+      "question": "say/tell/speak/talk 怎么区分？",
+      "answer": "say强调说话内容，tell强调告诉某人，speak强调单向说话能力/语言，talk强调双向交流。搭配：say + 内容(say 'hello', say that...)；tell + 人 + 内容(tell me a story, tell the truth)；speak + 语言/对某人说(speak English, speak to him)；talk + to/with + 人(talk to/with you, talk about sth)。例：She said she was happy. / He told me a story. / Can you speak Chinese? / Let's talk about the plan. 口诀：say说内容，tell告某人，speak单向讲，talk双向聊。",
+      "category": "词汇",
+      "level": 3
+    },
+    {
+      "id": "q26",
+      "keywords": ["borrow", "lend", "区别"],
+      "question": "borrow和lend有什么区别？",
+      "answer": "borrow是'借入'(从别人那里借来)，主语是借入方；lend是'借出'(借给别人)，主语是借出方。搭配：borrow sth from sb (I borrowed a book from the library.)；lend sth to sb / lend sb sth (Can you lend me your pen? / Can you lend your pen to me?)。记忆：borrow=入，lend=出。对比：I borrow from you, you lend to me。相关词：keep保留，return归还。例：Can I borrow your pen? = Can you lend me your pen? (意思相同，主语不同)。",
+      "category": "词汇",
+      "level": 3
+    },
+    {
+      "id": "q27",
+      "keywords": ["interesting", "interested", "区别"],
+      "question": "interesting和interested有什么区别？",
+      "answer": "-ing结尾的形容词表示'令人...的'(主动/性质)，修饰事物；-ed结尾表示'感到...的'(被动/感受)，修饰人。interesting令人感兴趣的(修饰物)：an interesting book一本有趣的书，The story is interesting.这个故事很有趣。interested感兴趣的(修饰人)：I am interested in the book.我对这本书感兴趣。类似对比：boring令人无聊 vs bored感到无聊；exciting令人兴奋 vs excited感到兴奋；surprising令人惊讶 vs surprised感到惊讶；tiring令人疲惫 vs tired感到疲惫。例：The movie is boring. / I am bored.",
+      "category": "词汇",
+      "level": 3
+    },
+    {
+      "id": "q28",
+      "keywords": ["be动词", "am", "is", "are", "系动词"],
+      "question": "什么是be动词？怎么用？",
+      "answer": "be动词是最基本的系动词，表示'是/存在'。形式：I用am(I am a student.)；第三人称单数(he/she/it/人名)用is(She is happy.)；复数和you用are(They are friends. / You are kind.)。否定：am not(无缩写)/isn't/aren't。疑问：把be提到主语前(Are you a student?)。缩写：I'm=I am, you're=you are, he's=he is, she's=she is, it's=it is, we're=we are, they're=they are。be动词后接：名词(I am a teacher)、形容词(She is happy)、介词短语(The book is on the desk)、现在分词构成进行时(He is running)。过去式：was(was用于I/he/she/it)，were(were用于you/we/they)。",
+      "category": "语法",
+      "level": 1
+    },
+    {
+      "id": "q29",
+      "keywords": ["人称代词", "主格", "宾格", "代词"],
+      "question": "什么是人称代词？主格和宾格怎么用？",
+      "answer": "人称代词分主格(作主语)和宾格(作宾语)。主格：I我/you你/he他/she她/it它/we我们/they他们，用于句首作主语(He is tall. / We like music.)。宾格：me/you/him/her/it/us/them，用于动词或介词后作宾语(I like her. / Listen to me.)。第三人称单数变化：he→him, she→her, it→it。复数：we→us, they→them。判断方法：作主语用主格(动词前)，作宾语用宾格(动词/介词后)。例：He helps me. (主格he+动词helps+宾格me) / Please call him. (动词call+宾格him)。",
+      "category": "语法",
+      "level": 1
+    },
+    {
+      "id": "q30",
+      "keywords": ["一般现在时", "经常", "习惯", "三单"],
+      "question": "一般现在时怎么用？第三人称单数怎么变？",
+      "answer": "一般现在时表示经常性、习惯性的动作或客观真理。常配always/usually/often/sometimes/never/every day等。结构：主语+动词原形。第三人称单数(he/she/it/单个人名)动词加-s/-es：①一般加-s (works)；②s/sh/ch/x/o结尾加-es (goes/watches)；③辅音+y变i加-es (study→studies)；④have→has。否定：don't/doesn't+原形。疑问：Do/Does+主语+原形？例：I go to school every day. / She works in a hospital. / The sun rises in the east. (客观真理)/ He doesn't like coffee. / Does he like coffee? 注意：客观真理即使主句是过去时，从句仍用一般现在时。",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q31",
+      "keywords": ["一般过去时", "过去", "ed", "didn't"],
+      "question": "一般过去时怎么用？规则动词和不规则动词怎么变？",
+      "answer": "一般过去时表示过去发生的事，常配yesterday/last week/in 2010/...ago。规则动词加-ed：①一般加-ed (worked)；②e结尾加-d (liked)；③辅音+y变i加-ed (studied)；④重读闭音节双写 (stopped)。不规则动词需单独记忆：go→went, see→saw, have→had, do→did, buy→bought, take→took, eat→ate, drink→drank, get→got, give→gave, come→came, make→made, find→found。否定：didn't+动词原形(He didn't come.)。疑问：Did+主语+原形？(Did you see him?)。be动词过去式was/were。例：I visited my grandma yesterday. / She went to Beijing last year. / Did you see the film?",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q32",
+      "keywords": ["一般将来时", "will", "be going to", "将来"],
+      "question": "一般将来时 will 和 be going to 有什么区别？",
+      "answer": "两种将来形式：①will+动词原形：表预测、意愿或临时决定，常配tomorrow/next week/soon。例：I will help you.(临时决定) / It will be sunny tomorrow.(预测)；②be going to+动词原形：表已计划好的打算或根据迹象的预测。例：We are going to travel next week.(计划) / Look at the clouds! It is going to rain.(迹象)。区别：will偏临时/主观意愿，be going to偏有计划/有迹象。否定：won't/isn't going to。疑问：Will...? / Is...going to? be going to中be随主语变(am/is/are)。there be将来式：There will be / There is going to be。",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q33",
+      "keywords": ["现在进行时", "ing", "正在"],
+      "question": "现在进行时怎么构成？",
+      "answer": "现在进行时表示说话时或现阶段正在进行的动作。结构：be(am/is/are)+动词现在分词(v-ing)。现在分词变化：①一般加-ing (working)；②e结尾去e加-ing (making, writing)；③重读闭音节双写尾字母加-ing (running, swimming)；④ie结尾变y加-ing (lying, dying)。常配now, right now, look, listen。例：I am reading a book now. / She is singing. / They are playing football. / Look! The bus is coming. 否定：be+not+doing (I am not sleeping.)。疑问：Be+主语+doing? (Are you working?)。",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q34",
+      "keywords": ["现在完成时", "have", "has", "过去分词", "经验"],
+      "question": "现在完成时怎么用？",
+      "answer": "现在完成时(have/has+过去分词)表示：①过去发生但对现在有影响(I have lost my key. 我钥匙丢了→现在打不开门)；②经验/经历(I have been to Beijing. 我去过北京)；③从过去持续到现在的状态(I have lived here for 10 years.)。常配already/yet/just/ever/never/since/for。过去分词变化：规则动词加-ed(worked)，不规则需记(go→gone, see→seen, do→done, write→written)。否定：haven't/hasn't+过去分词。疑问：Have/Has+主语+过去分词? 与一般过去时区别：现在完成时强调对现在的影响，过去时有具体过去时间(I went to Beijing last year. 不能用现在完成时)。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q35",
+      "keywords": ["过去完成时", "had", "过去之前"],
+      "question": "过去完成时怎么用？",
+      "answer": "过去完成时(had+过去分词)表示在过去某个时间或动作之前已经发生的事，即'过去的过去'。常配by the time, before, when引导的过去时从句。例：When I arrived, the train had left. (火车离开发生在到达之前) / By 2020, I had learned English for 5 years. / She had finished her homework before dinner. 否定：had not/hadn't+过去分词。疑问：Had+主语+过去分词? 与现在完成时区别：过去完成时的参照点是过去，现在完成时的参照点是现在。注意：必须有两个过去动作对比时才用过去完成时，单独一个过去动作用一般过去时即可。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q36",
+      "keywords": ["被动语态", "be done", "被动", "be+过去分词"],
+      "question": "被动语态怎么构成和使用？",
+      "answer": "被动语态结构：be+过去分词(done)，表示动作的承受者。当动作执行者不明确/不重要/泛指大众时使用。各时态变化：①一般现在时：is/are+done (English is spoken here.)；②一般过去时：was/were+done (The book was written in 1990.)；③现在进行时：is/are being+done (The bridge is being built.)；④现在完成时：has/have been+done (The work has been finished.)；⑤一般将来时：will be+done (It will be done tomorrow.)；⑥带情态动词：can/must be+done (It must be finished.)。带执行者用by (The book was written by him.)。注意：不及物动词(如happen)无被动；let/make sb do→被动为be made to do。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q37",
+      "keywords": ["情态动词", "can", "must", "may", "should"],
+      "question": "情态动词 can/must/may/should 怎么用？",
+      "answer": "情态动词+动词原形，无人称数变化。①can表能力/请求：I can swim. / Can you help me? 否定can't。②must表必须/禁止：You must finish it. / You mustn't smoke here. (禁止) Must I...? 否定回答用needn't(不必)。③may表许可/可能：May I come in? / It may rain. 否定may not。④should表应该/建议：You should rest. (建议休息) 否定shouldn't。⑤will表将来/请求：I will help. / Will you...? ⑥would表委婉请求：Would you like some tea? 表推测：must be(一定), can't be(不可能), may be(可能)。例：He must be tired. (他一定累了) / He can't be here. (他不可能在这)。",
+      "category": "语法",
+      "level": 1
+    },
+    {
+      "id": "q38",
+      "keywords": ["there be", "有", "存在", "is", "are"],
+      "question": "There be 句型怎么用？和 have 有什么区别？",
+      "answer": "There be 句型表示'某处有某物'(客观存在)，be的单复数由紧跟其后的名词决定(就近原则)。There is+单数/不可数：There is a book on the desk. / There is some water in the cup. There are+复数：There are some apples. 否定：There isn't/aren't。疑问：Is there...? / Are there...? 就近原则：There is a pen and two books. (最近是单数pen用is) / There are two books and a pen. (最近是复数books用are)。与have区别：there be表客观存在(某处有什么)；have表主观拥有(某人有什么)。There is a book on the desk. (存在) / I have a book. (拥有) 不能连用：'There has...' ❌。",
+      "category": "语法",
+      "level": 1
+    },
+    {
+      "id": "q39",
+      "keywords": ["定语从句", "关系代词", "who", "which", "that"],
+      "question": "什么是定语从句？关系代词怎么选？",
+      "answer": "定语从句修饰名词/代词(先行词)，相当于一个长形容词。结构：先行词+关系词+从句。关系代词选择：①who修饰人(作主语/宾语)：The man who is talking is my teacher. ②whom修饰人(作宾语，可省)：The man (whom) I met is a doctor. ③whose表所属(人/物)：The girl whose hair is long is my sister. ④which修饰物：The book which is on the desk is mine. ⑤that修饰人或物(可替代who/which)：The man/the book that... 限制性定语从句中that可替换who/which。非限制性(用逗号隔开)不能用that：My father, who is 50, works hard. ⑥关系副词when(时间)/where(地点)/why(原因)：The city where I live is beautiful.",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q40",
+      "keywords": ["宾语从句", "that", "if", "whether", "疑问词"],
+      "question": "宾语从句怎么用？",
+      "answer": "宾语从句作动词/介词的宾语，是一个完整句子作宾语。三类引导词：①that引导陈述句作宾语从句(that无义可省)：I think (that) he is right. / He said that he would come. ②if/whether引导一般疑问句转化的宾语从句：I don't know if he will come. (我不知道他是否会来) / She asked whether I was ready. ③疑问词引导特殊疑问句转化的宾语从句：I don't know what he wants. / Tell me where you live. 注意事项：①宾语从句用陈述语序(主语+谓语)，不是疑问语序：Tell me where you live. ✓ (不是where do you live) ②时态呼应：主句过去时，从句也用过去时态；客观真理除外。③if与whether多数可互换，但or not紧跟、不定式前、介词后只能用whether。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q41",
+      "keywords": ["虚拟语气", "if", "条件句", "假设"],
+      "question": "虚拟语气怎么用？",
+      "answer": "虚拟语气表示非真实/假设的情况。if条件句三种：①真实条件句(可能发生)：If it rains, I will stay. (主将从现) ②虚拟现在(与现在事实相反)：If I were you, I would go. (从句用过去式，主句would+原形；be动词一律用were) ③虚拟过去(与过去事实相反)：If I had known, I would have helped. (从句had+过去分词，主句would have+过去分词) ④虚拟将来(不太可能)：If I were to do/should do, I would... wish+宾从：wish+过去式(现在虚拟) I wish I were rich. / wish+过去完成时(过去虚拟) I wish I had studied harder. as if/though+虚拟：He talks as if he knew everything. would rather+从句(虚拟)：I would rather you didn't smoke.",
+      "category": "语法",
+      "level": 4
+    },
+    {
+      "id": "q42",
+      "keywords": ["直接引语", "间接引语", "转述"],
+      "question": "直接引语和间接引语怎么转换？",
+      "answer": "直接引语(原话加引号)→间接引语(转述)转换规则：①人称变化：引语中第一人称变为与主句主语一致(I said 'I am tired' → I said I was tired.)；第二人称变为与主句宾语一致(He said to me, 'You are kind.' → He told me I was kind.)；第三人称不变。②时态倒退一步(主句过去时)：am/is→was, are→were,一般现在→一般过去,一般过去→过去完成,will→would,can→could,must→had to。客观真理时态不变。③指示词变化：this→that, these→those, now→then, today→that day, yesterday→the day before, tomorrow→the next day, here→there。④疑问句用if/whether(一般疑问)或疑问词(特殊疑问)引导，且用陈述语序。He said, 'Do you like it?' → He asked if I liked it.",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q43",
+      "keywords": ["倒装", "完全倒装", "部分倒装", "never"],
+      "question": "什么是倒装句？",
+      "answer": "倒装句是把谓语(或助动词)提到主语前。分类：①完全倒装(整个谓语提到主语前)：表位置/方向的副词(Here/There/Up/Down/In/Out)+动词+主语。Here comes the bus! / There goes the bell! / On the wall hangs a picture. ②部分倒装(只把be/情态/助动词提到主语前)：否定副词/半否定词在句首：Never have I seen such a thing. / Hardly had I arrived when it rained. / Not only does he work hard, but he also helps others. / Only then did I understand. so/neither/nor引导的并列句：He likes music, so do I. / He doesn't smoke, neither do I. 虚拟条件句省略if：Were I you, I would go. / Had I known, I would have helped.",
+      "category": "语法",
+      "level": 4
+    },
+    {
+      "id": "q44",
+      "keywords": ["背单词", "记单词", "词汇", "记忆方法"],
+      "question": "怎么背英语单词最有效？",
+      "answer": "高效背单词方法：①间隔重复法(Spaced Repetition)：用Anki/Quizlet等APP，按遗忘曲线复习(1天/3天/7天/15天)；②词根词缀法：掌握常见词根(spect看→inspect/respect/suspect)和词缀(un-/re-/dis-/-able/-tion)；③联想法：把生词和已知信息联想(business=bus+in+ess联想'巴士里有生意');④语境记忆：把词放进句子/故事里记(The cat sits on the mat.)；⑤分类记忆：按主题归类(食物/动物/学校)、按词性归类；⑥多感官记忆：看+读+写+听+说同时进行；⑦应用输出：用新词造句、写日记。建议每天学10-20个新词+复习旧词，少量多次优于集中突击。本App的'词汇学习'模块按级别分级，适合循序渐进。",
+      "category": "学习方法",
+      "level": 0
+    },
+    {
+      "id": "q45",
+      "keywords": ["练听力", "听力训练", "听不懂", "听力方法"],
+      "question": "怎么练英语听力？",
+      "answer": "听力训练步骤：①精听(Intensive Listening)：选1-3分钟短材料(VOA Special English/ESL Pod)，反复听5-10遍，逐句听写/跟读，弄懂每个词；②泛听(Extensive Listening)：大量听可理解材料(英文歌/动画/播客)，培养语感；③跟读(Shadowing)：边听边模仿语音语调，模仿原速；④分阶段：零基础从儿歌/动画(粉红猪小妹)→分级读物音频(Voice of America慢速)→新闻(BBC/NPR)→影视(老友记)；⑤使用工具：用1.0倍速听懂后再1.25/1.5倍速挑战；⑥听写训练：每天5-10句听写，纠正语音错误。建议每天20-30分钟，精听+泛听结合。本App'听力训练'模块有分级音频和测验。",
+      "category": "学习方法",
+      "level": 1
+    },
+    {
+      "id": "q46",
+      "keywords": ["练口语", "口语练习", "发音", "开口说"],
+      "question": "怎么练英语口语？",
+      "answer": "口语练习方法：①跟读模仿(Shadowing)：听一句原音→立即模仿→录音对比，重点模仿语音语调/连读/弱读；②自言自语：每天用英文描述生活(I'm making coffee. / The weather is nice today.)；③复述练习：听/读一段话→用自己的话复述；④对话练习：找语伴(Tandem/HelloTalk)或用AI对话(ChatGPT)；⑤准备话题：自我介绍/家乡/爱好/工作等常见话题各准备一段；⑥录音回放：录下自己说话→找问题→改进；⑦不怕犯错：流利度优先于准确度，先敢说再说对。发音重点：先掌握音标/拼读规则，再练连读(I'm gonna)、弱读(want to→wanna)、语调(疑问句升调)。每天15分钟跟读+10分钟自言自语，3个月可见明显进步。",
+      "category": "学习方法",
+      "level": 1
+    },
+    {
+      "id": "q47",
+      "keywords": ["提高阅读", "阅读理解", "分级读物"],
+      "question": "怎么提高英语阅读能力？",
+      "answer": "阅读训练步骤：①选对材料：选'略高于自己水平'的材料(95%词认识)，分级读物(书虫系列/牛津树)/英文新闻(VOA慢速)/儿童文学(Charlotte's Web)；②精读+泛读结合：精读弄懂每词每句(每天1篇)，泛读培养语感(每天10-15分钟)；③猜词技巧：遇到生词先根据上下文猜，不要立即查字典；④积累词汇：把阅读中遇到的词记到笔记本，定期复习；⑤分析长难句：找主谓宾，拆解从句；⑥读不同体裁：故事/新闻/科普/对话；⑦阅读量大于完美：每天读1页胜过一周读一章。建议从分级读物Level 1开始，逐步升级。本App'阅读理解'模块有分级文章和测验。学会使用英英字典(Learner's Dictionary)更能培养英语思维。",
+      "category": "学习方法",
+      "level": 2
+    },
+    {
+      "id": "q48",
+      "keywords": ["提高写作", "写作训练", "作文", "英文写作"],
+      "question": "怎么提高英语写作？",
+      "answer": "写作训练方法：①从造句开始：每天用新学的5个词各造一句；②写日记：从3句话日记开始(Today I.../I felt.../I will...)，逐步增加到一段；③模仿范文：抄写/背诵优秀短文，模仿其句式；④学习段落结构：主题句+支撑句+总结句；⑤多种文体练习：描写/记叙/说明/议论；⑥修改完善：写完→放置→回来修改→AI/老师批改；⑦常见错误自查清单：时态一致/主谓一致/拼写/标点/冠词；⑧积累连接词：however, therefore, in addition, for example, in conclusion。建议：①先求准确再求流畅；②每天写50-200字；③用本App'写作训练'模块的AI批改功能。从模仿到自由表达，6-12个月可见明显进步。",
+      "category": "学习方法",
+      "level": 3
+    },
+    {
+      "id": "q49",
+      "keywords": ["零基础", "入门", "开始学", "从哪开始"],
+      "question": "零基础怎么开始学英语？",
+      "answer": "零基础入门路径：①先学26个字母的认读写(1周)：字母名+字母音+大小写；②学自然拼读(1-2月)：5个短元音+常见辅音组合+CVC单词+Magic E+元音组合；③学基础词汇(3-6月)：用频率词表(最常用500词覆盖80%日常表达)，如the/be/to/of/and/have/that等；④学基础语法(同步)：be动词+人称代词+一般现在时+一般疑问句+疑问词；⑤大量听输入：儿歌/简单对话/动画(粉红猪小妹、Blue's Clues)；⑥简单开口：自言自语+跟读；⑦每天坚持：30-60分钟比一周突击3小时有效。资源推荐：本App的'自然拼读'模块从字母学起，配合'词汇学习'从最常用词开始。坚持3个月能读简单绘本，6个月能基础对话。",
+      "category": "学习方法",
+      "level": 0
+    },
+    {
+      "id": "q50",
+      "keywords": ["学习计划", "学英语计划", "时间安排"],
+      "question": "怎么制定英语学习计划？",
+      "answer": "有效学习计划制定：①目标SMART化：具体(能用英语看懂动画)、可量化(掌握1000词)、可实现、相关、有时限(3个月内)；②时间安排：每天固定时段(早晨30分钟+晚上30分钟)，少量多次优于集中突击；③内容比例：听力30%+口语20%+词汇20%+阅读20%+语法10%；④难度分级：当前级别材料占70%，下一级占30%；⑤复习机制：每天复习昨天的+学新内容+每周总结；⑥阶段目标：1个月掌握某主题(如旅行英语)、3个月达到某级别(如A1)；⑦记录反馈：用进度记录(本App自带)，每周复盘调整。例计划：周一三五学新词+语法，周二四练听力+口语，周末做测试+复习。本App'学习进度'页面可查看连续天数和各模块进度。",
+      "category": "学习方法",
+      "level": 0
+    },
+    {
+      "id": "q51",
+      "keywords": ["英语思维", "thinking in english", "中文翻译"],
+      "question": "怎么培养英语思维？",
+      "answer": "英语思维培养方法：①减少心译：看到apple直接想到🍎，而不是先想'苹果'再翻译；②用英英字典：用英文解释英文(Learner's Dictionary)，如apple='a round fruit with red or green skin and white inside'；③情景记忆：把词和图像/动作/场景直接关联，不和中文挂钩；④自言自语：用英文描述周围/想法(I'm hungry. / It's a beautiful day.)；⑤阅读英文原版：从分级读物到原版小说；⑥看英文影视：先英文字幕→无字幕；⑦用英语学英语：用英文搜索/记笔记/写日记；⑧沉浸环境：手机/电脑系统设英文，关注英文博主。技巧：当遇到想说的不会时，先用英文解释(paraphrase)，如不会refrigerator就说'the cold box for food'。培养英语思维需6-12个月持续输入输出。",
+      "category": "学习方法",
+      "level": 3
+    },
+    {
+      "id": "q52",
+      "keywords": ["学多久", "时间", "见效", "多久能"],
+      "question": "学英语要多久才能学会？",
+      "answer": "学英语时间参考(CEFR标准)：①零基础→A1生存英语(1000-2000词)：100-150小时(每天1小时约3-4个月)；②A1→A2日常交流(3000词)：150-200小时(3-5个月)；③A2→B1工作学习(5000词)：200-350小时(6-12月)；④B1→B2流利应用：350-500小时(1-2年)；⑤B2→C1高级：500-700小时(2-3年)；⑥C1→C2精通：700-1000+小时(3-5年)。关键不是绝对时长而是有效时长：主动学习(听说读写输出)优于被动学习(只听不练)。影响速度的因素：①每天投入时间(每天1小时比周末10小时有效)；②方法是否科学(用对方法事半功倍)；③是否有反馈(AI/老师批改)；④动机和兴趣。建议用本App'学习进度'模块跟踪累计学时，对标CEFR级别。",
+      "category": "学习方法",
+      "level": 0
+    },
+    {
+      "id": "q53",
+      "keywords": ["背字典", "词典", "词汇书"],
+      "question": "学英语要背字典吗？",
+      "answer": "不建议背字典，原因：①脱离语境的词记不牢，会读不会用；②大量低频词浪费时间(英语16万词，常用5000词覆盖95%日常)；③缺乏听力输入，发音不准。更好的方法：①用频率词表(如牛津3000词/COCA高频词)从最常用词学起；②词不离句：在句子/故事中学词(The cat is on the mat.而不是只记mat=垫子)；③词根词缀扩展：学一个词根(spect看)能扩展多个词(inspect/respect/suspect)；④按主题学习：食物/旅行/工作等主题归类记忆；⑤勤查字典而非背字典：遇到生词就查(英英优先)，记入笔记本，定期复习；⑥使用词典APP(如有道/欧路)而非纸质字典，查得快还能听发音。本App'词汇学习'模块按CEFR分级，从最常用词开始。",
+      "category": "学习方法",
+      "level": 1
+    },
+    {
+      "id": "q54",
+      "keywords": ["你好", "hello", "hi", "打招呼"],
+      "question": "\"你好\" 用英语怎么说？",
+      "answer": "常见表达：①Hello (哈喽)——最通用，正式/非正式均可，打电话也用(Hello, this is Tom.)；②Hi (嗨)——非正式，朋友间常用(Hi, how are you?)；③Good morning/afternoon/evening——按时段问候(早上/下午/晚上好)，较正式；④How do you do?——初次见面很正式(回应同样说How do you do?)；⑤Nice to meet you.——初次见面表达'很高兴认识你'，回应用Nice to meet you too.；⑥How are you?——'你好吗'，回应：I'm fine, thanks. / I'm good. / Not bad. 实用对话：A: Hi, I'm Tom. B: Hello, nice to meet you. I'm Lisa. 注意：陌生人之间用Hello，朋友间Hi更自然。",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q55",
+      "keywords": ["谢谢", "thank you", "thanks", "感激"],
+      "question": "\"谢谢\" 用英语怎么说？",
+      "answer": "感谢表达分级：①Thanks.——最常用，朋友/家人间；②Thank you.——稍正式，对陌生人/长辈/老师；③Thank you very much.——非常感谢，强调感激；④Thanks a lot.——多谢，口语常用；⑤Thanks a million.——万分感谢，强调感激(夸张)；⑥I appreciate it.——我很感激，正式/书面；⑦I'm grateful for...——我对...很感激，正式；⑧That's very kind of you.——你真好，表达更深谢意。回应感谢：You're welcome.(别客气) / No problem.(没问题) / My pleasure.(我的荣幸) / Don't mention it.(别客气) / Sure.(口语) / It's nothing.(没什么)。实用对话：A: Here's your coffee. B: Thank you! A: You're welcome.",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q56",
+      "keywords": ["对不起", "sorry", "道歉", "excuse me"],
+      "question": "\"对不起\" 用英语怎么说？",
+      "answer": "根据场景选择：①Sorry.——日常小错(迟到/踩脚/打断)；②I'm sorry.——稍正式，可加原因：I'm sorry I'm late. (抱歉我迟到了)；③I'm so/very sorry.——非常抱歉，强调诚意；④I apologize.——正式道歉(商务/书面)：I apologize for the delay. ⑤Excuse me.——'打扰一下/借过'：Excuse me, where's the restroom? (请问洗手间在哪？) / Excuse me!(借过) ⑥My fault.——我的错，口语承认错误；⑦My apologies.——正式道歉(邮件)。回应道歉：That's OK. / That's all right. / No problem. / It doesn't matter. / Never mind. (都没关系) / Don't worry about it. (别放在心上)。例：A: I'm sorry I broke your cup. B: That's OK, don't worry about it.",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q57",
+      "keywords": ["我喜欢你", "i love you", "表白", "爱"],
+      "question": "\"我喜欢你\" 用英语怎么说？",
+      "answer": "感情表达分级：①I like you.——'我喜欢你'(朋友/有好感)：I like you. You're fun.；②I have a crush on you.——暗恋你，口语化：I've had a crush on you for months.；③I'm into you.——我对你有感觉，口语：I'm really into you.；④I have feelings for you.——我对你有感情，较委婉；⑤I love you.——'我爱你'(家人/恋人)，最直接；⑥I'm in love with you.——我爱上你了，强调爱情；⑦You mean a lot to me.——你对我很重要，深情；⑧I adore you.——我倾慕你，强调爱慕。表白常用：I've liked you for a long time. Will you be my girlfriend/boyfriend? (我喜欢你很久了，能做我女朋友/男朋友吗？)",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q58",
+      "keywords": ["天气很好", "今天天气", "weather"],
+      "question": "\"今天天气很好\" 用英语怎么说？",
+      "answer": "常见表达：①It's a nice day today.——今天天气真好(最自然)；②The weather is nice today.——今天天气不错；③It's a beautiful day.——今天天气真美；④It's sunny today.——今天晴天；⑤It's a lovely day.——今天天气宜人；⑥The sun is shining.——阳光灿烂；⑦It's a perfect day.——今天天气完美。具体天气：It's sunny(晴)/cloudy(多云)/rainy(下雨)/windy(有风)/snowy(下雪)/foggy(有雾)/hot(热)/cold(冷)/warm(温暖)/cool(凉爽)。完整对话：A: It's a beautiful day, isn't it? B: Yes, the sun is shining. Perfect for a walk. A: Let's go to the park! 相关：What's the weather like today? (今天天气怎么样？)",
+      "category": "翻译",
+      "level": 2
+    },
+    {
+      "id": "q59",
+      "keywords": ["在干什么", "what are you doing", "在做什么"],
+      "question": "\"你在干什么\" 用英语怎么说？",
+      "answer": "常见表达：①What are you doing?——最直接通用：What are you doing now? (你现在在干嘛？)；②What are you up to?——口语化，问在忙什么：What are you up to this weekend? (这周末打算干嘛？)；③What's up?——'怎么了/在忙啥'，朋友间打招呼口语；④What are you working on?——问在做什么工作；⑤What's going on?——'发生什么了/在搞什么'；⑥How's it going?——'进展如何'，打招呼。回答：I'm reading a book. / I'm watching TV. / I'm cooking. / Nothing much. (没干嘛) / Just relaxing. (放松) 完整对话：A: Hey, what are you doing? B: I'm studying English. What about you? A: I'm just watching TV. 注意：现在进行时(am/is/are+doing)用来描述正在做的事。",
+      "category": "翻译",
+      "level": 2
+    },
+    {
+      "id": "q60",
+      "keywords": ["我饿了", "hungry", "想吃", "饿"],
+      "question": "\"我饿了\" 用英语怎么说？",
+      "answer": "常见表达：①I'm hungry.——我饿了(最直接)；②I'm starving.——我饿死了(夸张口语)；③I'm famished.——我饿坏了(书面/正式)；④I could eat a horse.——我能吃下一匹马(夸张，很饿)；⑤I'm so hungry I could eat a horse.——我饿得能吃下一匹马；⑥I need something to eat.——我得吃点东西；⑦My stomach is growling.——我肚子在叫；⑧I haven't eaten all day.——我一天没吃了。相关：I'm full.(我饱了) / I'm thirsty.(我渴了)。实用对话：A: I'm hungry. Let's eat. B: What do you want? A: How about pizza? B: Sounds good! 相关表达：What's for dinner? (晚饭吃什么？) / Let's grab a bite. (我们吃点东西吧)",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q61",
+      "keywords": ["洗手间", "厕所", "在哪里", "restroom", "toilet"],
+      "question": "\"请问洗手间在哪里\" 用英语怎么说？",
+      "answer": "礼貌询问：①Excuse me, where's the restroom?——美式，公共场所(商场/餐厅)；②Excuse me, where's the toilet?——英式，英/澳/新常用；③Excuse me, where's the bathroom?——美式口语，家/酒店；④Excuse me, where's the washroom?——加拿大常用；⑤Could you tell me where the restroom is?——更礼貌(宾语从句)；⑥Is there a restroom near here?——附近有洗手间吗？性别标识：Men's / Gentlemen's (男厕), Women's / Ladies' (女厕)。 Occupied (有人) / Vacant (空闲)。相关对话：A: Excuse me, where's the restroom? B: It's down the hall, on the left. A: Thank you! B: You're welcome. 注意：在公共场所询问用Excuse me开头显得礼貌。",
+      "category": "翻译",
+      "level": 2
+    },
+    {
+      "id": "q62",
+      "keywords": ["多少钱", "how much", "价格", "价钱"],
+      "question": "\"请问这个多少钱\" 用英语怎么说？",
+      "answer": "询问价格：①How much is this?——这个多少钱(最常用)；②How much does this cost?——这个多少钱(稍正式)；③What's the price of this?——这个价格多少；④How much?——多少钱(最简短，指着物品说)；⑤How much are these?——这些多少钱(复数)；⑥What do you charge for this?——你这个卖多少(问商家)；⑦Is this on sale?——这个在打折吗；⑧Do you have a discount?——有折扣吗？实用对话：A: Excuse me, how much is this? B: It's 20 dollars. A: That's a bit expensive. Any discount? B: I can give you 10% off. A: Great, I'll take it. 相关：It's cheap(便宜)/expensive(贵)/a good deal(划算)/a rip-off(宰客)。货币：dollars($) / pounds(£) / euros(€) / yuan(¥)。",
+      "category": "翻译",
+      "level": 2
+    },
+    {
+      "id": "q63",
+      "keywords": ["祝你好运", "good luck", "加油"],
+      "question": "\"祝你好运\" 用英语怎么说？",
+      "answer": "祝好运表达：①Good luck!——祝你好运(最常用)；②Best of luck!——祝好运(稍正式)；③Wish you luck!——祝你好运；④I wish you the best!——祝你一切顺利；⑤Fingers crossed!——祈祷好运(手势动作)；⑥Break a leg!——祝演出成功(剧场用语，源自迷信)；⑦Knock 'em dead!——加油(口语，激励)；⑧You'll do great!——你会做得很好。加油(中文多义)：①Go for it!——加油去做(鼓励行动)；②Come on! / Go!——比赛加油；③Keep it up!——继续保持；④You can do it!——你能行；⑤Cheer up!——振作(沮丧时)。回应：Thanks! / I'll try my best. / I hope so. 实用对话：A: I have an interview tomorrow. B: Good luck! You'll do great. A: Thanks!",
+      "category": "翻译",
+      "level": 2
+    },
+    {
+      "id": "q64",
+      "keywords": ["再见", "goodbye", "bye", "告别"],
+      "question": "\"再见\" 用英语怎么说？",
+      "answer": "告别表达：①Goodbye.——再见(正式/通用)；②Bye.——再见(口语最常用)；③Bye-bye.——拜拜(儿语/亲切)；④See you. / See ya.——回头见(口语)；⑤See you later.——回头见；⑥See you tomorrow.——明天见；⑦Catch you later.——待会儿见(美式口语)；⑧Take care.——保重(告别+祝福)；⑨Have a nice day!——祝你度过美好的一天(白天告别)；⑩Good night.——晚安(晚上告别/睡前)；⑪Take it easy.——轻松点(美式告别)；⑫I'm off.——我走了。回应：Bye! / See you! / You too!(回应Have a nice day)。实用对话：A: I have to go now. See you tomorrow! B: Bye! Have a nice evening. A: You too!",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q65",
+      "keywords": ["请", "please", "麻烦", "礼貌"],
+      "question": "\"请\" 用英语怎么说？",
+      "answer": "请的表达：①Please.——请(单独用，请求/礼貌)：Please sit down. / A cup of coffee, please. (要一杯咖啡，谢谢)；②Please do.——请便(允许)；③Please don't.——请不要(阻止)；④Please help yourself.——请自便(食物)；⑤Go ahead, please.——请讲/请做；⑥After you, please.——您先请(礼让)；⑦Excuse me, please.——劳驾/请让一下。Please位置：句首(Please come in.) 或句末(Come in, please.) 都可，句末更礼貌。表请求时please + 动词：Please pass me the salt. (请把盐递给我)。实用对话：A: Can I help you? B: Yes, please. (好的，麻烦了) A: Here you go. B: Thank you! 注意：在餐厅点餐说'A coffee, please.'比'I want a coffee.'更礼貌。",
+      "category": "翻译",
+      "level": 1
+    },
+    {
+      "id": "q66",
+      "keywords": ["时态", "tense", "英语时态", "时态总览"],
+      "question": "英语有哪些时态？",
+      "answer": "英语16个时态(常用12个)：4时×3态组合。①一般时：一般现在(I work)、一般过去(I worked)、一般将来(I will work)、过去将来(I would work)；②进行时：现在进行(I am working)、过去进行(I was working)、将来进行(I will be working)、过去将来进行(I would be working)；③完成时：现在完成(I have worked)、过去完成(I had worked)、将来完成(I will have worked)、过去将来完成(I would have worked)；④完成进行时：现在完成进行(I have been working)、过去完成进行(I had been working)、将来完成进行(I will have been working)、过去将来完成进行(I would have been working)。零基础建议依次学：①一般现在→②一般过去→③一般将来→④现在进行→⑤现在完成→⑥过去完成。日常英语用前5种已覆盖95%。",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q67",
+      "keywords": ["主谓一致", "subject verb agreement", "单复数"],
+      "question": "什么是主谓一致？",
+      "answer": "主谓一致是主语和谓语在人称和数上保持一致。规则：①I用am/work(I am a student. / I work.)；②第三人称单数(he/she/it/单个人名/不可数名词)用is/works(He is tall. / She works hard.)；③复数和you用are/work(They are friends. / You work hard.)；④就近原则：Either you or I am wrong. (谓语和最近主语一致)；⑤集合名词(family/team/class)作整体用单数，强调个体用复数(My family is big. / My family are eating.)；⑥each/every/one of+复数，谓语用单数(Everyone is here. / One of the boys is absent.)；⑦a number of+复数+复数动词(A number of students are absent.)；the number of+复数+单数动词(The number of students is 30.)；⑧表示时间/距离/金钱的复数名词作整体用单数(Ten years is a long time.)。常见错：'He don't' ❌ → 'He doesn't' ✓。",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q68",
+      "keywords": ["可数", "不可数", "countable", "怎么区分"],
+      "question": "怎么判断名词可数还是不可数？",
+      "answer": "可数名词(Countable)：可以用数字数的，有单复数(a book→two books, an apple→three apples)。如：book/cat/student/pen。不可数名词(Uncountable)：不能直接数的，无复数形式，不能加a/an。①物质名词：water/milk/rice/bread/tea/coffee/meat/wood；②抽象名词：love/happiness/knowledge/time/money/information/advice/news/furniture/homework/housework；③液体/气体/粉末：water/air/sugar/salt/sand。判断技巧：能放进'a/an ___'或'one/two ___s'的是可数，否则不可数。特殊情况：①有些词既可数又不可数(意思不同)：chicken(鸡肉不可数/鸡可数)/paper(纸不可数/报纸可数)/time(时间不可数/次数可数)；②表示种类时不可数变可数：a coffee(一杯咖啡)/two coffees。量化：a piece of paper(一张纸)/a glass of water(一杯水)。",
+      "category": "词汇",
+      "level": 2
+    },
+    {
+      "id": "q69",
+      "keywords": ["句型结构", "五大句型", "基本句型"],
+      "question": "英语有哪些基本句型？",
+      "answer": "英语五大基本句型：①主谓(SV)：Subject+Verb. 例：Birds fly. / The sun rises. ②主谓宾(SVO)：Subject+Verb+Object. 例：I like apples. / She reads books. ③主系表(SVP)：Subject+LinkingVerb+Predicative. 例：She is happy. / The soup tastes good. ④主谓双宾(SVOO)：Subject+Verb+IndirectObj+DirectObj. 例：He gave me a book. / I bought her a gift. ⑤主谓宾补(SVOC)：Subject+Verb+Object+Complement. 例：We call him Tom. / She made me happy. 简单句扩展为并列句(用and/but/or连接)和复合句(加从句)。例：Birds fly and fish swim. (并列句) / I know that he is honest. (复合句)。掌握基本句型是造句的基础，零基础从SVO开始练习。",
+      "category": "语法",
+      "level": 1
+    },
+    {
+      "id": "q70",
+      "keywords": ["语调", "升降调", "疑问句", "陈述句"],
+      "question": "英语语调怎么用？",
+      "answer": "英语语调(intonation)主要分降调、升调、降升调：①降调(↘)：用于陈述句、特殊疑问句、命令句、感叹句。I'm fine↘. / Where are you↘? / Sit down↘. / What a nice day↘! 表示确定/完整/命令；②升调(↗)：用于一般疑问句、表示礼貌/犹豫/列举项。Are you ready↗? / Do you like tea↗? / Really↗? (表示疑问/惊讶) / A↗, B↗, and C↘. (列举前升后降)；③降升调(↘↗)：表示含蓄/不确定/委婉。I don't think so↘↗. (委婉否定)。常见规则：疑问词引导的特殊疑问句用降调，一般疑问句(Yes/No)用升调。陈述句末用降调，但表示疑问时也可升调(You're coming↗? 表示'你真的要来吗？')。语调对交际影响大，建议多听原音模仿，跟读是最有效的练习方法。",
+      "category": "拼读",
+      "level": 3
+    },
+    {
+      "id": "q71",
+      "keywords": ["谐音", "谐音记忆", "homophone", "记忆法", "怎么记"],
+      "question": "什么是谐音记忆法？怎么用谐音记单词？",
+      "answer": "谐音记忆法:用英文单词的读音近似一个中文词,再联想中文意思,组成一个有趣/荒诞/生动的画面,让大脑瞬间记住。例:①pest(害虫)→'拍死它'→害虫就要拍死;②ambulance(救护车)→'俺不能死'→救护车来救我;③family(家庭)→'伐木里'→一家人住在伐木屋里;④ banana(香蕉)→'把那拿'→把那香蕉拿过来;⑤coffee(咖啡)→'咖啡'本身;⑥schedule(日程)→'死磕驴'→排日程把驴磕死。注意:谐音只是辅助记忆的'拐杖',最终仍要回到正确发音。建议:谐音画面越夸张越离谱越记得住,但不能替代标准发音学习。",
+      "category": "学习方法",
+      "level": 1
+    },
+    {
+      "id": "q72",
+      "keywords": ["词根", "词根记忆", "roots", "后缀", "前缀", "词缀"],
+      "question": "什么是词根词缀记忆法？",
+      "answer": "词根词缀法:英语单词像搭积木,由'前缀+词根+后缀'组合而成。掌握常见词根词缀,可以批量记忆成千上万词。常见前缀:①un-/in-/dis-/non- 表'否定'(happy→unhappy, possible→impossible);②re- 表'再/重新'(do→redo, build→rebuild);③pre- 表'在...之前'(view→preview, pay→prepay);④over- 表'过度'(eat→overeat);⑤under- 表'不足'(pay→underpay)。常见后缀:①-tion/-sion 表'动作/状态'(act→action, decide→decision);②-er/-or 表'做的人'(teach→teacher, act→actor);③-ful 表'充满'(use→useful);④-less 表'无'(use→useless);⑤-able/-ible 表'可'(read→readable);⑥-ly 表'...地'(quick→quickly);⑦-ness 表'状态'(happy→happiness);⑧-ment 表'结果'(develop→development);⑨-ize/-ise 表'使...化'(modern→modernize)。例:unhappiness = un(否定)+happi(快乐)+ness(状态)=不快乐。建议:每学一个新词,先拆词根词缀,理解结构,再记意思。",
+      "category": "学习方法",
+      "level": 2
+    },
+    {
+      "id": "q73",
+      "keywords": ["联想", "联想记忆", "association", "记忆法"],
+      "question": "什么是联想记忆法？怎么联想记单词？",
+      "answer": "联想记忆法:把单词的拼写/发音/意思与你已知的事物建立联想,让新词从'陌生'变'熟悉'。三种联想方式:①形象联想:看到单词拼写想到一个画面,如 'bed'(床)→b+d 是床头床尾,e 是人躺在中间;②意义联想:把单词意思与生活场景挂钩,如 'rain'(雨)→联想大雨天打伞走路;③词义网络联想:学一个词时同时联想它的同义/反义/同主题词,如学了'hot'就联想 cold/warm/boiling/scalding。例:①'elephant'(大象)→'ele+phant'→'艾莉+phantom'→想象一头叫艾莉的大象幽灵;②'gorgeous'(华丽的)→'哥 + 神'→哥哥像神一样华丽。建议:联想越夸张越离谱越记得住,搭配画面/故事效果更好。",
+      "category": "学习方法",
+      "level": 1
+    },
+    {
+      "id": "q74",
+      "keywords": ["故事串联", "故事记忆", "story", "记忆法"],
+      "question": "什么是故事串联记忆法？",
+      "answer": "故事串联法:把多个单词串成一个生动的小故事,让大脑同时记住整组词。步骤:①选 5-10 个目标词;②编一个有画面感的短故事,让每个词都自然出现;③朗读故事 3 遍,边读边想象画面;④复述故事(不看词);⑤隔天再复习一次。例:记 'apple/banana/cat/jump/run' → 故事:一只 cat(猫)看到 apple(苹果)和 banana(香蕉),它 jump(跳)上桌子,grab(抢)了苹果就 run(跑)了。优势:故事有逻辑和画面,比死记硬背记得牢。适合批量记同主题词(如水果/动物/动作)。",
+      "category": "学习方法",
+      "level": 2
+    },
+    {
+      "id": "q75",
+      "keywords": ["对比记忆", "同义词", "反义词", "易混词", "辨析"],
+      "question": "什么是对比记忆法？",
+      "answer": "对比记忆法:把易混淆或同义/反义/同根词放一起对照记忆,通过比较差异加深印象。三种对比方式:①同义辨析:如 big/large/huge/gigantic 都表'大',但程度不同(big 最大众,huge 巨大,gigantic 极大);②反义对比:hot↔cold, long↔short, love↔hate,通过反义对照同时记住一对;③形近词对比:如 quite(相当)/quiet(安静)/quit(放弃),三个拼写相似但意思不同,放一起对照拼写差异。例:①accept(接受) vs except(除了);②affect(动词,影响) vs effect(名词,影响);③principal(主要的/校长) vs principle(原则);④stationary(静止) vs stationery(文具)。建议:每学一个新词,主动查它的同义/反义/形近词,放一起对照学,效率提升2倍。",
+      "category": "学习方法",
+      "level": 2
+    },
+    {
+      "id": "q76",
+      "keywords": ["词源", "词源学", "etymology", "来源"],
+      "question": "什么是词源记忆法？为什么要学词源？",
+      "answer": "词源记忆法:了解单词的历史来源,通过它的'出身故事'理解现在的意思和拼写。英语词汇来源:①日耳曼词层(最古老,如 house/man/water/bread,短词高频);②拉丁词层(罗马帝国/基督教传入,如 school/paper/money);③法语词层(1066 诺曼征服,如 government/army/court);④希腊词层(学术/科学,如 philosophy/democracy/telephone);⑤外来词(如 silk 来自中文,taco 来自西班牙语)。例:①'sincere'(真诚的)来自拉丁 sine+cera(没有蜡)→雕像没填蜡→真诚;②'disaster'(灾难)来自 dis+aster(坏星)→古人认为星辰错位就有灾;③'muscle'(肌肉)来自拉丁 mus(老鼠)→运动员肌肉像小老鼠在动。优势:词源让单词从'无意义的字母组合'变成'有故事的概念',记得牢。建议:对拼写古怪的词优先查词源。",
+      "category": "学习方法",
+      "level": 3
+    },
+    {
+      "id": "q77",
+      "keywords": ["自然拼读", "phonics", "拼读记忆", "见词能读"],
+      "question": "自然拼读怎么帮助记忆单词？",
+      "answer": "自然拼读(Phonics)是单词记忆的根本方法:掌握字母/字母组合的发音规律,就能'见词能读、听音能写'。规律举例:①CVC 结构(辅+元+辅,如 cat/pig/sun)→元音发短音;②Magic E(如 cake/kite/hope)→词尾 e 让前元音发长音;③字母组合:sh/ch/th/wh(如 ship/chip/this/what)、ai/ay(如 rain/play)、ee/ea(如 tree/tea)、oo(如 food/book)、ou/ow(如 house/cow);④r-控制元音:ar/or/er/ir/ur(如 car/for/her/bird/turn)。学习路径:26字母音 → 短元音 → CVC → 字母组合 → Magic E → 长元音 → r-控制元音 → 复杂组合。掌握后:看到一个生词能直接读出来,听到一个词能写出来,记忆效率提升5倍。",
+      "category": "学习方法",
+      "level": 1
+    },
+    {
+      "id": "q78",
+      "keywords": ["词语搭配", "collocation", "搭配", "组合"],
+      "question": "什么是词语搭配？为什么要学搭配？",
+      "answer": "词语搭配(Collocation):英语中有些词经常一起出现,形成固定或半固定的组合,称为'搭配'。掌握搭配比单独记单词更重要,因为英语母语者说话用搭配,不用单词。常见搭配类型:①动+名:make a decision(做决定,不用 do a decision)、take a photo、pay attention、catch a cold;②形+名:heavy rain(不用 strong rain)、strong wind、high price、deep breath;③动+介:depend on、look forward to、give up、put off;④名+介:reason for、cause of、solution to;⑤副+形:highly important、extremely useful。建议:每学一个新词,记 2-3 个常见搭配,而不是孤立地背词。例:学 decision 时,记 make a decision / reach a decision / a big decision。这样说的英语才地道。",
+      "category": "学习方法",
+      "level": 2
+    },
+    {
+      "id": "q79",
+      "keywords": ["不规则动词", "变形", "irregular", "动词三态"],
+      "question": "英语不规则动词怎么记？",
+      "answer": "英语有约 200 个不规则动词,需单独记忆三态(原形/过去式/过去分词)。分类记忆法:①AAA 型(三态同形):put/put/put, cut/cut/cut, cost/cost/cost, hit/hit/hit, let/let/let;②AAB 型(过去式=过去分词+ed 不规则):beat/beat/beaten;③ABA 型(过去分词=原形):come/came/come, run/ran/run, become/became/become;④ABB 型(过去式=过去分词):build/built/built, send/sent/sent, spend/spent/spent, lend/lent/lent, burn/burnt/burnt, learn/learnt/learnt, dream/dreamt/dreamt;⑤ABC 型(三态全不同):see/saw/seen, do/did/done, go/went/gone, give/gave/given, take/took/taken, eat/ate/eaten, write/wrote/written, drive/drove/driven, ride/rode/ridden, fly/flew/flown。高频不规则动词必背:be(was/been)、have(had)、do(did)、go(went)、get(got)、make(made)、say(said)、see(saw)、know(knew)、take(took)、come(came)。建议:用表格分类背,配例句背,如 He went to school yesterday. / I have never been there.",
+      "category": "语法",
+      "level": 2
+    },
+    {
+      "id": "q80",
+      "keywords": ["短语动词", "phrasal verb", "动词短语", "get up"],
+      "question": "什么是短语动词？怎么学？",
+      "answer": "短语动词(Phrasal Verb):动词+副词/介词构成的固定组合,意思往往不是字面相加。三种类型:①动+副:give up(放弃)、take off(起飞)、turn on(打开)、turn off(关闭)、pick up(捡起/接人)、put on(穿上)、take off(脱下);②动+介:look after(照顾)、look for(寻找)、listen to(听)、wait for(等待);③动+副+介:look forward to(期待)、get along with(相处)、put up with(忍受)。难点:同一动词+不同副词意思不同:①get up(起床) vs get on(上车/相处) vs get off(下车) vs get over(克服) vs get away(逃离);②take up(开始从事) vs take off(起飞) vs take over(接管) vs take in(吸收/欺骗)。学习技巧:①不要孤立背短语,放例句中背,如 He gave up smoking. / The plane took off at 8.;②用联想画面记忆;③高频先学:get/take/make/put/come/go + up/down/on/off/in/out。",
+      "category": "词汇",
+      "level": 3
+    },
+    {
+      "id": "q81",
+      "keywords": ["现在完成时", "have done", "现在完成", "怎么用"],
+      "question": "现在完成时怎么用？和一般过去时有什么区别？",
+      "answer": "现在完成时(have/has + 过去分词)表示:①过去发生但与现在有联系的动作(强调结果/影响):I have lost my key. (我现在找不到钥匙了);②从过去持续到现在的动作或状态(常配 since/for):I have lived here for 10 years. (我从10年前就住这里,现在还住)。结构:主语 + have/has + 过去分词。否定:have/has + not + 过去分词。疑问:Have/Has + 主语 + 过去分词? 与一般过去时区别:①I lost my key yesterday. (强调过去发生,与现在无关);②I have lost my key. (强调现在没有钥匙)。时间状语:①过去时用 yesterday/last week/in 2020(明确过去时间);②现在完成时用 already/yet/just/ever/never/recently/since+时间点/for+时间段(不明确过去时间或持续到现在)。常配 never/ever:I have never been to Paris. / Have you ever eaten sushi? 注意:不能与具体过去时间连用:I have lost my key yesterday. (错) → I lost my key yesterday. (对)。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q82",
+      "keywords": ["虚拟语气", "subjunctive", "if", "假设", "would"],
+      "question": "虚拟语气怎么用？",
+      "answer": "虚拟语气(Subjunctive Mood)表示假设/虚拟/不太可能/与事实相反的情况。三种主要句式:①与现在事实相反:If + 过去式, 主语 + would/could/should + 动词原形。例:If I were you, I would study harder. (如果我是你,我会更努力学习。- 实际我不是你);If I had time, I would help you. (如果我有时间... 实际我没时间)。注意:be 动词所有人称都用 were(正式)或 was(口语);②与过去事实相反:If + had + 过去分词, 主语 + would/could/should + have + 过去分词。例:If I had known, I would have helped. (如果我知道,我会帮。- 实际不知道也没帮);③与将来事实相反(可能性极小):If + were to + 动词原形 / should + 动词原形, 主语 + would + 动词原形。例:If it were to rain tomorrow, I would stay home. 倒装:省略 if 时,把 were/had/should 提到主语前。例:Were I you, I would go. / Had I known, I would have helped. 其他虚拟用法:①wish + 过去式:表示与现在事实相反的愿望 (I wish I were taller.);②suggest/insist/demand + (should) + 动词原形:表建议/要求 (I suggest that he (should) go now.);③It is high time + 过去式:表早该做某事 (It's high time we left.)。",
+      "category": "语法",
+      "level": 4
+    },
+    {
+      "id": "q83",
+      "keywords": ["定语从句", "attributive clause", "关系代词", "who", "which", "that"],
+      "question": "定语从句怎么用？关系代词怎么选？",
+      "answer": "定语从句(Attributive Clause):修饰名词/代词的从句,作用类似形容词。结构:先行词 + 关系词 + 从句。关系词选择:①修饰人用 who/whom/whose:The man who is talking is my teacher. (who 作主语);The man (whom) I met is my teacher. (whom 作宾语,口语可省略);The girl whose father is a doctor is my friend. (whose 表所有);②修饰物用 which:The book which is on the table is mine. (which 作主语);The book (which) I bought is interesting. (which 作宾语,可省略);③that 既可修饰人也可修饰物(限制定语从句中):The man that/who is talking. / The book that/which is on the table. (口语 that 更常用);④修饰地点用 where:This is the school where I studied. (where=in which);⑤修饰时间用 when:I remember the day when we met. (when=on which);⑥修饰原因用 why:That is the reason why he left. 限制性 vs 非限制性:①限制性(无逗号):限定先行词范围,不可省略。The man who is tall is my teacher. (限定哪个 man);②非限制性(有逗号):补充信息,可省略。My father, who is 60, is a doctor. (父亲已确定,补充年龄)。注意:非限制性从句不能用 that。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q84",
+      "keywords": ["倒装句", "inversion", "倒装", "never", "only"],
+      "question": "英语倒装句怎么用？",
+      "answer": "倒装(Inversion)把动词放在主语前,用于强调或特定句型。两种:①完全倒装(整个动词提前):Here comes the bus! / There goes the train! / On the wall hangs a picture. ②部分倒装(只把助动词/系动词/be 提前):常见场景:①否定副词在句首:Never have I seen such a thing. / Hardly had he arrived when it rained. / Not only does she sing well, but she also dances. / Little did I know about it.②only + 状语在句首:Only then did I understand. / Only in this way can we succeed. / Only when I saw her did I feel relieved.③so/neither/nor 表示'也/也不':He likes apples. So do I. (我也是);He doesn't like apples. Neither do I. (我也不);④虚拟语气省略 if:Were I you, I would go. / Had I known, I would have helped. ⑤as/though 引导让步:Try as I might, I could not lift it. (尽管我使劲尝试)。建议:倒装句让英语更地道,常出现在书面语和演讲中。先掌握最常见的 Never/Only/So/Neither 开头倒装,再扩展。",
+      "category": "语法",
+      "level": 4
+    },
+    {
+      "id": "q85",
+      "keywords": ["非谓语动词", "不定式", "动名词", "分词", "non-finite"],
+      "question": "什么是非谓语动词？三种形式有什么区别？",
+      "answer": "非谓语动词(Non-finite Verb):不在句中作谓语的动词形式,不受主语人称数限制。三种:①不定式(to + 动词原形):表目的/将来/具体动作。例:I want to learn English. (目的);I have something to tell you. (后置定语);To learn English well, you must practice. (目的状语);②动名词(动词+ing):表习惯/抽象/已发生。例:Swimming is fun. (主语,表一般);I enjoy reading. (宾语,已发生或习惯);My hobby is reading. (表语);注意有些动词后只接动名词:enjoy/finish/avoid/mind/practice/consider/suggest;③分词(现在分词 v-ing / 过去分词 v-ed):作定语/状语/补语。例:The sleeping baby is cute. (现在分词作定语,主动进行);The broken window needs repair. (过去分词作定语,被动完成);Seen from the hill, the city looks beautiful. (过去分词作状语,被动)。区别:①动名词 vs 现在分词:动名词表'事情',现在分词表'正在做';作定语时,动名词说明用途(swimming pool 游泳池),现在分词说明状态(sleeping baby 睡着的婴儿);②不定式 vs 动名词:不定式多表具体/将来/目的,动名词多表抽象/习惯/已发生。I like swimming. (习惯) vs I like to swim today. (今天具体);③有些动词后接两者意思不同:stop to do(停下来去做)/stop doing(停止正在做);remember to do(记得要做)/remember doing(记得做过);forget to do(忘记要做)/forget doing(忘记做过)。",
+      "category": "语法",
+      "level": 4
+    },
+    {
+      "id": "q86",
+      "keywords": ["直接引语", "间接引语", "direct", "indirect", "reported speech"],
+      "question": "直接引语和间接引语怎么转换？",
+      "answer": "直接引语(Direct Speech):原话引用,加引号。She said, \"I am busy.\"间接引语(Indirect Speech):转述原话,不用引号,改为人称/时态/时间。She said (that) she was busy. 转换规则:①改人称:第一人称改为主句主语的人称。She said, \"I am busy.\" → She said she was busy. (I→she);第二人称改为说话对象的人称。He said to me, \"You are smart.\" → He told me I was smart. (you→I);第三人称不变。He said, \"She is kind.\" → He said she was kind. ②改时态(主句是过去时):一般现在→一般过去,She said, \"I am busy.\" → She said she was busy.;现在进行→过去进行,He said, \"I am reading.\" → He said he was reading.;现在完成→过去完成,She said, \"I have finished.\" → She said she had finished.;一般过去→过去完成,He said, \"I saw it.\" → He said he had seen it.;will→would,She said, \"I will go.\" → She said she would go.;can→could,must→had to。注意:客观真理时态不变。He said, \"The earth is round.\" → He said the earth is round. ③改时间/地点指示词:now→then, today→that day, yesterday→the day before, tomorrow→the next day, here→there, this→that, these→those。④改疑问句:一般疑问句用 if/whether 引导,He asked, \"Are you ready?\" → He asked if I was ready.;特殊疑问句用原疑问词,She asked, \"Where do you live?\" → She asked where I lived. ⑤祈使句改 tell/ask sb to do:He said, \"Sit down.\" → He told me to sit down.",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q87",
+      "keywords": ["强调句", "it is", "cleft", "强调结构"],
+      "question": "什么是强调句？怎么用？",
+      "answer": "强调句(Cleft Sentence)结构:It is/was + 强调部分 + that/who + 句子剩余部分。用于强调句中的某一部分(主语/宾语/状语)。例:原句 John met Mary in the park yesterday. ①强调主语:It was John that/who met Mary in the park yesterday. (是约翰在公园遇见了玛丽);②强调宾语:It was Mary that John met in the park yesterday. (约翰昨天在公园遇见的是玛丽);③强调地点状语:It was in the park that John met Mary yesterday. (约翰昨天就是在公园遇见的玛丽);④强调时间状语:It was yesterday that John met Mary in the park. (约翰就是在昨天在公园遇见的玛丽)。判断方法:把 It is/was...that 去掉后,句子仍完整。如 It was John that met Mary. → John met Mary. (完整) ✓ 注意与形式主语区别:It is important to learn English. (这不是强调句,去掉 It is...that 不成立) 强调动词/谓语用 do/does/did + 动词原形:①I do like English. (我真的喜欢英语);②She does work hard. (她确实努力);③He did come yesterday. (他昨天确实来了)。疑问词强调:Who on earth told you? / What ever do you mean? 建议强调句让表达更有重点,常用于澄清/反驳/强调语气。",
+      "category": "语法",
+      "level": 4
+    },
+    {
+      "id": "q88",
+      "keywords": ["独立主格", "absolute", "with复合结构"],
+      "question": "什么是独立主格结构？",
+      "answer": "独立主格(Absolute Phrase):独立于主句主语之外的名词/代词+分词/形容词/副词/介词短语,作状语(时间/原因/条件/伴随),与主句是逻辑关系但语法独立。结构:[名词/代词 + 分词/形容词/副词/介词短语],主句。例:①名词+现在分词:Weather permitting, we will go hiking. (天气允许的话,我们将去徒步);②名词+过去分词:The task finished, he went home. (任务完成后,他回家了);③名词+形容词:The meeting over, everyone left. (会议结束后,大家都离开了);④名词+副词:The sun up, we started work. (太阳升起后,我们开始工作);⑤名词+介词短语:He stood at the door, hands in pockets. (他站在门口,双手插兜);⑥with 复合结构(更常见):He slept with the window open. (他开着窗户睡了);She came in with a book in her hand. (她手里拿着一本书走进来);The boy was playing with his mother looking on. (男孩在玩,妈妈在旁边看)。与从句转换:①Weather permitting, we will go. = If weather permits, we will go. ②The task finished, he left. = When the task was finished, he left. 注意:独立主格的名词不能是主句主语。如 He eating, I left. (≠I eating, he left. 主语不对应) 建议:独立主格多见于书面/正式语,口语少见,但读小说/学术文章常出现。",
+      "category": "语法",
+      "level": 5
+    },
+    {
+      "id": "q89",
+      "keywords": ["主谓一致", "subject verb agreement", "谓语单复数"],
+      "question": "主谓一致怎么判断？",
+      "answer": "主谓一致(Subject-Verb Agreement):谓语动词要与主语在人称和数上保持一致。三大原则:①语法一致(最常见):主语单数谓语单数,主语复数谓语复数。The boy is here. / The boys are here.;②意义一致:主语形式单数但意义复数,谓语用复数。The police are looking for him. (警察在找他);The cattle are grazing. (牛在吃草);Your family are waiting. (你家人在等-强调家庭成员) vs Your family is big. (你家很大-强调整体);③就近一致:用 or/nor/either...or/neither...nor/not only...but also 连接主语时,谓语与最近的主语一致。Either you or I am wrong. (你和我要么我错了 - am 与 I 一致);Neither he nor his friends are coming. (are 与 friends 一致)。特殊规则:①不可数名词用单数:The water is cold. / The news is exciting. ②each/every + 单数名词用单数:Each student has a book. / Every boy and girl is happy. ③one of + 复数名词用单数谓语(主语是 one):One of the boys is missing. (一个男孩不见了);④the number of + 复数名词用单数(主语是 number):The number of students is increasing. (学生人数在增加);⑤a number of + 复数名词用复数(主语是 students):A number of students are waiting. (许多学生在等);⑥集体名词(family/team/class/government)看具体语境:整体单数、个体复数。My family is big. (整体)/ My family are having dinner. (成员);⑦时间/金钱/距离看作整体用单数:Ten years is a long time. / Ten dollars is enough. / Ten miles is not far. ⑧there be 用就近一致:There is a book and two pens. / There are two pens and a book. 建议:说话前先确认主语是谁/是单是复数,再选 is/are, has/have。",
+      "category": "语法",
+      "level": 3
+    },
+    {
+      "id": "q90",
+      "keywords": ["情态动词", "must", "can", "should", "may", "might", "would"],
+      "question": "情态动词有哪些？怎么用？",
+      "answer": "情态动词(Modal Verbs):表示能力/可能性/必要性/建议/许可等,后接动词原形。常见:①can/could:能力/可能性/请求。I can swim. (能力);It could rain tomorrow. (可能性);Could you help me? (礼貌请求);②may/might:许可/可能性。You may leave. (许可);It may rain. (可能性,50%);It might rain. (可能性,30%);③must:必须/肯定推断。You must finish it today. (必须);He must be home. (肯定推断);must not = 不许(禁止):You must not smoke here. (不许抽烟);④have to:不得不(客观)。I have to work. (不得不工作,客观需要);must vs have to:must 主观、have to 客观;⑤should/ought to:应该(建议/责任)。You should see a doctor. (建议);⑥had better:最好(强烈建议)。You'd better rest. (你最好休息);⑦will/would:意愿/请求/习惯。I will help you. (意愿);Would you pass the salt? (礼貌请求);He would sit there for hours. (过去习惯);⑧shall:征求意见/提议。Shall we go? (我们走吗?);⑨need:需要(可作情态也可作实义)。You needn't worry. (情态)/ You don't need to worry. (实义);⑩dare:敢(同 need)。情态动词特征:①无人称/数变化:He can swim. 不用 He cans;②后接动词原形:不能加 to(I can swim 不用 I can to swim);③疑问/否定直接变化:Can you swim? / I cannot swim. ④有些只有过去式:could/would/should/might 既可表过去,也可表'礼貌/虚拟'。建议:情态动词使语气委婉礼貌,常用 could/would/might 替代 can/will/may 显得更礼貌。",
+      "category": "语法",
+      "level": 2
+    }
+  ]
+}
