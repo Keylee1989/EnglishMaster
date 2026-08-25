@@ -1,0 +1,917 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "name": "入门A1",
+      "target": "生存英语·最基础日常对话",
+      "items": [
+        {
+          "id": "l1_1",
+          "title": "打招呼 Greeting",
+          "cn": "日常打招呼对话，最基础的问候",
+          "lines": [
+            { "speaker": "A", "en": "Hi! How are you?", "cn": "嗨！你好吗？" },
+            { "speaker": "B", "en": "I'm fine, thank you. And you?", "cn": "我很好，谢谢。你呢？" },
+            { "speaker": "A", "en": "I'm great! Nice to meet you.", "cn": "我很好！很高兴认识你。" }
+          ],
+          "quiz": [
+            { "q": "How is person B?", "options": ["Fine", "Bad", "Tired", "Angry"], "answer": 0 },
+            { "q": "What does A say at the end?", "options": ["Nice to meet you", "Goodbye", "See you", "Sorry"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_2",
+          "title": "自我介绍 Self-introduction",
+          "cn": "初次见面介绍自己的名字和国籍",
+          "lines": [
+            { "speaker": "A", "en": "Hello, my name is Li Ming.", "cn": "你好，我叫李明。" },
+            { "speaker": "B", "en": "Hi, I'm Anna. Where are you from?", "cn": "嗨，我是安娜。你来自哪里？" },
+            { "speaker": "A", "en": "I'm from China. And you?", "cn": "我来自中国。你呢？" },
+            { "speaker": "B", "en": "I'm from America. Nice to meet you!", "cn": "我来自美国。很高兴认识你！" }
+          ],
+          "quiz": [
+            { "q": "Where is Li Ming from?", "options": ["China", "America", "Japan", "England"], "answer": 0 },
+            { "q": "Where is Anna from?", "options": ["America", "China", "France", "Korea"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_3",
+          "title": "问时间 Asking the Time",
+          "cn": "询问和回答当前时间",
+          "lines": [
+            { "speaker": "A", "en": "Excuse me, what time is it?", "cn": "打扰一下，现在几点了？" },
+            { "speaker": "B", "en": "It's three o'clock.", "cn": "三点钟。" },
+            { "speaker": "A", "en": "Thank you very much.", "cn": "非常感谢。" },
+            { "speaker": "B", "en": "You're welcome.", "cn": "不客气。" }
+          ],
+          "quiz": [
+            { "q": "What time is it?", "options": ["Three o'clock", "Two o'clock", "Five o'clock", "Ten o'clock"], "answer": 0 },
+            { "q": "What does B say at the end?", "options": ["You're welcome", "Sorry", "Goodbye", "Thanks"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_4",
+          "title": "买东西 Shopping",
+          "cn": "在小店买水并询问价格",
+          "lines": [
+            { "speaker": "A", "en": "Hello, a bottle of water, please.", "cn": "你好，请给我一瓶水。" },
+            { "speaker": "B", "en": "Sure. It's two dollars.", "cn": "好的。两美元。" },
+            { "speaker": "A", "en": "Here you are. Thank you.", "cn": "给你。谢谢。" },
+            { "speaker": "B", "en": "Thank you! Have a nice day.", "cn": "谢谢！祝你有美好的一天。" }
+          ],
+          "quiz": [
+            { "q": "What does A want to buy?", "options": ["Water", "Bread", "Milk", "Coffee"], "answer": 0 },
+            { "q": "How much is it?", "options": ["Two dollars", "One dollar", "Five dollars", "Ten dollars"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_5",
+          "title": "问路 Asking the Way",
+          "cn": "询问洗手间在哪里",
+          "lines": [
+            { "speaker": "A", "en": "Excuse me, where is the toilet?", "cn": "打扰一下，洗手间在哪里？" },
+            { "speaker": "B", "en": "It's over there, on the left.", "cn": "就在那边，左边。" },
+            { "speaker": "A", "en": "Thank you!", "cn": "谢谢！" },
+            { "speaker": "B", "en": "No problem.", "cn": "没问题。" }
+          ],
+          "quiz": [
+            { "q": "What is A looking for?", "options": ["The toilet", "The shop", "The school", "The bank"], "answer": 0 },
+            { "q": "Where is it?", "options": ["On the left", "On the right", "Upstairs", "Downstairs"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_6",
+          "title": "谈家庭 Talking about Family",
+          "cn": "介绍家里有几口人",
+          "lines": [
+            { "speaker": "A", "en": "How many people are in your family?", "cn": "你家有几口人？" },
+            { "speaker": "B", "en": "There are four people: my parents, my sister and me.", "cn": "有四口人：我的父母、我的姐姐和我。" },
+            { "speaker": "A", "en": "Do you have a brother?", "cn": "你有兄弟吗？" },
+            { "speaker": "B", "en": "No, I don't. I only have a sister.", "cn": "没有。我只有一个姐姐。" }
+          ],
+          "quiz": [
+            { "q": "How many people are in B's family?", "options": ["Four", "Three", "Five", "Two"], "answer": 0 },
+            { "q": "Does B have a brother?", "options": ["No", "Yes", "Two brothers", "Maybe"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_7",
+          "title": "点餐 Ordering a Meal",
+          "cn": "在快餐店点一份套餐",
+          "lines": [
+            { "speaker": "A", "en": "Hi, can I have a hamburger, please?", "cn": "你好，请给我一个汉堡。" },
+            { "speaker": "B", "en": "Sure. Would you like fries with that?", "cn": "好的。要配薯条吗？" },
+            { "speaker": "A", "en": "Yes, a small fries, please.", "cn": "要一份小薯条。" },
+            { "speaker": "B", "en": "Anything to drink?", "cn": "要喝的吗？" },
+            { "speaker": "A", "en": "A cola, please.", "cn": "一杯可乐。" },
+            { "speaker": "B", "en": "That's eight dollars.", "cn": "一共八美元。" },
+            { "speaker": "A", "en": "Here you are. Thank you.", "cn": "给你。谢谢。" }
+          ],
+          "quiz": [
+            { "q": "What does A order?", "options": ["A hamburger, fries and a cola", "Only a hamburger", "Only a cola", "A pizza"], "answer": 0 },
+            { "q": "How much is it?", "options": ["Eight dollars", "Five dollars", "Ten dollars", "Three dollars"], "answer": 0 },
+            { "q": "Does A want fries?", "options": ["Yes, a small fries", "No", "Only large", "Maybe"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_8",
+          "title": "谈天气 Talking about Weather",
+          "cn": "早上出门前询问当天天气",
+          "lines": [
+            { "speaker": "A", "en": "Good morning. How's the weather today?", "cn": "早上好。今天天气怎么样？" },
+            { "speaker": "B", "en": "It's sunny and a little cold.", "cn": "晴天，有点冷。" },
+            { "speaker": "A", "en": "Should I wear a jacket?", "cn": "我要穿夹克吗？" },
+            { "speaker": "B", "en": "Yes, you'd better. It may be windy later.", "cn": "最好穿上。一会儿可能起风。" },
+            { "speaker": "A", "en": "OK. Will it rain today?", "cn": "好的。今天会下雨吗？" },
+            { "speaker": "B", "en": "No, the sky is clear.", "cn": "不会，天空很晴朗。" }
+          ],
+          "quiz": [
+            { "q": "How's the weather today?", "options": ["Sunny and a little cold", "Hot", "Rainy", "Snowy"], "answer": 0 },
+            { "q": "What does B suggest?", "options": ["Wear a jacket", "Take an umbrella", "Wear a hat", "Stay home"], "answer": 0 },
+            { "q": "Will it rain today?", "options": ["No", "Yes", "Maybe", "Tonight"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_9",
+          "title": "感谢与道歉 Thanks and Apology",
+          "cn": "归还借物时表达感谢与歉意",
+          "lines": [
+            { "speaker": "A", "en": "Here's your book. Thank you for lending it to me.", "cn": "这是你的书。谢谢你借给我。" },
+            { "speaker": "B", "en": "You're welcome. Did you finish it?", "cn": "不客气。你看完了吗？" },
+            { "speaker": "A", "en": "Yes, I'm sorry I kept it so long.", "cn": "看完了，抱歉借了这么久。" },
+            { "speaker": "B", "en": "That's OK. No problem.", "cn": "没关系，没事。" },
+            { "speaker": "A", "en": "I'll buy you a coffee to say thanks.", "cn": "我请你喝咖啡表示感谢。" },
+            { "speaker": "B", "en": "That's very kind of you!", "cn": "你太客气了！" }
+          ],
+          "quiz": [
+            { "q": "Why does A thank B?", "options": ["For lending a book", "For a gift", "For money", "For food"], "answer": 0 },
+            { "q": "What does A apologize for?", "options": ["Keeping the book so long", "Being late", "Losing it", "Breaking it"], "answer": 0 },
+            { "q": "What does A offer to buy?", "options": ["A coffee", "A book", "Money", "A pen"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l1_10",
+          "title": "告别 Saying Goodbye",
+          "cn": "聚会后与朋友道别",
+          "lines": [
+            { "speaker": "A", "en": "It's late. I have to go now.", "cn": "很晚了。我得走了。" },
+            { "speaker": "B", "en": "Already? Will you take a taxi?", "cn": "这么快？你打车吗？" },
+            { "speaker": "A", "en": "No, I'll take the bus.", "cn": "不，我坐公交。" },
+            { "speaker": "B", "en": "OK. Let's meet again next week.", "cn": "好。我们下周再见。" },
+            { "speaker": "A", "en": "Sure. Have a good evening!", "cn": "好的。祝你度过一个美好的夜晚！" },
+            { "speaker": "B", "en": "Goodbye! Take care.", "cn": "再见！保重。" }
+          ],
+          "quiz": [
+            { "q": "Why does A leave?", "options": ["It's late", "It's early", "He's tired", "He's sick"], "answer": 0 },
+            { "q": "How will A go home?", "options": ["By bus", "By taxi", "By car", "On foot"], "answer": 0 },
+            { "q": "When will they meet again?", "options": ["Next week", "Tomorrow", "Today", "Never"], "answer": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "初级A2",
+      "target": "日常交流·生活场景对话",
+      "items": [
+        {
+          "id": "l2_1",
+          "title": "餐厅点餐 Ordering Food",
+          "cn": "在餐厅点餐和结账",
+          "lines": [
+            { "speaker": "A", "en": "Good evening. A table for two, please.", "cn": "晚上好。请给我一张两人桌。" },
+            { "speaker": "B", "en": "Sure, this way, please. Here is the menu.", "cn": "好的，这边请。这是菜单。" },
+            { "speaker": "A", "en": "I'd like a chicken sandwich and a cup of coffee.", "cn": "我想要一个鸡肉三明治和一杯咖啡。" },
+            { "speaker": "B", "en": "Anything else?", "cn": "还要别的吗？" },
+            { "speaker": "A", "en": "No, that's all. Thank you.", "cn": "不用了，就这些。谢谢。" }
+          ],
+          "quiz": [
+            { "q": "How many people will eat?", "options": ["Two", "One", "Three", "Four"], "answer": 0 },
+            { "q": "What does A order?", "options": ["Chicken sandwich and coffee", "Only coffee", "Only a sandwich", "Tea and bread"], "answer": 0 },
+            { "q": "Does A want anything else?", "options": ["No", "Yes, more food", "Yes, water", "Yes, juice"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_2",
+          "title": "预约看病 Booking a Doctor",
+          "cn": "打电话预约看医生",
+          "lines": [
+            { "speaker": "A", "en": "Hello, I'd like to see a doctor, please.", "cn": "你好，我想看医生。" },
+            { "speaker": "B", "en": "Sure. What's the problem?", "cn": "好的。您哪里不舒服？" },
+            { "speaker": "A", "en": "I have a headache and a fever.", "cn": "我头痛，还发烧。" },
+            { "speaker": "B", "en": "Can you come at ten tomorrow morning?", "cn": "您明天早上十点能来吗？" },
+            { "speaker": "A", "en": "Yes, ten o'clock is fine. Thank you.", "cn": "可以，十点没问题。谢谢。" }
+          ],
+          "quiz": [
+            { "q": "What's wrong with A?", "options": ["Headache and fever", "Stomachache", "Toothache", "Cold only"], "answer": 0 },
+            { "q": "When will A see the doctor?", "options": ["Ten tomorrow morning", "Today evening", "Now", "Next week"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_3",
+          "title": "乘出租车 Taking a Taxi",
+          "cn": "打车去机场并询问费用",
+          "lines": [
+            { "speaker": "A", "en": "Hello, please take me to the airport.", "cn": "你好，请送我去机场。" },
+            { "speaker": "B", "en": "OK. Which terminal?", "cn": "好的。哪个航站楼？" },
+            { "speaker": "A", "en": "Terminal Two, please. How long does it take?", "cn": "请去二号航站楼。要多久？" },
+            { "speaker": "B", "en": "About thirty minutes. The fare is forty yuan.", "cn": "大约三十分钟。车费四十元。" },
+            { "speaker": "A", "en": "Here is fifty yuan. Keep the change.", "cn": "这是五十元。不用找了。" }
+          ],
+          "quiz": [
+            { "q": "Where does A want to go?", "options": ["The airport", "The hotel", "The station", "The hospital"], "answer": 0 },
+            { "q": "How long does it take?", "options": ["About 30 minutes", "10 minutes", "1 hour", "2 hours"], "answer": 0 },
+            { "q": "How much does A pay?", "options": ["50 yuan", "40 yuan", "30 yuan", "60 yuan"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_4",
+          "title": "购物退换 Returning Goods",
+          "cn": "在商店退换有问题的商品",
+          "lines": [
+            { "speaker": "A", "en": "Excuse me, I bought this shirt yesterday, but it's too small.", "cn": "打扰一下，我昨天买的这件衬衫太小了。" },
+            { "speaker": "B", "en": "Do you have the receipt?", "cn": "您有收据吗？" },
+            { "speaker": "A", "en": "Yes, here it is. Can I change it for a bigger one?", "cn": "有，在这里。能换件大一号的吗？" },
+            { "speaker": "B", "en": "Of course. Let me find a large size for you.", "cn": "当然可以。我给您找件大号的。" },
+            { "speaker": "A", "en": "Thank you very much for your help.", "cn": "非常感谢您的帮忙。" }
+          ],
+          "quiz": [
+            { "q": "What's the problem with the shirt?", "options": ["Too small", "Too big", "Wrong color", "Broken"], "answer": 0 },
+            { "q": "What does A want to do?", "options": ["Change for a bigger one", "Get money back", "Buy another", "Return and leave"], "answer": 0 },
+            { "q": "What does A need to show?", "options": ["The receipt", "The ID card", "The bag", "Nothing"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_5",
+          "title": "借东西 Borrowing Something",
+          "cn": "向朋友借用雨伞并约好归还时间",
+          "lines": [
+            { "speaker": "A", "en": "Hi, could I borrow your umbrella for a while?", "cn": "嗨，能借你的伞用一下吗？" },
+            { "speaker": "B", "en": "Sure. When will you return it?", "cn": "当然。什么时候还？" },
+            { "speaker": "A", "en": "Tomorrow morning, after the rain stops.", "cn": "明天早上，雨停后。" },
+            { "speaker": "B", "en": "No problem. It's the blue one by the door.", "cn": "没问题。是门边那把蓝色的。" },
+            { "speaker": "A", "en": "Thank you so much. I'll take good care of it.", "cn": "太感谢了。我会好好保管。" },
+            { "speaker": "B", "en": "You're welcome. See you tomorrow.", "cn": "不客气。明天见。" }
+          ],
+          "quiz": [
+            { "q": "What does A want to borrow?", "options": ["An umbrella", "A book", "A pen", "A bag"], "answer": 0 },
+            { "q": "When will A return it?", "options": ["Tomorrow morning", "Today", "Next week", "Never"], "answer": 0 },
+            { "q": "Which umbrella is it?", "options": ["The blue one by the door", "The red one", "A black one", "A big one"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_6",
+          "title": "邀请朋友 Inviting a Friend",
+          "cn": "邀请朋友周末一起看电影",
+          "lines": [
+            { "speaker": "A", "en": "Hi Tom, are you free this Saturday?", "cn": "嗨汤姆，你这周六有空吗？" },
+            { "speaker": "B", "en": "Yes, I am. What's up?", "cn": "有空。怎么了？" },
+            { "speaker": "A", "en": "Would you like to see a movie with me?", "cn": "你想和我一起看电影吗？" },
+            { "speaker": "B", "en": "Sure! What time does it start?", "cn": "当然想！几点开始？" },
+            { "speaker": "A", "en": "At seven in the evening. Let's meet at six thirty.", "cn": "晚上七点。我们六点半见。" }
+          ],
+          "quiz": [
+            { "q": "When is Tom free?", "options": ["This Saturday", "This Sunday", "Friday", "Monday"], "answer": 0 },
+            { "q": "What does A invite Tom to do?", "options": ["See a movie", "Play football", "Have dinner", "Go shopping"], "answer": 0 },
+            { "q": "What time does the movie start?", "options": ["At seven", "At six thirty", "At eight", "At five"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_7",
+          "title": "问价格 Asking the Price",
+          "cn": "在市场买T恤并询问折扣",
+          "lines": [
+            { "speaker": "A", "en": "Excuse me, how much is this T-shirt?", "cn": "打扰一下，这件T恤多少钱？" },
+            { "speaker": "B", "en": "It's fifteen dollars.", "cn": "十五美元。" },
+            { "speaker": "A", "en": "That's a bit expensive. Any discount?", "cn": "有点贵。有折扣吗？" },
+            { "speaker": "B", "en": "If you buy two, you get ten percent off.", "cn": "买两件可以打九折。" },
+            { "speaker": "A", "en": "OK, I'll take two then.", "cn": "好，那我要两件。" },
+            { "speaker": "B", "en": "Great. That's twenty-seven dollars in total.", "cn": "好的。一共二十七美元。" }
+          ],
+          "quiz": [
+            { "q": "How much is one T-shirt?", "options": ["Fifteen dollars", "Ten dollars", "Twenty dollars", "Five dollars"], "answer": 0 },
+            { "q": "What discount does B offer for two?", "options": ["Ten percent off", "Twenty percent off", "Fifty percent off", "No discount"], "answer": 0 },
+            { "q": "How much does A pay in total?", "options": ["Twenty-seven dollars", "Thirty dollars", "Fifteen dollars", "Twenty dollars"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_8",
+          "title": "做客 Visiting a Friend's Home",
+          "cn": "去朋友家做客并送礼寒暄",
+          "lines": [
+            { "speaker": "A", "en": "Hi, come in! Thanks for coming.", "cn": "嗨，请进！谢谢你能来。" },
+            { "speaker": "B", "en": "Thanks for inviting me. Here's some fruit for you.", "cn": "谢谢邀请。这是给你带的水果。" },
+            { "speaker": "A", "en": "That's so kind. Please sit down.", "cn": "你太客气了。请坐。" },
+            { "speaker": "B", "en": "Your home is lovely. How long have you lived here?", "cn": "你家真漂亮。你住这儿多久了？" },
+            { "speaker": "A", "en": "About two years. Would you like some tea or coffee?", "cn": "大约两年了。喝茶还是咖啡？" },
+            { "speaker": "B", "en": "Tea, please.", "cn": "喝茶，谢谢。" }
+          ],
+          "quiz": [
+            { "q": "What does B bring?", "options": ["Some fruit", "A cake", "Nothing", "A book"], "answer": 0 },
+            { "q": "How long has A lived there?", "options": ["About two years", "One year", "Five years", "Six months"], "answer": 0 },
+            { "q": "What does B want to drink?", "options": ["Tea", "Coffee", "Water", "Juice"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_9",
+          "title": "打电话 Making a Phone Call",
+          "cn": "打电话找人未果并留言",
+          "lines": [
+            { "speaker": "A", "en": "Hello, this is Lisa. May I speak to Tom?", "cn": "你好，我是丽莎。请找汤姆接电话？" },
+            { "speaker": "B", "en": "Sorry, Tom isn't home right now. Can I take a message?", "cn": "抱歉，汤姆现在不在家。要留言吗？" },
+            { "speaker": "A", "en": "Yes, please. Could you ask him to call me back?", "cn": "好的。能请他回我电话吗？" },
+            { "speaker": "B", "en": "Sure. What's your number?", "cn": "好的。您的号码是多少？" },
+            { "speaker": "A", "en": "It's 555-2310. Thank you.", "cn": "是555-2310。谢谢。" },
+            { "speaker": "B", "en": "I'll give him the message. Goodbye.", "cn": "我会转告他。再见。" }
+          ],
+          "quiz": [
+            { "q": "Who does Lisa want to speak to?", "options": ["Tom", "Bob", "Lisa", "The mother"], "answer": 0 },
+            { "q": "Why can't Tom come to the phone?", "options": ["He isn't home", "He's busy", "He's sick", "He's sleeping"], "answer": 0 },
+            { "q": "What's Lisa's number?", "options": ["555-2310", "555-2100", "555-1234", "555-0000"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l2_10",
+          "title": "抱怨 Making a Complaint",
+          "cn": "在餐厅对菜品和服务提出投诉",
+          "lines": [
+            { "speaker": "A", "en": "Excuse me, the soup is cold.", "cn": "打扰一下，汤是凉的。" },
+            { "speaker": "B", "en": "I'm sorry about that. Let me bring you a new one.", "cn": "非常抱歉。我给您换一碗。" },
+            { "speaker": "A", "en": "And we've waited thirty minutes for the main dish.", "cn": "而且主菜我们等了三十分钟。" },
+            { "speaker": "B", "en": "I apologize. The kitchen is very busy tonight.", "cn": "对不起，今晚厨房太忙了。" },
+            { "speaker": "A", "en": "Could you check on our order, please?", "cn": "能帮我们催一下吗？" },
+            { "speaker": "B", "en": "Of course. I'll bring it right away.", "cn": "当然，我马上送来。" }
+          ],
+          "quiz": [
+            { "q": "What's wrong with the soup?", "options": ["It's cold", "Too hot", "Too salty", "Too small"], "answer": 0 },
+            { "q": "How long have they waited for the main dish?", "options": ["Thirty minutes", "Ten minutes", "An hour", "Five minutes"], "answer": 0 },
+            { "q": "Why is the kitchen slow?", "options": ["It's very busy tonight", "It's closed", "No staff", "No food"], "answer": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "中级B1",
+      "target": "工作学习·较复杂事务对话",
+      "items": [
+        {
+          "id": "l3_1",
+          "title": "租房 Renting an Apartment",
+          "cn": "与中介看房并询问租赁细节",
+          "lines": [
+            { "speaker": "A", "en": "Hello, I'm interested in the apartment you advertised.", "cn": "你好，我对您广告里的公寓感兴趣。" },
+            { "speaker": "B", "en": "Great. It has two bedrooms, a living room and a kitchen.", "cn": "太好了。它有两间卧室、一个客厅和一个厨房。" },
+            { "speaker": "A", "en": "How much is the rent per month?", "cn": "每月租金多少？" },
+            { "speaker": "B", "en": "It's 2,000 dollars a month, plus utilities.", "cn": "每月2000美元，不含水电费。" },
+            { "speaker": "A", "en": "Is a one-year lease required?", "cn": "需要签一年租约吗？" },
+            { "speaker": "B", "en": "Yes, and you need to pay a two-month deposit.", "cn": "是的，还需要付两个月押金。" }
+          ],
+          "quiz": [
+            { "q": "How many bedrooms does the apartment have?", "options": ["Two", "One", "Three", "Four"], "answer": 0 },
+            { "q": "How much is the monthly rent?", "options": ["2,000 dollars", "1,000 dollars", "3,000 dollars", "500 dollars"], "answer": 0 },
+            { "q": "What deposit is required?", "options": ["Two-month deposit", "One-month deposit", "No deposit", "Three-month deposit"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_2",
+          "title": "银行开户 Opening a Bank Account",
+          "cn": "在银行办理开户手续",
+          "lines": [
+            { "speaker": "A", "en": "Good morning. I'd like to open a savings account.", "cn": "早上好。我想开一个储蓄账户。" },
+            { "speaker": "B", "en": "Certainly. May I see your ID and proof of address?", "cn": "好的。请出示您的身份证和地址证明。" },
+            { "speaker": "A", "en": "Here is my passport and a phone bill.", "cn": "这是我的护照和一张电话账单。" },
+            { "speaker": "B", "en": "Thanks. Would you like a debit card as well?", "cn": "谢谢。您还要一张借记卡吗？" },
+            { "speaker": "A", "en": "Yes, please. Is there a monthly fee?", "cn": "要的。有月费吗？" },
+            { "speaker": "B", "en": "No fee if you keep a balance above 500 dollars.", "cn": "只要余额保持在500美元以上就免月费。" }
+          ],
+          "quiz": [
+            { "q": "What kind of account does A want to open?", "options": ["A savings account", "A checking account", "A business account", "A credit account"], "answer": 0 },
+            { "q": "What documents does A provide?", "options": ["Passport and phone bill", "Only passport", "Only a bill", "ID card only"], "answer": 0 },
+            { "q": "When is there no monthly fee?", "options": ["Balance above 500 dollars", "Never", "Always a fee", "Balance above 100 dollars"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_3",
+          "title": "工作面试 Job Interview",
+          "cn": "应聘职位时的面试对话",
+          "lines": [
+            { "speaker": "A", "en": "Good morning. Please tell me about your work experience.", "cn": "早上好。请介绍一下你的工作经验。" },
+            { "speaker": "B", "en": "I worked as a sales assistant for three years at a retail company.", "cn": "我在一家零售公司做了三年销售助理。" },
+            { "speaker": "A", "en": "Why did you leave your last job?", "cn": "你为什么离开上一份工作？" },
+            { "speaker": "B", "en": "I wanted to find a job with more challenges and growth.", "cn": "我想找一份更有挑战和成长空间的工作。" },
+            { "speaker": "A", "en": "What are your main strengths?", "cn": "你的主要优点是什么？" },
+            { "speaker": "B", "en": "I'm hardworking, good at communication and a quick learner.", "cn": "我勤奋、善于沟通，学得也快。" }
+          ],
+          "quiz": [
+            { "q": "How long did B work at the retail company?", "options": ["Three years", "One year", "Two years", "Five years"], "answer": 0 },
+            { "q": "Why did B leave the last job?", "options": ["Wanted more challenges and growth", "Low salary", "Bad boss", "Company closed"], "answer": 0 },
+            { "q": "Which is NOT mentioned as B's strength?", "options": ["Good at cooking", "Hardworking", "Good at communication", "Quick learner"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_4",
+          "title": "机场登机 Airport Check-in",
+          "cn": "在机场办理登机和托运行李",
+          "lines": [
+            { "speaker": "A", "en": "Good evening. Your passport and ticket, please.", "cn": "晚上好。请出示护照和机票。" },
+            { "speaker": "B", "en": "Here you are. I'd like a window seat, if possible.", "cn": "给您。如果可以，我想要靠窗的座位。" },
+            { "speaker": "A", "en": "Sure. How many bags are you checking in?", "cn": "好的。您要托运几件行李？" },
+            { "speaker": "B", "en": "Just one suitcase. It weighs twenty kilos.", "cn": "就一个行李箱。重二十公斤。" },
+            { "speaker": "A", "en": "That's within the limit. Boarding starts at gate 12.", "cn": "在限额内。登机口是12号。" },
+            { "speaker": "B", "en": "Thank you. When does boarding begin?", "cn": "谢谢。几点开始登机？" },
+            { "speaker": "A", "en": "At 9:15. Please be there fifteen minutes early.", "cn": "9点15分。请提前十五分钟到达。" }
+          ],
+          "quiz": [
+            { "q": "What seat does B want?", "options": ["A window seat", "An aisle seat", "Any seat", "A middle seat"], "answer": 0 },
+            { "q": "How much does the suitcase weigh?", "options": ["Twenty kilos", "Ten kilos", "Thirty kilos", "Fifteen kilos"], "answer": 0 },
+            { "q": "When does boarding begin?", "options": ["9:15", "9:00", "9:30", "8:15"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_5",
+          "title": "学校注册 School Enrollment",
+          "cn": "新生到学校报到注册课程",
+          "lines": [
+            { "speaker": "A", "en": "Hello, I'm a new student. I need to register for classes.", "cn": "你好，我是新生。我需要注册课程。" },
+            { "speaker": "B", "en": "Welcome. May I have your student ID number?", "cn": "欢迎。请告诉我你的学号。" },
+            { "speaker": "A", "en": "It's 20231005. I want to take English and Math.", "cn": "是20231005。我想选英语和数学。" },
+            { "speaker": "B", "en": "English is full, but Math has seats on Monday and Wednesday.", "cn": "英语已满，但数学周一周三还有名额。" },
+            { "speaker": "A", "en": "Then I'll take Math on Monday and Wednesday.", "cn": "那我就选周一周三的数学。" },
+            { "speaker": "B", "en": "Done. Your schedule will be emailed to you tonight.", "cn": "好了。你的课表今晚会发到你的邮箱。" }
+          ],
+          "quiz": [
+            { "q": "What is the student's ID number?", "options": ["20231005", "2023100", "20231050", "20230010"], "answer": 0 },
+            { "q": "Why can't A take English?", "options": ["It is full", "Too hard", "Too early", "Wrong teacher"], "answer": 0 },
+            { "q": "When does A take Math?", "options": ["Monday and Wednesday", "Tuesday only", "Friday", "Weekend"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_6",
+          "title": "修电脑 Repairing a Computer",
+          "cn": "电脑出问题送修与店员沟通",
+          "lines": [
+            { "speaker": "A", "en": "Hello, my laptop won't turn on. Can you help?", "cn": "你好，我的笔记本开不了机。能帮忙看看吗？" },
+            { "speaker": "B", "en": "Sure. When did the problem start?", "cn": "当然。问题什么时候开始的？" },
+            { "speaker": "A", "en": "Yesterday morning. The screen stays black.", "cn": "昨天早上。屏幕一直黑着。" },
+            { "speaker": "B", "en": "Let me check. It might be the battery or the screen.", "cn": "我检查一下。可能是电池或屏幕的问题。" },
+            { "speaker": "A", "en": "How long will the repair take?", "cn": "修理要多久？" },
+            { "speaker": "B", "en": "About two days. I'll call you when it's ready.", "cn": "大约两天。好了我打电话给你。" }
+          ],
+          "quiz": [
+            { "q": "What's wrong with the laptop?", "options": ["Won't turn on", "Slow", "No sound", "Broken keyboard"], "answer": 0 },
+            { "q": "When did the problem start?", "options": ["Yesterday morning", "Last week", "Today", "A month ago"], "answer": 0 },
+            { "q": "How long will the repair take?", "options": ["About two days", "One day", "One week", "A few hours"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_7",
+          "title": "投诉 Hotel Complaint",
+          "cn": "在酒店前台投诉房间问题并要求换房",
+          "lines": [
+            { "speaker": "A", "en": "Hello, I'd like to complain about my room.", "cn": "你好，我想投诉我的房间。" },
+            { "speaker": "B", "en": "I'm sorry to hear that. What's the problem?", "cn": "很抱歉。出了什么问题？" },
+            { "speaker": "A", "en": "The air conditioner doesn't work, and the bathroom is not clean.", "cn": "空调坏了，浴室也不干净。" },
+            { "speaker": "B", "en": "I apologize. I'll send someone to fix it right away.", "cn": "对不起。我马上派人修理。" },
+            { "speaker": "A", "en": "Could you also change my room? I need a quiet one for work.", "cn": "能换个房间吗？我工作需要一个安静的。" },
+            { "speaker": "B", "en": "Of course. I'll upgrade you to a quiet room on the fifth floor.", "cn": "当然。我给您升级到五楼一间安静的房间。" }
+          ],
+          "quiz": [
+            { "q": "What's wrong with the air conditioner?", "options": ["It doesn't work", "Too cold", "Too noisy", "Too old"], "answer": 0 },
+            { "q": "What else is wrong with the room?", "options": ["The bathroom isn't clean", "No TV", "No bed", "No window"], "answer": 0 },
+            { "q": "Where is the new room?", "options": ["On the fifth floor", "On the first floor", "On the tenth floor", "In the basement"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_8",
+          "title": "搬家 Moving House",
+          "cn": "和朋友商量搬家日的安排",
+          "lines": [
+            { "speaker": "A", "en": "Are you ready for the move this Saturday?", "cn": "这周六搬家准备好了吗？" },
+            { "speaker": "B", "en": "Almost. I've packed most boxes, but the furniture is hard to handle.", "cn": "差不多了。大部分箱子打包好了，但家具不好弄。" },
+            { "speaker": "A", "en": "Don't worry. I've rented a van and asked two friends to help.", "cn": "别担心。我租了辆面包车，也叫了两个朋友帮忙。" },
+            { "speaker": "B", "en": "That's great. What time will you arrive?", "cn": "太好了。你们几点到？" },
+            { "speaker": "A", "en": "Around nine in the morning. The new apartment is only twenty minutes away.", "cn": "早上九点左右。新公寓离这儿只有二十分钟。" },
+            { "speaker": "B", "en": "Perfect. I'll have breakfast ready for everyone.", "cn": "太好了。我会给大家准备好早餐。" }
+          ],
+          "quiz": [
+            { "q": "When is the move?", "options": ["This Saturday", "This Sunday", "Today", "Next month"], "answer": 0 },
+            { "q": "What's hard to handle?", "options": ["The furniture", "The boxes", "The clothes", "The books"], "answer": 0 },
+            { "q": "What time will A arrive?", "options": ["Around nine", "Around ten", "At noon", "At eight"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_9",
+          "title": "聚会聊天 Chatting at a Party",
+          "cn": "在聚会上与陌生人自我介绍并聊职业",
+          "lines": [
+            { "speaker": "A", "en": "Hi, I don't think we've met. I'm Kevin.", "cn": "嗨，我们好像没见过。我是凯文。" },
+            { "speaker": "B", "en": "Hello Kevin, I'm Sarah. Are you a friend of the host?", "cn": "你好凯文，我是莎拉。你是主人的朋友吗？" },
+            { "speaker": "A", "en": "Yes, we work together. How about you?", "cn": "是的，我们是同事。你呢？" },
+            { "speaker": "B", "en": "We were classmates in college. So, what do you do for a living?", "cn": "我们大学是同学。你做什么工作？" },
+            { "speaker": "A", "en": "I'm a graphic designer. I mostly work on websites.", "cn": "我是平面设计师，主要做网站。" },
+            { "speaker": "B", "en": "That sounds interesting. I work in a hospital as a nurse.", "cn": "听起来很有趣。我在医院当护士。" }
+          ],
+          "quiz": [
+            { "q": "How does Kevin know the host?", "options": ["They work together", "They're family", "Old neighbors", "College friends"], "answer": 0 },
+            { "q": "What does Kevin do?", "options": ["Graphic designer", "Nurse", "Teacher", "Driver"], "answer": 0 },
+            { "q": "What does Sarah do?", "options": ["Nurse", "Designer", "Engineer", "Cook"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l3_10",
+          "title": "求职咨询 Career Consulting",
+          "cn": "向职业顾问咨询转行建议",
+          "lines": [
+            { "speaker": "A", "en": "Hello, I'd like some advice on changing careers.", "cn": "你好，我想咨询转行的事。" },
+            { "speaker": "B", "en": "Of course. What field are you in now?", "cn": "好的。您现在在哪个行业？" },
+            { "speaker": "A", "en": "I've been a teacher for five years, but I want to move into IT.", "cn": "我做了五年老师，但想转行做IT。" },
+            { "speaker": "B", "en": "That's a big change. Do you have any technical skills?", "cn": "这是很大的转变。您有技术技能吗？" },
+            { "speaker": "A", "en": "I've learned some Python online, and I enjoy solving logical problems.", "cn": "我在网上学了些Python，也喜欢解决逻辑问题。" },
+            { "speaker": "B", "en": "Then I'd suggest a six-month coding bootcamp. It's a fast way to build a portfolio.", "cn": "那我建议参加六个月的编程训练营，这是快速建立作品集的方式。" }
+          ],
+          "quiz": [
+            { "q": "What's A's current job?", "options": ["Teacher", "Engineer", "Nurse", "Designer"], "answer": 0 },
+            { "q": "What field does A want to enter?", "options": ["IT", "Medicine", "Law", "Art"], "answer": 0 },
+            { "q": "What does B suggest?", "options": ["A six-month coding bootcamp", "A new degree", "Staying a teacher", "A short trip"], "answer": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "高级C1",
+      "target": "流利表达·商务学术深度对话",
+      "items": [
+        {
+          "id": "l4_1",
+          "title": "商务谈判 Business Negotiation",
+          "cn": "就合同价格与交付条件进行谈判",
+          "lines": [
+            { "speaker": "A", "en": "Thank you for the proposal. Frankly, the unit price is higher than we expected.", "cn": "感谢您的提案。坦白说，单价高于我们的预期。" },
+            { "speaker": "B", "en": "I understand your concern. However, our quality justifies the premium.", "cn": "我理解您的顾虑。但我们的品质足以支撑这个溢价。" },
+            { "speaker": "A", "en": "Could you offer a discount if we commit to a larger volume?", "cn": "如果我们承诺更大订单量，能打折吗？" },
+            { "speaker": "B", "en": "If you order above 10,000 units, we can offer a 12% discount.", "cn": "如果订量超过一万件，我们可以给12%的折扣。" },
+            { "speaker": "A", "en": "That sounds reasonable. What about the delivery schedule?", "cn": "这听起来合理。交付时间表呢？" },
+            { "speaker": "B", "en": "We guarantee shipment within four weeks of the signed contract.", "cn": "我们保证签约后四周内发货。" }
+          ],
+          "quiz": [
+            { "q": "What is A's main concern about the proposal?", "options": ["The unit price is too high", "Quality is poor", "Delivery too slow", "Wrong product"], "answer": 0 },
+            { "q": "What discount can B offer for over 10,000 units?", "options": ["12%", "10%", "15%", "20%"], "answer": 0 },
+            { "q": "What delivery guarantee does B make?", "options": ["Shipment within four weeks", "Within one week", "Within two weeks", "No guarantee"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_2",
+          "title": "会议主持 Chairing a Meeting",
+          "cn": "主持会议讨论销售进展与对策",
+          "lines": [
+            { "speaker": "A", "en": "Good morning, everyone. Let's start with the sales report.", "cn": "大家早上好。我们先从销售报告开始。" },
+            { "speaker": "B", "en": "Last quarter we reached 95% of our target, up 8% year on year.", "cn": "上季度我们完成了目标的95%，同比增长8%。" },
+            { "speaker": "A", "en": "Solid progress. What's holding back the remaining 5%?", "cn": "进展不错。剩下的5%卡在哪里？" },
+            { "speaker": "B", "en": "Mainly supply delays from our Asian factory.", "cn": "主要是亚洲工厂的供货延迟。" },
+            { "speaker": "A", "en": "Then let's prioritise an alternative supplier this week.", "cn": "那本周我们优先找替代供应商。" },
+            { "speaker": "B", "en": "Agreed. I'll prepare a shortlist by Friday.", "cn": "同意。我周五前准备好候选名单。" }
+          ],
+          "quiz": [
+            { "q": "How much of the target was reached last quarter?", "options": ["95%", "80%", "100%", "70%"], "answer": 0 },
+            { "q": "What's holding back the remaining 5%?", "options": ["Supply delays", "Staff shortage", "Low demand", "High prices"], "answer": 0 },
+            { "q": "When will B prepare a shortlist?", "options": ["By Friday", "By Monday", "Next month", "Next week"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_3",
+          "title": "新闻采访 News Interview",
+          "cn": "记者采访一位科学家关于最新发现",
+          "lines": [
+            { "speaker": "A", "en": "Doctor, could you explain your team's recent breakthrough in simple terms?", "cn": "博士，您能用通俗的话解释一下团队最近的突破吗？" },
+            { "speaker": "B", "en": "Certainly. We found a way to store energy using a new type of battery material.", "cn": "当然。我们找到了用一种新型电池材料储能的方法。" },
+            { "speaker": "A", "en": "How significant is this compared to existing technology?", "cn": "与现有技术相比，这有多重要？" },
+            { "speaker": "B", "en": "It could double the storage capacity while cutting the cost by roughly thirty percent.", "cn": "它能让储能容量翻倍，同时把成本降低约百分之三十。" },
+            { "speaker": "A", "en": "When might ordinary consumers see this in products?", "cn": "普通消费者什么时候能在产品中看到它？" },
+            { "speaker": "B", "en": "If trials succeed, commercial versions could appear within three years.", "cn": "如果试验成功，商用版本可能在三年内出现。" }
+          ],
+          "quiz": [
+            { "q": "What did the team discover?", "options": ["A new battery material for energy storage", "A new drug", "A new planet", "A new language"], "answer": 0 },
+            { "q": "What improvement does the new material offer?", "options": ["Double capacity and 30% lower cost", "Triple capacity", "Same capacity", "Half the capacity"], "answer": 0 },
+            { "q": "When might consumers get the product?", "options": ["Within three years", "Next month", "Ten years", "Already available"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_4",
+          "title": "项目汇报 Project Presentation",
+          "cn": "向管理层汇报项目进展并回答问题",
+          "lines": [
+            { "speaker": "A", "en": "Good afternoon. Today I'll walk you through our Q3 project results.", "cn": "下午好。今天我将向大家介绍第三季度项目的成果。" },
+            { "speaker": "B", "en": "Before you continue, what were the total costs versus the budget?", "cn": "在你继续之前，总成本与预算相比如何？" },
+            { "speaker": "A", "en": "We spent 92% of the budget, coming in 8% under plan.", "cn": "我们花了预算的92%，比计划低8%。" },
+            { "speaker": "B", "en": "Impressive. Did the savings affect quality?", "cn": "不错。节省是否影响了质量？" },
+            { "speaker": "A", "en": "Not at all. We optimised suppliers without compromising standards.", "cn": "完全没有。我们优化了供应商却没有降低标准。" },
+            { "speaker": "B", "en": "Excellent. What's the biggest risk for next quarter?", "cn": "很好。下季度最大的风险是什么？" },
+            { "speaker": "A", "en": "The main risk is a potential shortage of key components.", "cn": "主要风险是关键零部件可能短缺。" }
+          ],
+          "quiz": [
+            { "q": "How much of the budget was spent?", "options": ["92%", "100%", "80%", "75%"], "answer": 0 },
+            { "q": "How did they save money?", "options": ["Optimised suppliers", "Cut staff", "Lowered quality", "Skipped tests"], "answer": 0 },
+            { "q": "What's the biggest risk next quarter?", "options": ["Shortage of key components", "No budget", "No staff", "No demand"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_5",
+          "title": "客户接待 Receiving a Client",
+          "cn": "在总部接待来访客户并介绍同事",
+          "lines": [
+            { "speaker": "A", "en": "Welcome to our headquarters, Mr. Brown. Did you have a good flight?", "cn": "布朗先生，欢迎来到我们总部。航班还好吗？" },
+            { "speaker": "B", "en": "Yes, thank you. I'm looking forward to our factory tour this afternoon.", "cn": "是的，谢谢。我期待今天下午参观工厂。" },
+            { "speaker": "A", "en": "Excellent. Before that, let me introduce our production director, Ms. Lee.", "cn": "太好了。在那之前，让我介绍我们的生产总监李女士。" },
+            { "speaker": "B", "en": "Pleased to meet you, Ms. Lee. I've heard great things about your team.", "cn": "幸会，李女士。久仰你们团队。" },
+            { "speaker": "A", "en": "The feeling is mutual. Shall we move to the conference room for the presentation?", "cn": "彼此彼此。我们去会议室开始介绍吧？" },
+            { "speaker": "B", "en": "Lead the way, please.", "cn": "请带路。" }
+          ],
+          "quiz": [
+            { "q": "Who came to visit?", "options": ["Mr. Brown", "Mr. Lee", "Ms. Brown", "Mr. Smith"], "answer": 0 },
+            { "q": "What's planned for the afternoon?", "options": ["A factory tour", "A meeting only", "A dinner", "A flight"], "answer": 0 },
+            { "q": "Who does A introduce?", "options": ["Ms. Lee, the production director", "Mr. Brown", "A driver", "A client"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_6",
+          "title": "团队建设 Team Building",
+          "cn": "组织团队工作坊并讨论目标与评估",
+          "lines": [
+            { "speaker": "A", "en": "Thanks for organising the workshop. What's the goal for today?", "cn": "感谢组织这次工作坊。今天的目标是什么？" },
+            { "speaker": "B", "en": "We want to improve cross-team communication and trust.", "cn": "我们想提升跨团队沟通与信任。" },
+            { "speaker": "A", "en": "Sounds useful. How will we measure success?", "cn": "听起来有用。怎么衡量效果？" },
+            { "speaker": "B", "en": "Through a short survey before and after, plus follow-up in a month.", "cn": "通过前后短问卷，加上一个月后回访。" },
+            { "speaker": "A", "en": "Good. What's the first activity?", "cn": "好。第一个活动是什么？" },
+            { "speaker": "B", "en": "A problem-solving game where mixed teams race to build a bridge from paper.", "cn": "一个解题游戏：混合小组用纸搭桥比赛。" }
+          ],
+          "quiz": [
+            { "q": "What's the goal of the workshop?", "options": ["Improve communication and trust", "Increase sales", "Cut costs", "Hire staff"], "answer": 0 },
+            { "q": "How is success measured?", "options": ["A survey before and after", "Only sales", "Only by guessing", "No measure"], "answer": 0 },
+            { "q": "What's the first activity?", "options": ["Building a paper bridge", "A test", "A lecture", "A meeting"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_7",
+          "title": "技术讨论 Technical Discussion",
+          "cn": "工程师讨论 API 性能瓶颈与优化方案",
+          "lines": [
+            { "speaker": "A", "en": "The new API responds in 800 milliseconds on average. That's too slow for mobile users.", "cn": "新API平均响应800毫秒，对移动用户太慢了。" },
+            { "speaker": "B", "en": "Agreed. I suspect the bottleneck is the database query, not the network.", "cn": "同意。我怀疑瓶颈在数据库查询，不是网络。" },
+            { "speaker": "A", "en": "How can we confirm that?", "cn": "怎么确认？" },
+            { "speaker": "B", "en": "Let's add logging on each query and review the slowest ones this week.", "cn": "我们在每个查询加日志，本周检查最慢的。" },
+            { "speaker": "A", "en": "Good plan. If it's the query, should we add an index or cache the results?", "cn": "好计划。如果是查询问题，加索引还是缓存结果？" },
+            { "speaker": "B", "en": "Start with caching the most frequent requests. It's lower risk than changing the schema.", "cn": "先缓存最频繁的请求，比改表结构风险低。" }
+          ],
+          "quiz": [
+            { "q": "What's the average response time?", "options": ["800 milliseconds", "80 milliseconds", "8 seconds", "800 seconds"], "answer": 0 },
+            { "q": "Where does B suspect the bottleneck is?", "options": ["The database query", "The network", "The browser", "The server hardware"], "answer": 0 },
+            { "q": "What does B suggest doing first?", "options": ["Caching frequent requests", "Adding an index", "Changing the schema", "Buying new servers"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_8",
+          "title": "培训指导 Training and Coaching",
+          "cn": "经理指导下属改进客户推介表达",
+          "lines": [
+            { "speaker": "A", "en": "I noticed you froze during the client pitch. Let's work on your delivery.", "cn": "我注意到你在客户推介时卡壳了。我们来练你的表达。" },
+            { "speaker": "B", "en": "Thanks. I get nervous when senior clients ask unexpected questions.", "cn": "谢谢。资深客户问意外问题时我会紧张。" },
+            { "speaker": "A", "en": "That's normal. Let's rehearse three tough questions and your answers.", "cn": "这很正常。我们来演练三个刁钻问题及你的回答。" },
+            { "speaker": "B", "en": "OK. What if they ask why our price is higher than competitors?", "cn": "好。如果他们问为什么我们价格比竞品高？" },
+            { "speaker": "A", "en": "Reframe it around total cost of ownership, not unit price. Practice that now.", "cn": "把它重构到总拥有成本，不是单价。现在练习。" },
+            { "speaker": "B", "en": "Got it. I'll prepare a one-page comparison for next time.", "cn": "明白了。我下次准备一页对比。" }
+          ],
+          "quiz": [
+            { "q": "What problem did A notice?", "options": ["B froze during the pitch", "B was late", "B was rude", "B left early"], "answer": 0 },
+            { "q": "When does B get nervous?", "options": ["When clients ask unexpected questions", "When speaking Chinese", "In the morning", "On weekends"], "answer": 0 },
+            { "q": "How does A suggest handling the price question?", "options": ["Reframe around total cost of ownership", "Lower the price", "Ignore it", "Apologise"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_9",
+          "title": "冲突调解 Conflict Mediation",
+          "cn": "调解设计与工程团队之间的协作冲突",
+          "lines": [
+            { "speaker": "A", "en": "Let's address the tension between design and engineering. What's the core issue?", "cn": "我们处理一下设计和工程之间的紧张关系。核心问题是什么？" },
+            { "speaker": "B", "en": "Engineering says design keeps changing specs late in the sprint.", "cn": "工程方说设计总在冲刺后期改规格。" },
+            { "speaker": "A", "en": "And design feels engineering ignores their feedback. How can we break this cycle?", "cn": "设计方觉得工程忽视反馈。怎么打破这个循环？" },
+            { "speaker": "B", "en": "What if we lock specs every two weeks and route changes through a shared review?", "cn": "如果每两周锁定规格，变更走共同评审呢？" },
+            { "speaker": "A", "en": "That adds structure without blocking creativity. Let's trial it next sprint.", "cn": "这样既有结构又不阻碍创意。下个冲刺试一下。" },
+            { "speaker": "B", "en": "I'll draft the process and circulate it by end of day.", "cn": "我来起草流程，今天结束前发给大家。" }
+          ],
+          "quiz": [
+            { "q": "What does engineering complain about?", "options": ["Design changes specs late", "Design is slow", "Too many meetings", "Low budget"], "answer": 0 },
+            { "q": "How does design feel?", "options": ["Engineering ignores their feedback", "Engineering is great", "No issues", "They want more work"], "answer": 0 },
+            { "q": "What solution do they propose?", "options": ["Lock specs every two weeks with shared review", "Fire the designers", "Cancel the project", "Hire more engineers"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l4_10",
+          "title": "跨部门协作 Cross-department Collaboration",
+          "cn": "市场部与工程部协调产品发布数据",
+          "lines": [
+            { "speaker": "A", "en": "Marketing needs product data for the launch campaign. When can we get it?", "cn": "市场部需要产品数据做发布活动。什么时候能拿到？" },
+            { "speaker": "B", "en": "We can share the beta test results by next Wednesday. Will that be enough time?", "cn": "我们下周三能分享测试结果。时间够吗？" },
+            { "speaker": "A", "en": "Cutting it close, but workable. Can you also include user satisfaction scores?", "cn": "有点紧，但可行。能附上用户满意度评分吗？" },
+            { "speaker": "B", "en": "Yes, I'll add a short summary of feedback themes as well.", "cn": "可以，我还会附上反馈主题的简短总结。" },
+            { "speaker": "A", "en": "Perfect. I'll loop in the regional teams so they can localise the message.", "cn": "太好了。我会通知各地区团队以便本地化。" },
+            { "speaker": "B", "en": "Good idea. Let's hold a thirty-minute sync every Monday until launch.", "cn": "好主意。我们每周一开30分钟同步会直到发布。" }
+          ],
+          "quiz": [
+            { "q": "What does marketing need?", "options": ["Product data", "More staff", "A new office", "A vacation"], "answer": 0 },
+            { "q": "When can engineering share beta results?", "options": ["Next Wednesday", "Today", "Next month", "Next year"], "answer": 0 },
+            { "q": "What will they do every Monday?", "options": ["A thirty-minute sync", "A two-hour meeting", "Nothing", "A full review"], "answer": 0 }
+          ]
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "精通C2",
+      "target": "母语水平·抽象思辨与专业深度对话",
+      "items": [
+        {
+          "id": "l5_1",
+          "title": "哲学辩论 Philosophical Debate",
+          "cn": "两位学者辩论自由意志与决定论",
+          "lines": [
+            { "speaker": "A", "en": "If every action is determined by prior causes, in what sense can we be said to exercise free will?", "cn": "如果每个行为都由先前的因决定，我们在何种意义上能说行使了自由意志？" },
+            { "speaker": "B", "en": "That presupposes freedom requires uncaused causes, which itself is metaphysically dubious.", "cn": "这预设了自由需要无因之因，而这本身在形而上学上是可疑的。" },
+            { "speaker": "A", "en": "But compatibilism merely redefines freedom as acting on one's desires, which sidesteps the real question.", "cn": "但相容论只是把自由重新定义为依欲望行事，回避了真正的问题。" },
+            { "speaker": "B", "en": "I'd argue it clarifies rather than evades: what matters is whether coercion is absent, not whether the universe is deterministic.", "cn": "我倒认为这是澄清而非回避：关键在于有无强制，而非宇宙是否决定论。" },
+            { "speaker": "A", "en": "Yet if desires themselves are predetermined, the sense of authorship feels illusory.", "cn": "然而若欲望本身也是被决定的，主体的作者感就显得虚幻。" },
+            { "speaker": "B", "en": "Perhaps, but responsibility tracks responsiveness to reasons, not the metaphysical origin of those reasons.", "cn": "也许吧，但责任对应的是对理由的回应，而非那些理由的形而上来源。" }
+          ],
+          "quiz": [
+            { "q": "What does A question at the start?", "options": ["How free will exists if actions are predetermined", "Whether desires exist", "Whether reason matters", "Whether time is real"], "answer": 0 },
+            { "q": "What position does B seem to defend?", "options": ["Compatibilism", "Hard determinism", "Libertarianism", "Solipsism"], "answer": 0 },
+            { "q": "What does B say responsibility tracks?", "options": ["Responsiveness to reasons", "The origin of desires", "The strength of will", "The absence of thought"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_2",
+          "title": "文学评论 Literary Review",
+          "cn": "评论家讨论一部小说的叙事技巧",
+          "lines": [
+            { "speaker": "A", "en": "The novel's use of an unreliable narrator forces readers to reconstruct truth themselves.", "cn": "小说使用不可靠叙述者，迫使读者自行重构真相。" },
+            { "speaker": "B", "en": "Indeed, but the technique risks alienating readers who expect moral clarity from fiction.", "cn": "确实，但这技巧可能疏远那些期待小说给予道德明晰的读者。" },
+            { "speaker": "A", "en": "Isn't that ambiguity precisely what elevates it above conventional realism?", "cn": "这种含混难道不正是它超越常规现实主义的所在？" },
+            { "speaker": "B", "en": "Up to a point; however, ambiguity can also mask authorial laziness when structure is slack.", "cn": "在一定程度上是；然而结构松散时，含混也可能掩饰作者的偷懒。" },
+            { "speaker": "A", "en": "Fair criticism. Yet the final chapter rewards attentive readers with a coherent reinterpretation.", "cn": "公允的批评。但末章以连贯的重新解读回报了细心的读者。" },
+            { "speaker": "B", "en": "Agreed. On balance, the ambition outweighs the occasional structural unevenness.", "cn": "同意。总体而言，其雄心胜过了偶尔的结构不均。" }
+          ],
+          "quiz": [
+            { "q": "What narrative technique does the novel use?", "options": ["An unreliable narrator", "A omniscient narrator", "A second-person narrator", "No narrator"], "answer": 0 },
+            { "q": "What risk does B mention about the technique?", "options": ["Alienating readers expecting moral clarity", "Being too simple", "Too much clarity", "Too short"], "answer": 0 },
+            { "q": "What does the final chapter do for attentive readers?", "options": ["Offers a coherent reinterpretation", "Confuses them", "Adds nothing", "Contradicts itself"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_3",
+          "title": "科技前沿 Tech Frontier",
+          "cn": "专家讨论通用人工智能的影响与风险",
+          "lines": [
+            { "speaker": "A", "en": "The trajectory toward artificial general intelligence raises profound governance questions we are ill-equipped to answer.", "cn": "通向通用人工智能的轨迹提出了我们难以应对的深刻治理问题。" },
+            { "speaker": "B", "en": "I'm less alarmed. Iterative deployment creates feedback loops that discipline capability growth.", "cn": "我不那么忧虑。迭代部署形成反馈回路，约束了能力的增长。" },
+            { "speaker": "A", "en": "That optimism assumes regulators can keep pace with exponentially compounding capability, which historically they cannot.", "cn": "这种乐观假设监管者能跟上指数级叠加的能力，而历史表明他们做不到。" },
+            { "speaker": "B", "en": "A fair rejoinder. But international coordination, while slow, is not structurally impossible.", "cn": "有力的回应。但国际协调虽慢，并非结构性不可能。" },
+            { "speaker": "A", "en": "Yet coordination requires shared threat models, and the actors disagree on what counts as a risk.", "cn": "但协调需要共享的威胁模型，而各方对何为风险意见不一。" },
+            { "speaker": "B", "en": "Then perhaps the priority is epistemic: building common frameworks before we can govern at all.", "cn": "那么也许优先的是认识层面：在能治理之前先建立共同框架。" }
+          ],
+          "quiz": [
+            { "q": "What does A say regulators historically cannot do?", "options": ["Keep pace with exponential capability growth", "Understand the internet", "Speak English", "Use computers"], "answer": 0 },
+            { "q": "What does B say is not structurally impossible?", "options": ["International coordination", "Stopping all AI", "Banning research", "A single world law"], "answer": 0 },
+            { "q": "What does B suggest as a priority?", "options": ["Building common epistemic frameworks", "Banning AI now", "Racing faster", "Doing nothing"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_4",
+          "title": "外交谈判 Diplomatic Negotiation",
+          "cn": "两位外交官就一项条约条款激烈交锋",
+          "lines": [
+            { "speaker": "A", "en": "Our position is firm: any inspection regime must be mutual and verifiable, or we walk away.", "cn": "我方立场坚定：任何核查机制必须是互惠且可验证的，否则我们退出。" },
+            { "speaker": "B", "en": "We appreciate the principle, but mutual inspections raise sovereignty concerns domestically.", "cn": "我们理解这一原则，但互惠核查在国内引发主权担忧。" },
+            { "speaker": "A", "en": "Sovereignty cannot be a one-way shield; it must be matched by reciprocal transparency.", "cn": "主权不能是单向盾牌；它必须与互惠透明相匹配。" },
+            { "speaker": "B", "en": "Perhaps a phased approach, beginning with confidence-building measures, could bridge the gap.", "cn": "或许分阶段推进，从建立信任措施开始，能弥合分歧。" },
+            { "speaker": "A", "en": "We could entertain phased implementation, provided the endpoint is legally binding.", "cn": "我们可以考虑分阶段实施，前提是最终目标具有法律约束力。" },
+            { "speaker": "B", "en": "That's a basis for progress. Let us convene technical experts to define the sequencing.", "cn": "这是进展的基础。让我们召集技术专家界定排序。" }
+          ],
+          "quiz": [
+            { "q": "What is A's firm demand?", "options": ["Mutual and verifiable inspections", "No inspections", "Only their inspections", "A payment"], "answer": 0 },
+            { "q": "What concern does B raise about mutual inspections?", "options": ["Sovereignty concerns", "Cost concerns", "Time concerns", "Language concerns"], "answer": 0 },
+            { "q": "What compromise does B propose?", "options": ["A phased approach", "Immediate full access", "Cancel the treaty", "A new leader"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_5",
+          "title": "艺术批评 Art Criticism",
+          "cn": "两位评论家对一幅当代作品的评价分歧",
+          "lines": [
+            { "speaker": "A", "en": "The piece is intellectually thin; its provocation substitutes for substance.", "cn": "这件作品思想单薄；其挑衅替代了实质。" },
+            { "speaker": "B", "en": "I'd counter that provocation itself is the substance when it exposes the viewer's assumptions.", "cn": "我反驳：当挑衅揭示观者的预设时，它本身就是实质。" },
+            { "speaker": "A", "en": "But without formal rigor, the gesture collapses into mere spectacle.", "cn": "但若缺乏形式严谨，这一姿态便沦为单纯的奇观。" },
+            { "speaker": "B", "en": "Formalism isn't the only criterion; historically aware criticism must weigh context and intent.", "cn": "形式主义并非唯一标准；有历史意识的批评必须权衡语境与意图。" },
+            { "speaker": "A", "en": "Intent is unfalsifiable and easily mythologised after the fact.", "cn": "意图不可证伪，且极易事后被神话化。" },
+            { "speaker": "B", "en": "True, yet ignoring it altogether flattens interpretation into pure aesthetics, which is its own ideology.", "cn": "确实，但完全无视它会把诠释压平为纯粹美学，而那本身也是一种意识形态。" }
+          ],
+          "quiz": [
+            { "q": "What is A's main criticism of the piece?", "options": ["It's intellectually thin", "It's too traditional", "It's too small", "It's too colorful"], "answer": 0 },
+            { "q": "What does B argue provocation can do?", "options": ["Expose the viewer's assumptions", "Make money", "Win prizes", "Shock children"], "answer": 0 },
+            { "q": "What does B warn ignoring intent leads to?", "options": ["Pure aesthetics as its own ideology", "Better art", "Cheaper art", "Faster art"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_6",
+          "title": "跨文化比较 Cross-cultural Comparison",
+          "cn": "两位人类学家讨论礼貌的文化差异",
+          "lines": [
+            { "speaker": "A", "en": "Politeness is often framed as universal, yet its rituals vary so widely that the common core seems vanishingly thin.", "cn": "礼貌常被说成普世，但其仪式差异之大，使共同核心似乎薄得可怜。" },
+            { "speaker": "B", "en": "The thinness is real at the surface, but the underlying function, face maintenance, recurs cross-culturally.", "cn": "表层确很薄，但底层的功能，即面子维护，是跨文化反复出现的。" },
+            { "speaker": "A", "en": "Yet face itself is theorised so differently that the term may be a false friend across traditions.", "cn": "然而面子本身被理论化得如此不同，这词跨传统可能是个假朋友。" },
+            { "speaker": "B", "en": "A fair caution. Perhaps we should treat it as a family resemblance concept, not a universal essence.", "cn": "公允的提醒。或许我们应把它看作家族相似概念，而非普遍本质。" },
+            { "speaker": "A", "en": "That concession actually strengthens comparative work by preventing conceptual overextension.", "cn": "这一让步通过防止概念过度延伸，反而加强了比较研究。" },
+            { "speaker": "B", "en": "Exactly. Precision in framing is what makes difference legible rather than reducible to stereotype.", "cn": "正是。表述的精确使差异变得可读，而非简化为刻板印象。" }
+          ],
+          "quiz": [
+            { "q": "What does A say is vanishingly thin?", "options": ["The common core of politeness", "The study budget", "The book", "The audience"], "answer": 0 },
+            { "q": "What underlying function does B identify?", "options": ["Face maintenance", "Making money", "Eating food", "Telling jokes"], "answer": 0 },
+            { "q": "How does B suggest treating the concept of face?", "options": ["As a family resemblance concept", "As a universal essence", "As useless", "As wrong"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_7",
+          "title": "学术答辩 Academic Defense",
+          "cn": "答辩中回应方法论与泛化能力的质疑",
+          "lines": [
+            { "speaker": "A", "en": "Your thesis claims the model outperforms baselines, but your error bars overlap. How do you justify the claim?", "cn": "你的论文声称模型优于基线，但误差棒重叠。你如何辩护这个主张？" },
+            { "speaker": "B", "en": "Thank you. The overlap is within one standard deviation, but the paired t-test shows significance at p<0.01.", "cn": "谢谢。重叠在一个标准差内，但配对t检验显示p<0.01显著。" },
+            { "speaker": "A", "en": "Even so, your test set is drawn from the same distribution as training. Doesn't that inflate the metric?", "cn": "即便如此，你的测试集与训练同分布。这不会虚高指标吗？" },
+            { "speaker": "B", "en": "A fair concern. We've now validated on an out-of-distribution set, and performance degrades gracefully by only 4%.", "cn": "公允的担忧。我们已在分布外集合验证，性能仅下降4%，衰减平缓。" },
+            { "speaker": "A", "en": "That's more convincing. How do you handle adversarial inputs not present in your data?", "cn": "这更有说服力。你如何处理数据中未出现的对抗输入？" },
+            { "speaker": "B", "en": "We incorporate adversarial training as a regulariser, though I concede robustness under novel attacks remains an open question.", "cn": "我们引入对抗训练作为正则项，但我承认在新攻击下的鲁棒性仍是开放问题。" }
+          ],
+          "quiz": [
+            { "q": "What's A's first concern?", "options": ["Error bars overlap", "Sample too small", "Wrong language", "No baseline"], "answer": 0 },
+            { "q": "What statistic does B cite?", "options": ["A paired t-test at p<0.01", "A chi-square", "No statistic", "A correlation"], "answer": 0 },
+            { "q": "How much does performance degrade on out-of-distribution data?", "options": ["About 4%", "About 40%", "Not at all", "About 20%"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_8",
+          "title": "法律辩论 Legal Debate",
+          "cn": "辩论虚假信息言论的法律边界与限制原则",
+          "lines": [
+            { "speaker": "A", "en": "The statute protects speech that is merely offensive, yet you'd extend it to deliberate disinformation. Where's the limiting principle?", "cn": "法律保护仅具冒犯性的言论，你却要扩展到故意虚假信息。界限原则在哪里？" },
+            { "speaker": "B", "en": "The limit is harm: disinformation that proximately causes measurable injury falls outside protected speech.", "cn": "界限是伤害：近似造成可衡量损害的虚假信息不在保护之列。" },
+            { "speaker": "A", "en": "But \"measurable injury\" is elastic. Who decides, and on what standard of proof?", "cn": "但\"可衡量损害\"有弹性。由谁、依何种证明标准决定？" },
+            { "speaker": "B", "en": "Courts would apply the existing clear-and-present-danger test, with evidence assessed on the preponderance standard.", "cn": "法院将适用现存的明显且现实危险测试，依优势证据标准评估。" },
+            { "speaker": "A", "en": "That still chills lawful dissent, since speakers can't predict how their words will be retroactively judged.", "cn": "这仍会寒蝉合法异见，因为发言者无法预知其言论将被如何追溯评判。" },
+            { "speaker": "B", "en": "Any standard risks some chill; the question is whether it's proportionate and reviewable, which I argue it is.", "cn": "任何标准都有寒蝉风险；问题在于是否相称且可审查，我认为是的。" }
+          ],
+          "quiz": [
+            { "q": "What does A ask B to identify?", "options": ["A limiting principle", "A new law", "A judge", "A witness"], "answer": 0 },
+            { "q": "What limit does B propose?", "options": ["Harm that proximately causes measurable injury", "Offense", "Disagreement", "Any false statement"], "answer": 0 },
+            { "q": "What test does B say courts would apply?", "options": ["The clear-and-present-danger test", "A new test", "No test", "Strict scrutiny"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_9",
+          "title": "医学伦理 Medical Ethics",
+          "cn": "讨论预先指示与代理人决策的权重",
+          "lines": [
+            { "speaker": "A", "en": "If a patient lacks capacity but previously expressed a clear wish, how much weight should we give it?", "cn": "如果患者丧失能力但先前表达过明确意愿，我们应给予多大权重？" },
+            { "speaker": "B", "en": "Advance directives carry strong moral authority, but they must be weighed against current best interests.", "cn": "预先指示具有强道德权威，但必须与当前最佳利益权衡。" },
+            { "speaker": "A", "en": "Yet \"best interests\" is notoriously subjective. Isn't that a backdoor for paternalism?", "cn": "但\"最佳利益\"出了名地主观。这难道不是家长主义的后门？" },
+            { "speaker": "B", "en": "It can be, which is why decisions should involve surrogates and a second clinical opinion.", "cn": "可能是，所以决定应涉及代理人和第二临床意见。" },
+            { "speaker": "A", "en": "What if the surrogate's choice contradicts the directive itself?", "cn": "如果代理人的选择与指示本身矛盾呢？" },
+            { "speaker": "B", "en": "Then the directive generally prevails, unless there's credible evidence the patient changed their mind.", "cn": "那么指示通常优先，除非有可信证据表明患者改变主意。" }
+          ],
+          "quiz": [
+            { "q": "What carries strong moral authority for B?", "options": ["Advance directives", "Family wishes", "Doctor's opinion", "Cost"], "answer": 0 },
+            { "q": "What does A worry \"best interests\" enables?", "options": ["Paternalism", "Better care", "Lower costs", "Faster treatment"], "answer": 0 },
+            { "q": "What prevails if a surrogate contradicts a directive?", "options": ["The directive generally prevails", "The surrogate", "The doctor", "The hospital"], "answer": 0 }
+          ]
+        },
+        {
+          "id": "l5_10",
+          "title": "公共政策 Public Policy",
+          "cn": "辩论拥堵费的公平性与实施时序",
+          "lines": [
+            { "speaker": "A", "en": "A congestion charge reduces traffic, but it disproportionately burdens low-income drivers. How do you address the equity gap?", "cn": "拥堵费减少交通，但对低收入驾驶者负担不成比例。你如何解决公平差距？" },
+            { "speaker": "B", "en": "The revenue is ring-fenced for public transit subsidies, which benefit precisely those lower-income groups.", "cn": "收入专款用于公交补贴，恰好惠及那些低收入群体。" },
+            { "speaker": "A", "en": "In theory. In practice, transit improvements lag the charge by years, so the harm precedes the benefit.", "cn": "理论上如此。实际上，公交改善滞后收费数年，所以损害先于收益。" },
+            { "speaker": "B", "en": "That's why I'd phase in the charge only after the transit upgrades are operational, not before.", "cn": "所以我会在公交升级投运后才分阶段引入收费，而非之前。" },
+            { "speaker": "A", "en": "Sensible sequencing. But won't delayed charging squander the political window for action?", "cn": "顺序合理。但延迟收费会不会错失行动的政治窗口？" },
+            { "speaker": "B", "en": "There's tension, yes. But legitimacy built on delivered improvements is more durable than speed that breeds backlash.", "cn": "确有张力。但基于已交付改善的合法性，比催生反弹的速度更持久。" }
+          ],
+          "quiz": [
+            { "q": "What's A's equity concern?", "options": ["The charge burdens low-income drivers", "It's too cheap", "It helps the rich", "It's unfair to tourists"], "answer": 0 },
+            { "q": "How does B say revenue is used?", "options": ["For public transit subsidies", "For new roads", "For tax cuts", "For bonuses"], "answer": 0 },
+            { "q": "Why does B phase in the charge after transit upgrades?", "options": ["To build legitimacy and avoid backlash", "To save money", "Because it's easier", "To delay action"], "answer": 0 }
+          ]
+        }
+      ]
+    }
+  ]
+}
