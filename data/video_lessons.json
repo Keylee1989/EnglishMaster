@@ -1,0 +1,2389 @@
+{
+  "version": 1,
+  "description": "分级音视频课程,每个视频包含YouTube跳转链接+学习要点+测试题",
+  "howToUse": "1.点击视频标题或封面跳转到YouTube观看 2.学习完毕返回本页 3.完成测试题 4.全部正确则标记完成",
+  "levels": [
+    {
+      "level": 1,
+      "name": "入门A1",
+      "description": "零基础英语启蒙",
+      "videos": [
+        {
+          "id": "v1_1",
+          "level": 1,
+          "title": "Learn English Alphabet A-Z",
+          "titleCn": "26个字母学习",
+          "url": "https://www.youtube.com/watch?v=36l1pHSf1Q4",
+          "channel": "English Singsing",
+          "duration": "5:20",
+          "description": "This video covers learn english alphabet a-z. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "26个字母学习课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "26个字母的发音",
+            "大小写字母对应",
+            "字母歌跟唱"
+          ],
+          "quiz": [
+            {
+              "q": "How many letters are in the English alphabet?",
+              "options": [
+                "26",
+                "24",
+                "28",
+                "22"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Which letter comes after A?",
+              "options": [
+                "B",
+                "C",
+                "D",
+                "E"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_2",
+          "level": 1,
+          "title": "Numbers 1-10 in English",
+          "titleCn": "数字1-10",
+          "url": "https://www.youtube.com/watch?v=dk9YJM4Df7c",
+          "channel": "Super Simple Songs",
+          "duration": "3:45",
+          "description": "This video covers numbers 1-10 in english. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "数字1-10课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "1-10的读法",
+            "数字拼写",
+            "数物品练习"
+          ],
+          "quiz": [
+            {
+              "q": "How do you say 5 in English?",
+              "options": [
+                "Five",
+                "Four",
+                "Six",
+                "Three"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What number is ten?",
+              "options": [
+                "10",
+                "1",
+                "100",
+                "0"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_3",
+          "level": 1,
+          "title": "Colors in English",
+          "titleCn": "颜色学习",
+          "url": "https://www.youtube.com/watch?v=gYMzgs-CXEs",
+          "channel": "English Singsing",
+          "duration": "4:10",
+          "description": "This video covers colors in english. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "颜色学习课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "11种基本颜色",
+            "颜色拼写",
+            "描述物品颜色"
+          ],
+          "quiz": [
+            {
+              "q": "What color is the sky on a clear day?",
+              "options": [
+                "Blue",
+                "Red",
+                "Green",
+                "Black"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How do you spell red?",
+              "options": [
+                "R-E-D",
+                "R-A-D",
+                "R-E-T",
+                "R-I-D"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_4",
+          "level": 1,
+          "title": "Family Members",
+          "titleCn": "家庭成员",
+          "url": "https://www.youtube.com/watch?v=OpWTTepjc8A",
+          "channel": "Wow English TV",
+          "duration": "5:30",
+          "description": "This video covers family members. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "家庭成员课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "father/mother/brother/sister",
+            "grandfather/grandmother",
+            "家族关系"
+          ],
+          "quiz": [
+            {
+              "q": "What do you call your father's mother?",
+              "options": [
+                "Grandmother",
+                "Aunt",
+                "Sister",
+                "Cousin"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Your mother's brother is your?",
+              "options": [
+                "Uncle",
+                "Aunt",
+                "Father",
+                "Cousin"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_5",
+          "level": 1,
+          "title": "Basic Greetings Hello Hi Bye",
+          "titleCn": "基本问候",
+          "url": "https://www.youtube.com/watch?v=4F3S0gE6KuM",
+          "channel": "Maple Leaf Learning",
+          "duration": "3:15",
+          "description": "This video covers basic greetings hello hi bye. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "基本问候课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Hello/Hi/Goodbye",
+            "Good morning/afternoon",
+            "Nice to meet you"
+          ],
+          "quiz": [
+            {
+              "q": "What do you say in the morning?",
+              "options": [
+                "Good morning",
+                "Good night",
+                "Goodbye",
+                "Sorry"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How do you greet someone?",
+              "options": [
+                "Hello",
+                "Goodbye",
+                "Thanks",
+                "Sorry"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_6",
+          "level": 1,
+          "title": "My Body Parts Song",
+          "titleCn": "身体部位",
+          "url": "https://www.youtube.com/watch?v=q_954cVealg",
+          "channel": "Genki English",
+          "duration": "4:00",
+          "description": "This video covers my body parts song. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "身体部位课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "head/eyes/ears/nose",
+            "hands/legs/feet",
+            "身体动作"
+          ],
+          "quiz": [
+            {
+              "q": "What do you see with?",
+              "options": [
+                "Eyes",
+                "Ears",
+                "Nose",
+                "Mouth"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How many hands do you have?",
+              "options": [
+                "Two",
+                "One",
+                "Three",
+                "Four"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_7",
+          "level": 1,
+          "title": "Animal Sounds Song",
+          "titleCn": "动物叫声",
+          "url": "https://www.youtube.com/watch?v=U5rPn5qVxc0",
+          "channel": "Cocomelon",
+          "duration": "4:50",
+          "description": "This video covers animal sounds song. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "动物叫声课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "常见动物单词",
+            "动物叫声",
+            "动物习性"
+          ],
+          "quiz": [
+            {
+              "q": "What animal says meow?",
+              "options": [
+                "Cat",
+                "Dog",
+                "Cow",
+                "Duck"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What animal barks?",
+              "options": [
+                "Dog",
+                "Cat",
+                "Bird",
+                "Fish"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_8",
+          "level": 1,
+          "title": "Food and Drinks",
+          "titleCn": "食物饮料",
+          "url": "https://www.youtube.com/watch?v=9uD8D8i1cIo",
+          "channel": "English Singsing",
+          "duration": "5:10",
+          "description": "This video covers food and drinks. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "食物饮料课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "apple/bread/milk/water",
+            "I like / I don't like",
+            "餐桌用语"
+          ],
+          "quiz": [
+            {
+              "q": "What is yellow and sweet?",
+              "options": [
+                "Banana",
+                "Apple",
+                "Milk",
+                "Bread"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What do you drink?",
+              "options": [
+                "Water",
+                "Bread",
+                "Apple",
+                "Egg"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_9",
+          "level": 1,
+          "title": "Days of the Week",
+          "titleCn": "星期几",
+          "url": "https://www.youtube.com/watch?v=3Lqi6B072qg",
+          "channel": "The Kiboomers",
+          "duration": "2:55",
+          "description": "This video covers days of the week. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "星期几课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Monday-Sunday",
+            "星期顺序",
+            "today/tomorrow"
+          ],
+          "quiz": [
+            {
+              "q": "What day comes after Monday?",
+              "options": [
+                "Tuesday",
+                "Sunday",
+                "Friday",
+                "Wednesday"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How many days in a week?",
+              "options": [
+                "Seven",
+                "Five",
+                "Six",
+                "Ten"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v1_10",
+          "level": 1,
+          "title": "Weather Song for Kids",
+          "titleCn": "天气",
+          "url": "https://www.youtube.com/watch?v=riDsLn6VvJk",
+          "channel": "Super Simple Songs",
+          "duration": "3:40",
+          "description": "This video covers weather song for kids. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "天气课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "sunny/rainy/cloudy/windy",
+            "hot/cold/warm",
+            "It is...句型"
+          ],
+          "quiz": [
+            {
+              "q": "When it is raining, the weather is?",
+              "options": [
+                "Rainy",
+                "Sunny",
+                "Windy",
+                "Snowy"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What is the weather like when the sun is shining?",
+              "options": [
+                "Sunny",
+                "Rainy",
+                "Cloudy",
+                "Windy"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "初级A2",
+      "description": "日常生活英语",
+      "videos": [
+        {
+          "id": "v2_1",
+          "level": 2,
+          "title": "Daily Routines in English",
+          "titleCn": "日常生活",
+          "url": "https://www.youtube.com/watch?v=bQj3rt6ZPsQ",
+          "channel": "Learn English with TV Series",
+          "duration": "8:30",
+          "description": "This video covers daily routines in english. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "日常生活课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "get up/eat breakfast/go to school",
+            "一般现在时",
+            "时间表达"
+          ],
+          "quiz": [
+            {
+              "q": "What do you do in the morning?",
+              "options": [
+                "Get up",
+                "Go to bed",
+                "Sleep",
+                "Watch TV"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "When do you eat lunch?",
+              "options": [
+                "At noon",
+                "In the morning",
+                "At night",
+                "At 6 am"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_2",
+          "level": 2,
+          "title": "At the Restaurant",
+          "titleCn": "在餐厅",
+          "url": "https://www.youtube.com/watch?v=hQ5b7VSE9Zw",
+          "channel": "BBC Learning English",
+          "duration": "6:15",
+          "description": "This video covers at the restaurant. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "在餐厅课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "点餐用语",
+            "menu/order/bill",
+            "礼貌请求"
+          ],
+          "quiz": [
+            {
+              "q": "What do you ask for to see food choices?",
+              "options": [
+                "The menu",
+                "The bill",
+                "The order",
+                "The check"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How do you politely order food?",
+              "options": [
+                "I would like...",
+                "Give me...",
+                "I want now...",
+                "Bring food..."
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_3",
+          "level": 2,
+          "title": "Shopping for Clothes",
+          "titleCn": "买衣服",
+          "url": "https://www.youtube.com/watch?v=W9bMUjv-y7U",
+          "channel": "English Singsing",
+          "duration": "5:50",
+          "description": "This video covers shopping for clothes. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "买衣服课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "clothes vocabulary",
+            "size/color",
+            "How much is..."
+          ],
+          "quiz": [
+            {
+              "q": "Where do you try on clothes?",
+              "options": [
+                "Fitting room",
+                "Kitchen",
+                "Bathroom",
+                "Office"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What do you ask to know the price?",
+              "options": [
+                "How much is it?",
+                "What is it?",
+                "Where is it?",
+                "Why is it?"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_4",
+          "level": 2,
+          "title": "Asking for Directions",
+          "titleCn": "问路",
+          "url": "https://www.youtube.com/watch?v=v0E5bz5fMpc",
+          "channel": "Learn English with TV Series",
+          "duration": "7:20",
+          "description": "This video covers asking for directions. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "问路课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Where is.../How do I get to",
+            "left/right/straight",
+            "地点名词"
+          ],
+          "quiz": [
+            {
+              "q": "What do you say to ask for a location?",
+              "options": [
+                "Where is...?",
+                "What is...?",
+                "Why is...?",
+                "When is...?"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "If you need to turn left, you go?",
+              "options": [
+                "Left",
+                "Right",
+                "Straight",
+                "Back"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_5",
+          "level": 2,
+          "title": "Talking About Hobbies",
+          "titleCn": "谈论爱好",
+          "url": "https://www.youtube.com/watch?v=8iR29pXyKVs",
+          "channel": "Oxford Online English",
+          "duration": "9:10",
+          "description": "This video covers talking about hobbies. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "谈论爱好课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "I like/love/enjoy+ing",
+            "hobby vocabulary",
+            "频率副词"
+          ],
+          "quiz": [
+            {
+              "q": "What do you say to express you enjoy something?",
+              "options": [
+                "I like it",
+                "I hate it",
+                "I don't know",
+                "Maybe"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "After 'enjoy' what form of verb?",
+              "options": [
+                "-ing form",
+                "Base form",
+                "-ed form",
+                "-s form"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_6",
+          "level": 2,
+          "title": "Past Tense Story",
+          "titleCn": "过去时故事",
+          "url": "https://www.youtube.com/watch?v=eLTj9p7VxKU",
+          "channel": "Learn English with Papa Teach Me",
+          "duration": "8:00",
+          "description": "This video covers past tense story. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "过去时故事课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "was/were usage",
+            "regular -ed verbs",
+            "irregular verbs"
+          ],
+          "quiz": [
+            {
+              "q": "Past tense of 'go' is?",
+              "options": [
+                "Went",
+                "Goes",
+                "Going",
+                "Gone"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Past tense of 'is' is?",
+              "options": [
+                "Was",
+                "Are",
+                "Were",
+                "Be"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_7",
+          "level": 2,
+          "title": "Making Plans Future Tense",
+          "titleCn": "制定计划将来时",
+          "url": "https://www.youtube.com/watch?v=4Z9bV5ABZno",
+          "channel": "English with Lucy",
+          "duration": "6:45",
+          "description": "This video covers making plans future tense. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "制定计划将来时课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "will / be going to",
+            "future time expressions",
+            "planning vocabulary"
+          ],
+          "quiz": [
+            {
+              "q": "What structure expresses future plans?",
+              "options": [
+                "be going to",
+                "was going",
+                "have gone",
+                "is going"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What word expresses future predictions?",
+              "options": [
+                "Will",
+                "Was",
+                "Did",
+                "Has"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_8",
+          "level": 2,
+          "title": "Describing People",
+          "titleCn": "描述人物",
+          "url": "https://www.youtube.com/watch?v=2Ee_qQBKiU4",
+          "channel": "Learn English with EnglishClass101",
+          "duration": "7:00",
+          "description": "This video covers describing people. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "描述人物课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "appearance adjectives",
+            "personality adjectives",
+            "tall/short/kind/friendly"
+          ],
+          "quiz": [
+            {
+              "q": "What describes someone who is not short?",
+              "options": [
+                "Tall",
+                "Small",
+                "Wide",
+                "Narrow"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "A person who helps others is?",
+              "options": [
+                "Kind",
+                "Mean",
+                "Lazy",
+                "Rude"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_9",
+          "level": 2,
+          "title": "At the Airport",
+          "titleCn": "在机场",
+          "url": "https://www.youtube.com/watch?v=3yvXq7VzMpc",
+          "channel": "BBC 6 Minute English",
+          "duration": "6:20",
+          "description": "This video covers at the airport. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "在机场课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "check-in/security/board",
+            "passport/boarding pass",
+            "travel vocabulary"
+          ],
+          "quiz": [
+            {
+              "q": "What document do you need to fly?",
+              "options": [
+                "Passport",
+                "Library card",
+                "Driver license",
+                "Student ID"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What do you do before boarding?",
+              "options": [
+                "Check in",
+                "Sleep",
+                "Eat dinner",
+                "Watch TV"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v2_10",
+          "level": 2,
+          "title": "Health and Doctor Visit",
+          "titleCn": "看病",
+          "url": "https://www.youtube.com/watch?v=GAUj3pc2Y_c",
+          "channel": "Learn English with TV Series",
+          "duration": "8:40",
+          "description": "This video covers health and doctor visit. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "看病课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "body parts vocabulary",
+            "I have a headache/cold/fever",
+            "doctor-patient对话"
+          ],
+          "quiz": [
+            {
+              "q": "What do you say when your head hurts?",
+              "options": [
+                "I have a headache",
+                "I am headache",
+                "Headache me",
+                "My head pain"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Where do you go when sick?",
+              "options": [
+                "Hospital",
+                "Bank",
+                "School",
+                "Park"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "中级B1",
+      "description": "工作学习英语",
+      "videos": [
+        {
+          "id": "v3_1",
+          "level": 3,
+          "title": "Job Interview English",
+          "titleCn": "面试英语",
+          "url": "https://www.youtube.com/watch?v=qtZ4OQ75J18",
+          "channel": "Learn English with Rebecca",
+          "duration": "12:30",
+          "description": "This video covers job interview english. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "面试英语课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Tell me about yourself",
+            "strengths/weaknesses",
+            "professional vocabulary"
+          ],
+          "quiz": [
+            {
+              "q": "What's a common interview question?",
+              "options": [
+                "Tell me about yourself",
+                "What's your hobby",
+                "Where do you live",
+                "How old are you"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How should you describe a weakness?",
+              "options": [
+                "Honestly with growth plan",
+                "Say you have none",
+                "List many faults",
+                "Refuse to answer"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_2",
+          "level": 3,
+          "title": "Business Meeting English",
+          "titleCn": "商务会议",
+          "url": "https://www.youtube.com/watch?v=mXj3TBh9Z7Y",
+          "channel": "Business English Pod",
+          "duration": "10:45",
+          "description": "This video covers business meeting english. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "商务会议课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "meeting agenda",
+            "expressing opinions",
+            "agreeing/disagreeing"
+          ],
+          "quiz": [
+            {
+              "q": "What word starts a meeting topic?",
+              "options": [
+                "Agenda",
+                "Menu",
+                "List",
+                "Plan"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How do you politely disagree?",
+              "options": [
+                "I see your point, but...",
+                "You're wrong",
+                "No way",
+                "I disagree completely"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_3",
+          "level": 3,
+          "title": "Environmental Issues Discussion",
+          "titleCn": "环境问题讨论",
+          "url": "https://www.youtube.com/watch?v=cA2-ej8f3Vc",
+          "channel": "BBC 6 Minute English",
+          "duration": "6:15",
+          "description": "This video covers environmental issues discussion. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "环境问题讨论课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "climate change vocabulary",
+            "cause/effect expressions",
+            "solutions discussion"
+          ],
+          "quiz": [
+            {
+              "q": "What causes global warming?",
+              "options": [
+                "Greenhouse gases",
+                "Ozone layer",
+                "Rain",
+                "Wind"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What can reduce carbon footprint?",
+              "options": [
+                "Planting trees",
+                "Cutting trees",
+                "Burning coal",
+                "Using plastic"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_4",
+          "level": 3,
+          "title": "Telling Stories Past Tenses",
+          "titleCn": "讲故事过去时",
+          "url": "https://www.youtube.com/watch?v=N8Igv9nD4Rg",
+          "channel": "English with Lucy",
+          "duration": "11:20",
+          "description": "This video covers telling stories past tenses. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "讲故事过去时课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "past simple vs past continuous",
+            "past perfect",
+            "storytelling vocabulary"
+          ],
+          "quiz": [
+            {
+              "q": "Which describes ongoing past action?",
+              "options": [
+                "Past continuous",
+                "Past simple",
+                "Present perfect",
+                "Future"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Past tense of 'write' is?",
+              "options": [
+                "Wrote",
+                "Writed",
+                "Writting",
+                "Wrotsen"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_5",
+          "level": 3,
+          "title": "Cultural Differences",
+          "titleCn": "文化差异",
+          "url": "https://www.youtube.com/watch?v=Jr0sXlmkV2w",
+          "channel": "TED-Ed",
+          "duration": "8:50",
+          "description": "This video covers cultural differences. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "文化差异课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "cultural concepts",
+            "comparing cultures",
+            "respect and understanding"
+          ],
+          "quiz": [
+            {
+              "q": "What is cultural awareness?",
+              "options": [
+                "Understanding other cultures",
+                "Ignoring cultures",
+                "Judging cultures",
+                "Copying cultures"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Why learn about other cultures?",
+              "options": [
+                "Build understanding",
+                "Create conflict",
+                "Show superiority",
+                "Avoid people"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_6",
+          "level": 3,
+          "title": "Technology and Society",
+          "titleCn": "科技与社会",
+          "url": "https://www.youtube.com/watch?v=ttLG0vPbXww",
+          "channel": "Vox",
+          "duration": "9:30",
+          "description": "This video covers technology and society. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "科技与社会课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "technology vocabulary",
+            "impact on society",
+            "pros and cons"
+          ],
+          "quiz": [
+            {
+              "q": "What does AI stand for?",
+              "options": [
+                "Artificial Intelligence",
+                "Auto Industry",
+                "Active Internet",
+                "Applied Innovation"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What's a benefit of smartphones?",
+              "options": [
+                "Instant communication",
+                "No communication",
+                "Less knowledge",
+                "More pollution"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_7",
+          "level": 3,
+          "title": "Conditional Sentences",
+          "titleCn": "条件句",
+          "url": "https://www.youtube.com/watch?v=eTTfQ47nU1w",
+          "channel": "Learn English with Papa Teach Me",
+          "duration": "10:00",
+          "description": "This video covers conditional sentences. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "条件句课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Zero/First/Second conditional",
+            "if-clauses",
+            "hypothetical situations"
+          ],
+          "quiz": [
+            {
+              "q": "Which expresses real possibility?",
+              "options": [
+                "First conditional",
+                "Second conditional",
+                "Third conditional",
+                "Zero conditional"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Second conditional expresses?",
+              "options": [
+                "Unreal present/future",
+                "Real future",
+                "Past facts",
+                "General truths"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_8",
+          "level": 3,
+          "title": "Travel Stories and Experiences",
+          "titleCn": "旅行经历",
+          "url": "https://www.youtube.com/watch?v=eLTj9p7VxKU",
+          "channel": "Oxford Online English",
+          "duration": "11:00",
+          "description": "This video covers travel stories and experiences. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "旅行经历课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "present perfect for experiences",
+            "travel vocabulary",
+            "describing places"
+          ],
+          "quiz": [
+            {
+              "q": "What tense for life experiences?",
+              "options": [
+                "Present perfect",
+                "Past simple",
+                "Future",
+                "Present simple"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Which is correct?",
+              "options": [
+                "I have been to Paris",
+                "I has been to Paris",
+                "I am been to Paris",
+                "I be to Paris"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_9",
+          "level": 3,
+          "title": "Education Systems Worldwide",
+          "titleCn": "各国教育系统",
+          "url": "https://www.youtube.com/watch?v=NFw2u8iN7Qc",
+          "channel": "NowThis News",
+          "duration": "7:40",
+          "description": "This video covers education systems worldwide. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "各国教育系统课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "education vocabulary",
+            "comparing systems",
+            "expressing opinions"
+          ],
+          "quiz": [
+            {
+              "q": "What word means required schooling?",
+              "options": [
+                "Compulsory",
+                "Optional",
+                "Voluntary",
+                "Free"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What's a benefit of education?",
+              "options": [
+                "Better opportunities",
+                "Less knowledge",
+                "Lower income",
+                "Fewer skills"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v3_10",
+          "level": 3,
+          "title": "Healthy Lifestyle",
+          "titleCn": "健康生活",
+          "url": "https://www.youtube.com/watch?v=Gm3F7f1dX8w",
+          "channel": "BBC Learning English",
+          "duration": "6:30",
+          "description": "This video covers healthy lifestyle. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "健康生活课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "health vocabulary",
+            "modals of advice",
+            "lifestyle discussion"
+          ],
+          "quiz": [
+            {
+              "q": "What should you do to be healthy?",
+              "options": [
+                "Exercise regularly",
+                "Eat junk food",
+                "Sleep little",
+                "Smoke often"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What modal gives advice?",
+              "options": [
+                "Should",
+                "Must not",
+                "Cannot",
+                "Will not"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "中高级B2",
+      "description": "思辨讨论英语",
+      "videos": [
+        {
+          "id": "v4_1",
+          "level": 4,
+          "title": "Debating Skills in English",
+          "titleCn": "辩论技巧",
+          "url": "https://www.youtube.com/watch?v=Gl5PV7NZzS0",
+          "channel": "TEDx Talks",
+          "duration": "15:20",
+          "description": "This video covers debating skills in english. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "辩论技巧课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "argument structure",
+            "counter-arguments",
+            "persuasive language"
+          ],
+          "quiz": [
+            {
+              "q": "What's a counter-argument?",
+              "options": [
+                "Opposing viewpoint",
+                "Supporting point",
+                "Random fact",
+                "Personal story"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What makes a strong argument?",
+              "options": [
+                "Evidence and logic",
+                "Emotion only",
+                "Opinion only",
+                "Personal attacks"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_2",
+          "level": 4,
+          "title": "Advanced Vocabulary for Opinions",
+          "titleCn": "高级观点词汇",
+          "url": "https://www.youtube.com/watch?v=2Ee_qQBKiU4",
+          "channel": "English with Lucy",
+          "duration": "12:15",
+          "description": "This video covers advanced vocabulary for opinions. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "高级观点词汇课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "sophisticated opinion phrases",
+            "hedging language",
+            "formal expressions"
+          ],
+          "quiz": [
+            {
+              "q": "Which is a hedging phrase?",
+              "options": [
+                "It could be argued",
+                "Absolutely yes",
+                "No doubt",
+                "Certainly not"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What's a formal opinion phrase?",
+              "options": [
+                "From my perspective",
+                "I reckon",
+                "I guess",
+                "Maybe so"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_3",
+          "level": 4,
+          "title": "Idioms and Phrasal Verbs",
+          "titleCn": "习语与短语动词",
+          "url": "https://www.youtube.com/watch?v=8iR29pXyKVs",
+          "channel": "Learn English with EnglishClass101",
+          "duration": "14:00",
+          "description": "This video covers idioms and phrasal verbs. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "习语与短语动词课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "common idioms",
+            "phrasal verbs meanings",
+            "contextual usage"
+          ],
+          "quiz": [
+            {
+              "q": "What does 'break the ice' mean?",
+              "options": [
+                "Start a conversation",
+                "Break something",
+                "Be cold",
+                "Stop talking"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "'Give up' means?",
+              "options": [
+                "Quit",
+                "Continue",
+                "Start",
+                "Begin"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_4",
+          "level": 4,
+          "title": "Critical Thinking Skills",
+          "titleCn": "批判性思维",
+          "url": "https://www.youtube.com/watch?v=fW7a4O0786M",
+          "channel": "TED-Ed",
+          "duration": "9:30",
+          "description": "This video covers critical thinking skills. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "批判性思维课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "evaluating arguments",
+            "logical fallacies",
+            "evidence assessment"
+          ],
+          "quiz": [
+            {
+              "q": "What's a logical fallacy?",
+              "options": [
+                "Flawed reasoning",
+                "Strong evidence",
+                "True statement",
+                "Valid argument"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Critical thinking requires?",
+              "options": [
+                "Questioning assumptions",
+                "Accepting claims",
+                "Ignoring evidence",
+                "Trusting feelings"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_5",
+          "level": 4,
+          "title": "Academic Writing Techniques",
+          "titleCn": "学术写作",
+          "url": "https://www.youtube.com/watch?v=vm79pEQT8Tc",
+          "channel": "Smrt English",
+          "duration": "13:45",
+          "description": "This video covers academic writing techniques. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "学术写作课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "essay structure",
+            "thesis statements",
+            "academic vocabulary"
+          ],
+          "quiz": [
+            {
+              "q": "What's a thesis statement?",
+              "options": [
+                "Main argument",
+                "Random fact",
+                "Supporting detail",
+                "Quote"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Academic essays need?",
+              "options": [
+                "Formal structure",
+                "Informal style",
+                "Personal stories",
+                "Slang words"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_6",
+          "level": 4,
+          "title": "Presentation Skills",
+          "titleCn": "演讲技能",
+          "url": "https://www.youtube.com/watch?v=KPY2l1n7nAQ",
+          "channel": "English with Lucy",
+          "duration": "11:30",
+          "description": "This video covers presentation skills. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "演讲技能课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "presentation structure",
+            "body language",
+            "engaging audience"
+          ],
+          "quiz": [
+            {
+              "q": "What makes a good presentation?",
+              "options": [
+                "Clear structure",
+                "Reading slides",
+                "Speaking fast",
+                "Ignoring audience"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Body language should be?",
+              "options": [
+                "Open and confident",
+                "Closed off",
+                "Stiff",
+                "Invisible"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_7",
+          "level": 4,
+          "title": "Social Issues Discussion",
+          "titleCn": "社会问题讨论",
+          "url": "https://www.youtube.com/watch?v=cA2-ej8f3Vc",
+          "channel": "Vox",
+          "duration": "10:00",
+          "description": "This video covers social issues discussion. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "社会问题讨论课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "social vocabulary",
+            "complex argumentation",
+            "multiple perspectives"
+          ],
+          "quiz": [
+            {
+              "q": "What's a social issue?",
+              "options": [
+                "Societal problem",
+                "Personal issue",
+                "Family matter",
+                "Private concern"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "How to discuss social issues?",
+              "options": [
+                "Multiple perspectives",
+                "One viewpoint",
+                "Emotional rants",
+                "Personal attacks"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_8",
+          "level": 4,
+          "title": "News and Media Literacy",
+          "titleCn": "新闻与媒介素养",
+          "url": "https://www.youtube.com/watch?v=GN4pb9JCjgM",
+          "channel": "BBC Learning English",
+          "duration": "8:15",
+          "description": "This video covers news and media literacy. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "新闻与媒介素养课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "news vocabulary",
+            "fact vs opinion",
+            "media bias"
+          ],
+          "quiz": [
+            {
+              "q": "What's media literacy?",
+              "options": [
+                "Evaluating media critically",
+                "Believing everything",
+                "Ignoring news",
+                "Only watching TV"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Fact is different from opinion because?",
+              "options": [
+                "Facts are verifiable",
+                "Opinions are true",
+                "Facts are personal",
+                "Opinions are facts"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_9",
+          "level": 4,
+          "title": "Workplace Communication",
+          "titleCn": "职场沟通",
+          "url": "https://www.youtube.com/watch?v=mXj3TBh9Z7Y",
+          "channel": "Business English Pod",
+          "duration": "12:00",
+          "description": "This video covers workplace communication. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "职场沟通课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "professional emails",
+            "meeting participation",
+            "negotiation phrases"
+          ],
+          "quiz": [
+            {
+              "q": "Formal email should be?",
+              "options": [
+                "Polite and clear",
+                "Casual and brief",
+                "Long and rambling",
+                "Informal"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "What's important in meetings?",
+              "options": [
+                "Active listening",
+                "Silent presence",
+                "Dominating talk",
+                "Interrupting"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v4_10",
+          "level": 4,
+          "title": "Literature Analysis",
+          "titleCn": "文学分析",
+          "url": "https://www.youtube.com/watch?v=ttLG0vPbXww",
+          "channel": "CrashCourse",
+          "duration": "14:30",
+          "description": "This video covers literature analysis. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "文学分析课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "literary devices",
+            "theme analysis",
+            "character development"
+          ],
+          "quiz": [
+            {
+              "q": "What's a metaphor?",
+              "options": [
+                "Figurative comparison",
+                "Literal statement",
+                "Random word",
+                "Definition"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Character development means?",
+              "options": [
+                "Character changes",
+                "Character stays same",
+                "Character disappears",
+                "Character repeats"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "高级C1",
+      "description": "学术专业英语",
+      "videos": [
+        {
+          "id": "v5_1",
+          "level": 5,
+          "title": "Advanced Grammar Subjunctive",
+          "titleCn": "高级语法虚拟语气",
+          "url": "https://www.youtube.com/watch?v=eTTjQ47nU1w",
+          "channel": "English with Lucy",
+          "duration": "15:00",
+          "description": "This video covers advanced grammar subjunctive. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "高级语法虚拟语气课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "subjunctive mood",
+            "conditional structures",
+            "formal usage"
+          ],
+          "quiz": [
+            {
+              "q": "Subjunctive mood expresses?",
+              "options": [
+                "Hypothetical situations",
+                "Past facts",
+                "Present reality",
+                "Future certainty"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Which is subjunctive?",
+              "options": [
+                "If I were you",
+                "If I was you",
+                "If I am you",
+                "If I being you"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_2",
+          "level": 5,
+          "title": "Rhetorical Devices",
+          "titleCn": "修辞手法",
+          "url": "https://www.youtube.com/watch?v=R6cGvej3eVU",
+          "channel": "The School of Life",
+          "duration": "12:30",
+          "description": "This video covers rhetorical devices. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "修辞手法课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "metaphor/simile/personification",
+            "rhetorical questions",
+            "parallelism"
+          ],
+          "quiz": [
+            {
+              "q": "What's personification?",
+              "options": [
+                "Giving human traits to objects",
+                "Comparing with like",
+                "Literal description",
+                "Definition"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Rhetorical question is?",
+              "options": [
+                "Question not expecting answer",
+                "Question needing answer",
+                "Statement",
+                "Fact"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_3",
+          "level": 5,
+          "title": "Academic Discussion Seminar",
+          "titleCn": "学术讨论",
+          "url": "https://www.youtube.com/watch?v=fW7a4O0786M",
+          "channel": "Oxford University",
+          "duration": "18:00",
+          "description": "This video covers academic discussion seminar. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "学术讨论课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "seminar participation",
+            "academic argumentation",
+            "citing sources"
+          ],
+          "quiz": [
+            {
+              "q": "In seminars you should?",
+              "options": [
+                "Contribute thoughtfully",
+                "Stay silent",
+                "Talk constantly",
+                "Disagree rudely"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Academic arguments need?",
+              "options": [
+                "Citation and evidence",
+                "Personal opinions only",
+                "Emotional appeals",
+                "Anecdotal stories"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_4",
+          "level": 5,
+          "title": "Philosophy of Language",
+          "titleCn": "语言哲学",
+          "url": "https://www.youtube.com/watch?v=KPY2l1n7nAQ",
+          "channel": "Philosophy Tube",
+          "duration": "16:30",
+          "description": "This video covers philosophy of language. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "语言哲学课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "language philosophy concepts",
+            "Wittgenstein's ideas",
+            "linguistic analysis"
+          ],
+          "quiz": [
+            {
+              "q": "What's linguistic philosophy?",
+              "options": [
+                "Study of language meaning",
+                "Grammar rules",
+                "Vocabulary study",
+                "Pronunciation"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Wittgenstein said language is?",
+              "options": [
+                "A game with rules",
+                "Random sounds",
+                "Pure math",
+                "Biological"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_5",
+          "level": 5,
+          "title": "Political Discourse Analysis",
+          "titleCn": "政治话语分析",
+          "url": "https://www.youtube.com/watch?v=GN4pb9JCjgM",
+          "channel": "TEDx Talks",
+          "duration": "14:00",
+          "description": "This video covers political discourse analysis. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "政治话语分析课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "political vocabulary",
+            "discourse analysis",
+            "rhetoric in politics"
+          ],
+          "quiz": [
+            {
+              "q": "Political discourse studies?",
+              "options": [
+                "Political language use",
+                "Voting patterns",
+                "Laws",
+                "Elections only"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Politicians use rhetoric to?",
+              "options": [
+                "Persuade audiences",
+                "Inform only",
+                "Confuse",
+                "Entertain"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_6",
+          "level": 5,
+          "title": "Scientific Paper Writing",
+          "titleCn": "科学论文写作",
+          "url": "https://www.youtube.com/watch?v=vm79pEQT8Tc",
+          "channel": "Nature",
+          "duration": "17:45",
+          "description": "This video covers scientific paper writing. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "科学论文写作课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "IMRAD structure",
+            "scientific vocabulary",
+            "citation styles"
+          ],
+          "quiz": [
+            {
+              "q": "IMRAD stands for?",
+              "options": [
+                "Intro-Methods-Results-And-Discussion",
+                "Intro-Math-Reading-Art-Dance",
+                "Ideas-Methods-Review-Data",
+                "Items-Methods-Results-Data"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Scientific writing should be?",
+              "options": [
+                "Objective and precise",
+                "Emotional and vague",
+                "Subjective and casual",
+                "Informal and brief"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_7",
+          "level": 5,
+          "title": "Cross-cultural Communication",
+          "titleCn": "跨文化沟通",
+          "url": "https://www.youtube.com/watch?v=Jr0sXlmkV2w",
+          "channel": "TED-Ed",
+          "duration": "13:20",
+          "description": "This video covers cross-cultural communication. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "跨文化沟通课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "cultural dimensions",
+            "communication styles",
+            "cultural intelligence"
+          ],
+          "quiz": [
+            {
+              "q": "Cultural intelligence means?",
+              "options": [
+                "Working across cultures",
+                "Speaking many languages",
+                "Traveling often",
+                "Knowing history"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "High-context cultures rely on?",
+              "options": [
+                "Nonverbal cues",
+                "Direct words",
+                "Written contracts",
+                "Formal rules"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_8",
+          "level": 5,
+          "title": "Debate Advanced Techniques",
+          "titleCn": "高级辩论技巧",
+          "url": "https://www.youtube.com/watch?v=Gl5PV7NZzS0",
+          "channel": "Oxford Union",
+          "duration": "19:30",
+          "description": "This video covers debate advanced techniques. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "高级辩论技巧课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "rebuttal strategies",
+            "logical fallacies detection",
+            "cross-examination"
+          ],
+          "quiz": [
+            {
+              "q": "What's a rebuttal?",
+              "options": [
+                "Counter-argument",
+                "Opening statement",
+                "Conclusion",
+                "Question"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Ad hominem is?",
+              "options": [
+                "Attacking person not argument",
+                "Logical reasoning",
+                "Strong evidence",
+                "Valid point"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_9",
+          "level": 5,
+          "title": "Literary Criticism",
+          "titleCn": "文学批评",
+          "url": "https://www.youtube.com/watch?v=ttLG0vPbXww",
+          "channel": "YaleCourses",
+          "duration": "20:00",
+          "description": "This video covers literary criticism. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "文学批评课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "critical theory schools",
+            "textual analysis",
+            "interpretation methods"
+          ],
+          "quiz": [
+            {
+              "q": "Literary criticism studies?",
+              "options": [
+                "Literature interpretation",
+                "Grammar rules",
+                "Vocabulary",
+                "Author bio only"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Which is a critical theory?",
+              "options": [
+                "Feminist criticism",
+                "Grammar rules",
+                "Spelling tests",
+                "Reading speed"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v5_10",
+          "level": 5,
+          "title": "Ethics and Morality Discussion",
+          "titleCn": "伦理道德讨论",
+          "url": "https://www.youtube.com/watch?v=cA2-ej8f3Vc",
+          "channel": "HarvardX",
+          "duration": "16:45",
+          "description": "This video covers ethics and morality discussion. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "伦理道德讨论课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "ethical frameworks",
+            "moral reasoning",
+            "case analysis"
+          ],
+          "quiz": [
+            {
+              "q": "Ethics studies?",
+              "options": [
+                "Moral principles",
+                "Laws",
+                "Customs",
+                "Tastes"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Utilitarianism maximizes?",
+              "options": [
+                "Overall happiness",
+                "Personal gain",
+                "Individual wealth",
+                "Social status"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "name": "精通C2",
+      "description": "高阶精通英语",
+      "videos": [
+        {
+          "id": "v6_1",
+          "level": 6,
+          "title": "Complex Argumentation",
+          "titleCn": "复杂论证",
+          "url": "https://www.youtube.com/watch?v=fW7a4O0786M",
+          "channel": "Oxford Union",
+          "duration": "22:00",
+          "description": "This video covers complex argumentation. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "复杂论证课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Toulmin model",
+            "warrants/backing",
+            "rebuttal integration"
+          ],
+          "quiz": [
+            {
+              "q": "Toulmin model includes?",
+              "options": [
+                "Claim-data-warrant",
+                "Intro-body-conclusion",
+                "Fact-opinion",
+                "Start-middle-end"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "A warrant in argument is?",
+              "options": [
+                "Logical connection",
+                "Random statement",
+                "Emotional appeal",
+                "Personal story"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_2",
+          "level": 6,
+          "title": "Postmodern Philosophy",
+          "titleCn": "后现代哲学",
+          "url": "https://www.youtube.com/watch?v=KPY2l1n7nAQ",
+          "channel": "Philosophy Tube",
+          "duration": "25:30",
+          "description": "This video covers postmodern philosophy. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "后现代哲学课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "postmodern concepts",
+            "Derrida/Foucault",
+            "deconstruction"
+          ],
+          "quiz": [
+            {
+              "q": "Postmodernism questions?",
+              "options": [
+                "Grand narratives",
+                "Tradition only",
+                "Science only",
+                "Religion only"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Deconstruction means?",
+              "options": [
+                "Analyzing contradictions",
+                "Building structures",
+                "Defining terms",
+                "Creating stories"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_3",
+          "level": 6,
+          "title": "Advanced Literary Theory",
+          "titleCn": "高级文学理论",
+          "url": "https://www.youtube.com/watch?v=ttLG0vPbXww",
+          "channel": "YaleCourses",
+          "duration": "28:00",
+          "description": "This video covers advanced literary theory. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "高级文学理论课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "structuralism/post-structuralism",
+            "reader-response theory",
+            "intertextuality"
+          ],
+          "quiz": [
+            {
+              "q": "Reader-response theory focuses on?",
+              "options": [
+                "Reader's interpretation",
+                "Author's intent only",
+                "Text structure",
+                "Historical context only"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Intertextuality means?",
+              "options": [
+                "Texts reference other texts",
+                "Texts are independent",
+                "Texts are simple",
+                "Texts are short"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_4",
+          "level": 6,
+          "title": "Scientific Philosophy",
+          "titleCn": "科学哲学",
+          "url": "https://www.youtube.com/watch?v=vm79pEQT8Tc",
+          "channel": "MIT OpenCourseWare",
+          "duration": "24:15",
+          "description": "This video covers scientific philosophy. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "科学哲学课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "Kuhn's paradigms",
+            "falsifiability",
+            "scientific revolutions"
+          ],
+          "quiz": [
+            {
+              "q": "Kuhn's paradigm shift is?",
+              "options": [
+                "Scientific revolution",
+                "Small change",
+                "Error correction",
+                "Method update"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Falsifiability means?",
+              "options": [
+                "Can be proven false",
+                "Is definitely true",
+                "Cannot be tested",
+                "Is absolutely certain"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_5",
+          "level": 6,
+          "title": "High-level Negotiation",
+          "titleCn": "高级谈判",
+          "url": "https://www.youtube.com/watch?v=mXj3TBh9Z7Y",
+          "channel": "Harvard Business School",
+          "duration": "20:30",
+          "description": "This video covers high-level negotiation. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "高级谈判课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "BATNA concept",
+            "interest-based negotiation",
+            "cultural factors"
+          ],
+          "quiz": [
+            {
+              "q": "BATNA stands for?",
+              "options": [
+                "Best Alternative To Negotiated Agreement",
+                "Basic Agreement Terms Negotiated",
+                "Best Action To Need Agreement",
+                "Better Alternative Than No Agreement"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Interest-based negotiation focuses on?",
+              "options": [
+                "Underlying interests",
+                "Positions only",
+                "Demands",
+                "Ultimatums"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_6",
+          "level": 6,
+          "title": "Comparative Literature",
+          "titleCn": "比较文学",
+          "url": "https://www.youtube.com/watch?v=ttLG0vPbXww",
+          "channel": "Columbia University",
+          "duration": "26:00",
+          "description": "This video covers comparative literature. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "比较文学课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "cross-cultural analysis",
+            "translation studies",
+            "world literature"
+          ],
+          "quiz": [
+            {
+              "q": "Comparative literature studies?",
+              "options": [
+                "Literature across cultures",
+                "One national literature",
+                "Grammar rules",
+                "Single author"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Translation studies examine?",
+              "options": [
+                "Translation theory and practice",
+                "Original texts only",
+                "Language history",
+                "Reading speed"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_7",
+          "level": 6,
+          "title": "Sociolinguistics",
+          "titleCn": "社会语言学",
+          "url": "https://www.youtube.com/watch?v=Jr0sXlmkV2w",
+          "channel": "Stanford",
+          "duration": "23:45",
+          "description": "This video covers sociolinguistics. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "社会语言学课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "language and society",
+            "dialect/registers",
+            "identity and language"
+          ],
+          "quiz": [
+            {
+              "q": "Sociolinguistics studies?",
+              "options": [
+                "Language in social context",
+                "Language history",
+                "Grammar rules",
+                "Vocabulary"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "A dialect is?",
+              "options": [
+                "Regional language variety",
+                "Official language",
+                "Foreign language",
+                "Dead language"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_8",
+          "level": 6,
+          "title": "Cognitive Linguistics",
+          "titleCn": "认知语言学",
+          "url": "https://www.youtube.com/watch?v=eTTjQ47nU1w",
+          "channel": "UC Berkeley",
+          "duration": "27:30",
+          "description": "This video covers cognitive linguistics. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "认知语言学课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "language and mind",
+            "conceptual metaphors",
+            "embodied cognition"
+          ],
+          "quiz": [
+            {
+              "q": "Cognitive linguistics studies?",
+              "options": [
+                "Language and thought",
+                "Grammar only",
+                "History",
+                "Phonetics"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Conceptual metaphor is?",
+              "options": [
+                "Understanding one concept via another",
+                "Poetic device",
+                "Word play",
+                "Random comparison"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_9",
+          "level": 6,
+          "title": "Academic Publishing",
+          "titleCn": "学术出版",
+          "url": "https://www.youtube.com/watch?v=vm79pEQT8Tc",
+          "channel": "Nature Video",
+          "duration": "18:20",
+          "description": "This video covers academic publishing. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "学术出版课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "peer review process",
+            "journal submission",
+            "academic writing standards"
+          ],
+          "quiz": [
+            {
+              "q": "Peer review means?",
+              "options": [
+                "Expert evaluation",
+                "Self-publication",
+                "Public voting",
+                "Editor's choice"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Academic publishing requires?",
+              "options": [
+                "Rigorous standards",
+                "Casual writing",
+                "Personal opinions",
+                "Marketing appeal"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        },
+        {
+          "id": "v6_10",
+          "level": 6,
+          "title": "Diplomatic Discourse",
+          "titleCn": "外交话语",
+          "url": "https://www.youtube.com/watch?v=GN4pb9JCjgM",
+          "channel": "Chatham House",
+          "duration": "21:15",
+          "description": "This video covers diplomatic discourse. Watch carefully and take notes on the key learning points below.",
+          "descriptionCn": "外交话语课程视频,请认真观看并学习以下要点。",
+          "learningPoints": [
+            "diplomatic language",
+            "international relations",
+            "diplomatic protocol"
+          ],
+          "quiz": [
+            {
+              "q": "Diplomatic language is?",
+              "options": [
+                "Formal and tactful",
+                "Casual and direct",
+                "Emotional",
+                "Slang-heavy"
+              ],
+              "answer": 0
+            },
+            {
+              "q": "Diplomacy aims to?",
+              "options": [
+                "Resolve conflicts peacefully",
+                "Win arguments",
+                "Defeat enemies",
+                "Show power"
+              ],
+              "answer": 0
+            }
+          ],
+          "completed": false
+        }
+      ]
+    }
+  ]
+}
