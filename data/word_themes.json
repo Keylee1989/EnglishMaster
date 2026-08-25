@@ -1,0 +1,152 @@
+{
+  "version": 1,
+  "themes": [
+    {
+      "id": "days_of_week",
+      "name": "星期",
+      "icon": "📅",
+      "level": 1,
+      "words": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    },
+    {
+      "id": "months",
+      "name": "月份",
+      "icon": "📆",
+      "level": 1,
+      "words": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    },
+    {
+      "id": "seasons",
+      "name": "季节",
+      "icon": "🍂",
+      "level": 1,
+      "words": ["spring", "summer", "autumn", "winter"]
+    },
+    {
+      "id": "colors",
+      "name": "颜色",
+      "icon": "🎨",
+      "level": 1,
+      "words": ["red", "orange", "yellow", "green", "blue", "purple", "pink", "brown", "black", "white", "gray", "gold"]
+    },
+    {
+      "id": "family_members",
+      "name": "家庭成员",
+      "icon": "👨‍👩‍👧‍👦",
+      "level": 1,
+      "words": ["father", "mother", "brother", "sister", "uncle", "aunt", "cousin", "nephew", "niece", "grandfather", "grandmother", "son", "daughter", "husband", "wife"]
+    },
+    {
+      "id": "numbers",
+      "name": "数字",
+      "icon": "🔢",
+      "level": 1,
+      "words": ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety", "hundred", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "twentieth", "thirtieth", "fortieth", "fiftieth", "sixtieth", "seventieth", "eightieth", "ninetieth", "hundredth"]
+    },
+    {
+      "id": "time_words",
+      "name": "时间词",
+      "icon": "⏰",
+      "level": 1,
+      "words": ["today", "tomorrow", "yesterday", "morning", "afternoon", "evening", "night", "now", "then", "later"]
+    },
+    {
+      "id": "weather",
+      "name": "天气",
+      "icon": "🌤️",
+      "level": 1,
+      "words": ["sunny", "rainy", "cloudy", "windy", "snowy", "foggy", "stormy", "hot", "cold", "warm", "cool"]
+    },
+    {
+      "id": "food",
+      "name": "食物",
+      "icon": "🍽️",
+      "level": 1,
+      "words": ["rice", "bread", "meat", "fish", "egg", "milk", "water", "fruit", "vegetable", "soup", "noodle", "cake"]
+    },
+    {
+      "id": "body_parts",
+      "name": "身体部位",
+      "icon": "🧍",
+      "level": 1,
+      "words": ["head", "face", "eye", "nose", "mouth", "ear", "hand", "foot", "leg", "arm", "heart", "stomach", "tooth", "hair"]
+    },
+    {
+      "id": "clothes",
+      "name": "衣服",
+      "icon": "👕",
+      "level": 1,
+      "words": ["shirt", "pants", "dress", "skirt", "coat", "shoes", "socks", "hat", "jacket", "sweater"]
+    },
+    {
+      "id": "animals",
+      "name": "动物",
+      "icon": "🐾",
+      "level": 1,
+      "words": ["dog", "cat", "bird", "fish", "horse", "cow", "pig", "sheep", "chicken", "tiger", "lion", "elephant", "monkey", "bear", "rabbit"]
+    },
+    {
+      "id": "transportation",
+      "name": "交通工具",
+      "icon": "🚗",
+      "level": 1,
+      "words": ["car", "bus", "train", "plane", "bike", "boat", "ship", "truck", "taxi", "subway"]
+    },
+    {
+      "id": "subjects",
+      "name": "学科",
+      "icon": "📚",
+      "level": 2,
+      "words": ["math", "English", "science", "history", "geography", "art", "music", "PE", "physics", "chemistry", "biology"]
+    },
+    {
+      "id": "occupations",
+      "name": "职业",
+      "icon": "💼",
+      "level": 2,
+      "words": ["teacher", "doctor", "nurse", "farmer", "cook", "driver", "engineer", "lawyer", "judge", "artist", "writer", "singer", "policeman"]
+    },
+    {
+      "id": "nature",
+      "name": "自然",
+      "icon": "🏔️",
+      "level": 3,
+      "words": ["mountain", "river", "lake", "sea", "ocean", "forest", "desert", "island", "valley", "waterfall"]
+    },
+    {
+      "id": "emotions",
+      "name": "情绪",
+      "icon": "😊",
+      "level": 3,
+      "words": ["happy", "sad", "angry", "surprised", "scared", "excited", "bored", "tired", "nervous", "proud"]
+    },
+    {
+      "id": "directions",
+      "name": "方位",
+      "icon": "🧭",
+      "level": 1,
+      "words": ["left", "right", "front", "back", "up", "down", "inside", "outside", "near", "far", "east", "south", "west", "north"]
+    },
+    {
+      "id": "house",
+      "name": "房屋",
+      "icon": "🏠",
+      "level": 1,
+      "words": ["kitchen", "bedroom", "bathroom", "living room", "garden", "garage", "basement", "attic", "balcony", "door"]
+    },
+    {
+      "id": "fruits",
+      "name": "水果",
+      "icon": "🍎",
+      "level": 1,
+      "words": ["apple", "banana", "orange", "grape", "watermelon", "strawberry", "pear", "peach", "cherry", "lemon"]
+    },
+    {
+      "id": "vegetables",
+      "name": "蔬菜",
+      "icon": "🥕",
+      "level": 1,
+      "words": ["tomato", "potato", "onion", "carrot", "cabbage", "lettuce", "pea", "bean", "cucumber", "corn"]
+    }
+  ]
+}
