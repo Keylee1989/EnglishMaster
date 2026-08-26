@@ -82,10 +82,13 @@ EM.media = {
         padding:14px 24px; background:#ff0000; color:#fff;
         border:none; border-radius:var(--radius-sm); cursor:pointer;
         font-size:15px; font-weight:600; text-decoration:none;
-        transition:var(--transition); margin:12px 0;
+        transition:var(--transition); margin:4px 8px 4px 0;
       }
       .video-watch-btn:hover { background:#cc0000; transform:translateY(-1px); }
       .video-watch-btn::before { content:"▶"; font-size:14px; }
+      .video-watch-btn.bilibili { background:#00a1d6; }
+      .video-watch-btn.bilibili:hover { background:#0088b3; }
+      .video-watch-btn.bilibili::before { content:"📺"; }
       .video-points {
         margin:16px 0; padding:14px; background:var(--bg-hover);
         border-radius:var(--radius-sm); border-left:4px solid var(--accent);
@@ -211,6 +214,9 @@ EM.media = {
       this._renderList();
       return;
     }
+    const bilibiliHtml = v.bilibiliUrl
+      ? `<a class="video-watch-btn bilibili" href="${v.bilibiliUrl}" target="_blank" rel="noopener noreferrer">在 Bilibili 中观看</a>`
+      : '';
     const contentEl = document.getElementById('mediaContent');
     contentEl.innerHTML = `
       <button class="back-btn" id="mediaBack">← 返回列表</button>
@@ -221,9 +227,10 @@ EM.media = {
           📺 ${v.channel} · ⏱️ ${v.duration}
         </p>
         <p style="font-size:14px; margin:0 0 8px">${v.descriptionCn}</p>
-        <a class="video-watch-btn" href="${v.url}" target="_blank" rel="noopener noreferrer">
-          在 YouTube 中观看
-        </a>
+        <div style="display:flex; flex-wrap:wrap; gap:4px 0; margin:8px 0;">
+          <a class="video-watch-btn" href="${v.url}" target="_blank" rel="noopener noreferrer">在 YouTube 中观看</a>
+          ${bilibiliHtml}
+        </div>
         <div class="video-points">
           <h4>🎯 学习要点</h4>
           <ul>

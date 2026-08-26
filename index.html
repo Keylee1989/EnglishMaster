@@ -84,10 +84,33 @@
           </select>
         </div>
         <div class="setting-group">
-          <label>AI 问答接口 (可选)</label>
-          <input type="text" id="aiApiUrl" placeholder="https://api.openai.com/v1/chat/completions">
-          <input type="password" id="aiApiKey" placeholder="API Key (留空则用本地知识库)">
-          <input type="text" id="aiModel" placeholder="gpt-4o-mini" value="gpt-4o-mini">
+          <label>AI 问答接口 (可选 · 配置后可启用 AI 模式)</label>
+          <div style="display:flex; gap:6px; margin-bottom:8px;">
+            <select id="aiPreset" style="flex:1; padding:8px; border-radius:8px; background:var(--bg-card); border:1px solid var(--border); color:var(--text-primary); font-size:13px;">
+              <option value="custom">自定义</option>
+              <option value="agnes">Agnes AI (国内推荐)</option>
+              <option value="openai">OpenAI</option>
+              <option value="deepseek">DeepSeek</option>
+              <option value="qwen">通义千问</option>
+              <option value="doubao">豆包</option>
+              <option value="silicon">SiliconFlow</option>
+              <option value="azure">Azure OpenAI</option>
+            </select>
+            <button class="btn btn-secondary" id="aiFetchModels" style="padding:8px 12px; font-size:13px;">🔌 获取模型</button>
+          </div>
+          <input type="text" id="aiApiUrl" placeholder="API Base URL, 如 https://api.agnes-ai.cn/v1" style="margin-bottom:6px;">
+          <input type="password" id="aiApiKey" placeholder="API Key (留空则仅用本地知识库)" style="margin-bottom:6px;">
+          <div style="display:flex; gap:6px; align-items:center;">
+            <select id="aiModel" style="flex:1; padding:8px; border-radius:8px; background:var(--bg-card); border:1px solid var(--border); color:var(--text-primary); font-size:13px;">
+              <option value="">-- 请选择模型(先获取或手动输入) --</option>
+            </select>
+            <button class="btn btn-secondary" id="aiModelManual" style="padding:8px 12px; font-size:13px;">✏️</button>
+          </div>
+          <div id="aiTestResult" style="margin-top:8px; font-size:12px; color:var(--text-muted);"></div>
+          <div style="display:flex; gap:6px; margin-top:8px;">
+            <button class="btn btn-secondary" id="aiTestBtn" style="flex:1; padding:8px; font-size:13px;">🧪 测试连接</button>
+            <button class="btn btn-secondary" id="aiResetBtn" style="flex:1; padding:8px; font-size:13px;">🔄 重置默认</button>
+          </div>
         </div>
         <div class="setting-group">
           <button class="btn btn-secondary" id="exportProgress">📤 导出进度</button>

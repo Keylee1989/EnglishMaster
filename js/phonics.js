@@ -152,46 +152,62 @@ EM.phonics = {
    *   quizType: 该分类用的题型 'letter'(字母辨识) | 'sound'(听音选字母组合) | 'split' | 'magic' | 'listen'
    *   optionsPool: 该分类用于干扰选项的候选数组
    */
+  // 字母名发音映射:用单词形式拼写字母名,避免 Web Speech API 把单字母读成不定冠词
+  // 例: A→"Ayy", B→"Bee", C→"See", D→"Dee", E→"Ee", F→"Ef", G→"Gee", H→"Aich", ...
+  // 这样 TTS 读到的就是纯字母名 /eɪ/ /biː/ /siː/ /diː/ /iː/ 等,无任何前缀
+  _letterName(letter) {
+    const map = {
+      'A':'Ayy','B':'Bee','C':'See','D':'Dee','E':'Ee','F':'Ef','G':'Gee',
+      'H':'Aich','I':'Ai','J':'Jay','K':'Kay','L':'El','M':'Em','N':'En',
+      'O':'Oh','P':'Pee','Q':'Cue','R':'Ar','S':'Es','T':'Tee',
+      'U':'You','V':'Vee','W':'Double-You','X':'Ecks','Y':'Why','Z':'Zee'
+    };
+    return map[(letter || '').toUpperCase()] || (letter || '').toUpperCase();
+  },
+
   _getItems(tabKey) {
     const d = this.data;
     if (!d) return [];
     const items = [];
     switch (tabKey) {
       case 'letters':
-        // 字母分类：测验用"听字母名→选字母"题型，主显示就是字母本身
-        // 关键：TTS 直接朗读单字母"A"会被识别为不定冠词读成 /ə/，
-        //      所以 speakText 用 "The letter A. A." 明确朗读字母名 /eɪ/
+        // 字母分类:测验用"听字母名→选字母"题型,主显示就是字母本身
+        // TTS 用字母名的拼写形式(Ayy/Bee/See...)直接读出纯正字母名,无前缀
         (d.letters || []).forEach(o => {
           const up = o.letter.toUpperCase();
+          const name = this._letterName(up);
           items.push({
-            id: 'letters:' + up,                          // 用大写字母做 id 后缀
+            id: 'letters:' + up,
             group: '',
-            symbol: up,                                   // 主显示：纯大写字母
-            subSymbol: o.letter.toLowerCase(),            // 副显示：小写字母
+            symbol: up,
+            subSymbol: o.letter.toLowerCase(),
             sound: o.sound,
-            words: [o.word],                              // 仅作辅助例词
+            words: [o.word],
             cn: o.cn,
             emoji: o.emoji,
-            speakText: 'The letter ' + up + '. ' + up + '.',  // 明确朗读字母名
+            speakText: name,                       // 直接读字母名,如 "Ayy" /eɪ/
+            speakLabel: up + ' /' + name + '/',   // UI 显示辅助
             quizType: 'letter',
-            quizAnswer: up,                               // 测验答案用大写
+            quizAnswer: up,
             optionsPool: (d.letters || []).map(x => x.letter.toUpperCase())
           });
         });
         break;
       case 'vowels':
-        // 元音分类：测验用"听元音字母名→选元音字母"
+        // 元音分类:测验用"听元音字母名→选元音字母"
         (d.vowels || []).forEach(o => {
           const up = (o.combo || '').toUpperCase();
+          const name = this._letterName(up);
           items.push({
-            id: 'vowels:' + up,                          // 用大写做 id 后缀
+            id: 'vowels:' + up,
             group: '',
-            symbol: up,                                  // 主显示：纯大写
+            symbol: up,
             subSymbol: o.combo,
             sound: '短 ' + o.short + '  长 ' + o.long,
             words: [o.shortEg, o.longEg],
             cn: '短音例词:' + o.shortEg + ' · 长音例词:' + o.longEg,
-            speakText: 'The letter ' + up + '. ' + up + '.',
+            speakText: name,                        // 直接读字母名
+            speakLabel: up + ' /' + name + '/',
             quizType: 'letter',
             quizAnswer: up,
             optionsPool: (d.vowels || []).map(x => (x.combo || '').toUpperCase())
@@ -345,6 +361,7 @@ EM.phonics = {
           <button class="phonics-mark" data-mark="${EM.ui.esc(it.id)}" title="标记已掌握">${isM ? '✓' : '○'}</button>
           <div class="phonics-symbol">${EM.ui.esc(mainSymbol)}</div>
           ${it.subSymbol ? `<div class="phonics-sub">${EM.ui.esc(it.subSymbol)}</div>` : ''}
+          ${it.speakLabel ? `<div class="phonics-speak-label" style="font-size:11px;color:var(--accent);opacity:0.7;margin-top:2px;">🔊 ${EM.ui.esc(it.speakLabel)} 点击听</div>` : ''}
           ${eg ? `<div class="phonics-eg">例词:${EM.ui.esc(eg)}${it.emoji ? ' '+it.emoji : ''}</div>` : ''}
           ${it.sound ? `<div class="phonics-sound">${EM.ui.esc(it.sound)}</div>` : ''}
           ${it.cn ? `<div class="phonics-cn">${EM.ui.esc(it.cn)}</div>` : ''}

@@ -881,6 +881,18 @@ EM.init = async () => {
     document.getElementById('sidebar').classList.toggle('open');
   };
 
+  // AI 预设供应商 (base URL + 推荐模型前缀)
+  const AI_PRESETS = {
+    agnes:     { url: 'https://api.agnes-ai.cn/v1',                    hint: 'Agnes AI',         modelPrefix: 'agnes' },
+    openai:    { url: 'https://api.openai.com/v1',                     hint: 'OpenAI',           modelPrefix: 'gpt' },
+    deepseek:  { url: 'https://api.deepseek.com/v1',                   hint: 'DeepSeek',         modelPrefix: 'deepseek' },
+    qwen:      { url: 'https://dashscope.aliyuncs.com/compatible-mode/v1', hint: '通义千问',       modelPrefix: 'qwen' },
+    doubao:    { url: 'https://ark.cn-beijing.volces.com/api/v3',      hint: '豆包',             modelPrefix: 'doubao' },
+    silicon:   { url: 'https://api.siliconflow.cn/v1',                hint: 'SiliconFlow',      modelPrefix: '' },
+    azure:     { url: '',                                             hint: 'Azure (需填完整URL)', modelPrefix: 'gpt' },
+    custom:    { url: '',                                             hint: '自定义',           modelPrefix: '' }
+  };
+
   // 设置弹窗
   document.getElementById('settingsBtn').onclick = () => {
     document.getElementById('settingsModal').classList.add('show');
@@ -891,7 +903,31 @@ EM.init = async () => {
     document.getElementById('themeSelect').value = s.theme || 'dark';
     document.getElementById('aiApiUrl').value = s.aiApiUrl || '';
     document.getElementById('aiApiKey').value = s.aiApiKey || '';
-    document.getElementById('aiModel').value = s.aiModel || 'gpt-4o-mini';
+    // 预设选择:根据 URL 反推
+    let presetKey = 'custom';
+    for (const [k, v] of Object.entries(AI_PRESETS)) {
+      if (v.url && s.aiApiUrl && s.aiApiUrl.startsWith(v.url.replace('/v1',''))) { presetKey = k; break; }
+    }
+    document.getElementById('aiPreset').value = presetKey;
+    // 模型:如果有已保存的模型,填到下拉或手动输入
+    const modelSel = document.getElementById('aiModel');
+    const savedModel = s.aiModel || '';
+    if (savedModel) {
+      // 如果下拉已有此选项则选中,否则添加
+      let found = false;
+      for (const opt of modelSel.options) {
+        if (opt.value === savedModel) { found = true; break; }
+      }
+      if (!found) {
+        const opt = document.createElement('option');
+        opt.value = savedModel; opt.textContent = savedModel + ' (已保存)';
+        modelSel.appendChild(opt);
+      }
+      modelSel.value = savedModel;
+    } else {
+      modelSel.value = '';
+    }
+    document.getElementById('aiTestResult').textContent = '';
   };
 
   document.querySelectorAll('#settingsModal [data-close]').forEach(el => {
@@ -915,12 +951,144 @@ EM.init = async () => {
     EM.progress.saveSettings({ theme: e.target.value });
     EM.applyTheme(e.target.value);
   };
-  ['aiApiUrl','aiApiKey','aiModel'].forEach(id => {
-    document.getElementById(id).onchange = e => {
+  // AI 设置:预设选择 → 自动填 URL
+  const presetSel = document.getElementById('aiPreset');
+  if (presetSel) {
+    presetSel.onchange = e => {
+      const p = AI_PRESETS[e.target.value];
+      if (p && p.url) {
+        document.getElementById('aiApiUrl').value = p.url;
+        EM.progress.saveSettings({ aiApiUrl: p.url });
+      }
+    };
+  }
+
+  // AI 设置:手动输入 URL/Key 时保存
+  ['aiApiUrl','aiApiKey'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.onchange = e => {
       EM.progress.saveSettings({ [id]: e.target.value });
       if (EM.modules.rag) EM.modules.rag.reloadConfig();
     };
   });
+
+  // AI 设置:模型下拉选择保存
+  const modelSel = document.getElementById('aiModel');
+  if (modelSel) {
+    modelSel.onchange = e => {
+      if (e.target.value) {
+        EM.progress.saveSettings({ aiModel: e.target.value });
+        if (EM.modules.rag) EM.modules.rag.reloadConfig();
+      }
+    };
+  }
+
+  // AI 设置:手动输入模型名(✏️按钮)
+  const modelManualBtn = document.getElementById('aiModelManual');
+  if (modelManualBtn) {
+    modelManualBtn.onclick = () => {
+      const cur = modelSel.value || '';
+      const val = prompt('输入模型名称(如 agnes-2.5-flash / gpt-4o-mini):', cur);
+      if (val !== null && val.trim()) {
+        // 添加到下拉并选中
+        let found = false;
+        for (const opt of modelSel.options) {
+          if (opt.value === val.trim()) { found = true; break; }
+        }
+        if (!found) {
+          const opt = document.createElement('option');
+          opt.value = val.trim(); opt.textContent = val.trim();
+          modelSel.appendChild(opt);
+        }
+        modelSel.value = val.trim();
+        EM.progress.saveSettings({ aiModel: val.trim() });
+        if (EM.modules.rag) EM.modules.rag.reloadConfig();
+      }
+    };
+  }
+
+  // AI 设置:获取模型列表(从 /models 端点)
+  const fetchBtn = document.getElementById('aiFetchModels');
+  if (fetchBtn) {
+    fetchBtn.onclick = async () => {
+      const url = document.getElementById('aiApiUrl').value.trim();
+      const key = document.getElementById('aiApiKey').value.trim();
+      if (!url || !key) { EM.ui.toast('请先填 API URL 和 API Key'); return; }
+      fetchBtn.disabled = true;
+      fetchBtn.textContent = '⏳ 获取中...';
+      try {
+        const modelsUrl = url.replace(/\/chat\/completions$/, '') + '/models';
+        const res = await fetch(modelsUrl, {
+          headers: { 'Authorization': 'Bearer ' + key }
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        const models = (data.data || []).map(m => m.id || m.id);
+        if (!models.length) { EM.ui.toast('该接口未返回可用模型'); return; }
+        // 填充下拉
+        modelSel.innerHTML = '<option value="">-- 选择模型 --</option>';
+        models.forEach(m => {
+          const opt = document.createElement('option');
+          opt.value = m; opt.textContent = m;
+          modelSel.appendChild(opt);
+        });
+        EM.ui.toast('获取到 ' + models.length + ' 个模型,请选择');
+      } catch (e) {
+        EM.ui.toast('获取模型失败: ' + (e.message || '未知错误') + '(可手动输入)');
+      } finally {
+        fetchBtn.disabled = false;
+        fetchBtn.textContent = '🔌 获取模型';
+      }
+    };
+  }
+
+  // AI 设置:测试连接
+  const testBtn = document.getElementById('aiTestBtn');
+  if (testBtn) {
+    testBtn.onclick = async () => {
+      const url = document.getElementById('aiApiUrl').value.trim();
+      const key = document.getElementById('aiApiKey').value.trim();
+      const model = (document.getElementById('aiModel').value || '').trim();
+      const resultEl = document.getElementById('aiTestResult');
+      if (!url || !key) { resultEl.textContent = '⚠️ 请先填 API URL 和 API Key'; resultEl.style.color = 'var(--danger)'; return; }
+      resultEl.textContent = '⏳ 正在连接...';
+      resultEl.style.color = 'var(--text-muted)';
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + key },
+          body: JSON.stringify({ model: model || 'test', messages: [{ role: 'user', content: 'hi' }], max_tokens: 10 })
+        });
+        if (!res.ok) {
+          const txt = await res.text().catch(() => '');
+          resultEl.innerHTML = '❌ 连接失败 HTTP ' + res.status + (txt ? '<br>' + txt.slice(0,200) : '');
+          resultEl.style.color = 'var(--danger)';
+        } else {
+          resultEl.innerHTML = '✅ 连接成功! 模型: ' + (model || '自动') + '<br>现在可以在智能问答页使用 AI 模式了';
+          resultEl.style.color = 'var(--success)';
+        }
+      } catch (e) {
+        resultEl.innerHTML = '❌ 网络错误: ' + (e.message || '未知') + '<br>请检查 URL 是否正确(应为 /v1 结尾)';
+        resultEl.style.color = 'var(--danger)';
+      }
+    };
+  }
+
+  // AI 设置:重置默认
+  const resetBtn = document.getElementById('aiResetBtn');
+  if (resetBtn) {
+    resetBtn.onclick = () => {
+      document.getElementById('aiPreset').value = 'custom';
+      document.getElementById('aiApiUrl').value = '';
+      document.getElementById('aiApiKey').value = '';
+      modelSel.innerHTML = '<option value="">-- 请选择模型(先获取或手动输入) --</option>';
+      modelSel.value = '';
+      EM.progress.saveSettings({ aiApiUrl: '', aiApiKey: '', aiModel: '' });
+      if (EM.modules.rag) EM.modules.rag.reloadConfig();
+      document.getElementById('aiTestResult').textContent = '🔄 已重置';
+      document.getElementById('aiTestResult').style.color = 'var(--accent)';
+    };
+  }
 
   // 导入导出
   document.getElementById('exportProgress').onclick = () => EM.progress.export();

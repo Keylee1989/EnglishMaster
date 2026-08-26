@@ -578,11 +578,23 @@ EM.rag = {
     this._renderMessages();
 
     const settings = this.config || {};
-    const apiUrl = settings.aiApiUrl || 'https://api.openai.com/v1/chat/completions';
+    // 智能补全 URL:用户可能填 https://api.agnes-ai.cn/v1 或 https://api.agnes-ai.cn/v1/chat/completions
+    let apiUrl = settings.aiApiUrl || '';
+    if (!apiUrl) {
+      this.thinking = false;
+      this._renderMessages();
+      this.messages.push({ role: 'bot', text: '⚠️ 未配置 AI 接口 URL,已切换到本地知识库。请在 ⚙️ 设置中填写 API Base URL。' });
+      this._renderMessages();
+      return;
+    }
+    // 如果 URL 不以 /chat/completions 结尾,自动补全
+    if (!/\/chat\/completions\/?$/.test(apiUrl)) {
+      apiUrl = apiUrl.replace(/\/$/, '') + '/chat/completions';
+    }
     const apiKey = settings.aiApiKey || '';
-    const model = settings.aiModel || 'gpt-4o-mini';
+    const model = settings.aiModel || '';
 
-    // 取本地最相关的几条作为上下文（RAG：检索增强）
+    // 取本地最相关的几条作为上下文(RAG：检索增强)
     const contextQA = this._retrieveContext(query, 5);
     const contextText = contextQA.map(t =>
       `Q: ${t.item.question}\nA: ${t.item.answer}`
@@ -598,6 +610,7 @@ EM.rag = {
       '以下是本地知识库中可能相关的内容，可参考但不必照搬：\n' + (contextText || '（无相关知识）');
 
     try {
+      if (!model) throw new Error('请先在设置中选择或输入模型名称(如 agnes-2.5-flash)');
       const res = await fetch(apiUrl, {
         method: 'POST',
         headers: {
