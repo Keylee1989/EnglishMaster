@@ -486,6 +486,10 @@ EM.speaking = {
       d.modules.speaking.score = (d.modules.speaking.score || 0) + Math.round(score / 5);
     });
     this._refreshStats();
+    // 完成一句跟读后自动检查路径推进(满足阈值时进入下一课)
+    if (ok && EM.path && typeof EM.path.advanceToNext === 'function') {
+      setTimeout(() => EM.path.advanceToNext(), 1200);
+    }
   },
 
   /* ================= 情景对话 ================= */

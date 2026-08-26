@@ -747,6 +747,11 @@ EM.reading = {
     const submitBtn = document.getElementById('submitQuiz');
     if (submitBtn) submitBtn.disabled = true;
 
+    // 完成阅读后自动检查路径推进(满足3篇阈值时自动进入下一课)
+    if (EM.path && typeof EM.path.advanceToNext === 'function') {
+      setTimeout(() => EM.path.advanceToNext(), 1200);
+    }
+
     this._refreshStats();
     EM.ui.toast(pass ? `测验通过！得 ${score} 分` : `未通过，已记入弱项，可重新作答`);
   }

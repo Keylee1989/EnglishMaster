@@ -589,6 +589,11 @@ EM.listening = {
     this._quizState = null;
     this._refreshStats();
 
+    // 完成对话后自动检查路径推进(满足3段阈值时自动进入下一课)
+    if (EM.path && typeof EM.path.advanceToNext === 'function') {
+      setTimeout(() => EM.path.advanceToNext(), 1200);
+    }
+
     // 显示完成结果
     const el = document.getElementById('listenContent');
     if (el) {

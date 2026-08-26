@@ -454,6 +454,10 @@ EM.writing = {
       });
       this._refreshStats();
       EM.ui.toast('造句通过！已记录');
+      // 完成造句后自动检查路径推进(满足阈值时进入下一课)
+      if (EM.path && typeof EM.path.advanceToNext === 'function') {
+        setTimeout(() => EM.path.advanceToNext(), 1200);
+      }
     } else {
       EM.progress.addWeakness('writing', 'sentence_' + item.word);
       EM.ui.toast('相似度较低，已记入弱项');

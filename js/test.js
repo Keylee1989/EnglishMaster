@@ -826,9 +826,22 @@ EM.test = {
       if (d.modules.test.history.length > 50) d.modules.test.history = d.modules.test.history.slice(-50);
       // 更新 currentLevel：以本次自适应结束的难度为准，但不要轻易超过用户主级别太多
       d.modules.test.currentLevel = endLevel;
+      // 关键:通过测试(accuracy≥70%)自动升级主级别 d.level
+      //   这样 _isStepDone 里的 case 6/15/23/31/39 (p.level>=1/2/3/4/5) 才能自动满足
+      //   - 一般情况:取 max(原级别, 本次测试结束级别 endLevel)
+      //   - 兜底:若 endLevel 没上移(测试题数少时),通过即至少 startLevel+1
+      if (accuracy >= 0.7) {
+        const promoted = Math.max(endLevel, startLevel + 1, (d.level || 0));
+        if (promoted > (d.level || 0)) d.level = Math.min(5, promoted);
+      }
     });
 
     this._renderResult(record, recommendation);
+
+    // 测试通过后自动检查路径推进(毕业测试通过会跳到下一课)
+    if (accuracy >= 0.7 && EM.path && typeof EM.path.advanceToNext === 'function') {
+      setTimeout(() => EM.path.advanceToNext(), 1500);
+    }
   },
 
   _renderResult(record, recommendation) {

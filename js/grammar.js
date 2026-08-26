@@ -513,6 +513,10 @@ EM.grammar = {
         if (!d.modules.grammar.mastered.includes(t.id)) d.modules.grammar.mastered.push(t.id);
       });
       EM.progress.removeWeakness('grammar', t.id);
+      // 掌握一个语法点后自动检查路径推进(满足阈值时进入下一课)
+      if (EM.path && typeof EM.path.advanceToNext === 'function') {
+        setTimeout(() => EM.path.advanceToNext(), 1200);
+      }
     } else {
       // 记入弱项
       EM.progress.addWeakness('grammar', t.id);

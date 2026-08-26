@@ -66,6 +66,9 @@ EM.phonics = {
         line-height:1; padding:0;
       }
       .phonics-mark:hover { border-color: var(--success); color: var(--success); }
+      .phonics-symbol { font-size:34px; font-weight:700; line-height:1.1; }
+      .phonics-sub   { font-size:18px; color: var(--text-secondary); margin-top:2px; }
+      .phonics-eg   { font-size:12px; color: var(--text-secondary); margin-top:4px; }
       .phonics-sound { font-size:13px; color: var(--accent); margin-top:4px; font-family: Georgia, serif; }
       .phonics-cn { font-size:12px; color: var(--text-secondary); margin-top:2px; }
       .group-header { width:100%; font-size:14px; font-weight:600; color: var(--text-secondary); margin:10px 0 4px; padding-left:4px; }
@@ -74,6 +77,7 @@ EM.phonics = {
       .quiz-replay { margin-bottom:14px; }
       .quiz-prompt-word { font-size:34px; font-weight:700; text-align:center; margin:8px 0 16px; color: var(--accent); }
       .phonics-hint { font-size:13px; color: var(--text-secondary); margin-top:8px; }
+      .phonics-emoji-row { font-size:20px; margin-top:4px; }
     `;
     document.head.appendChild(style);
   },
@@ -142,7 +146,11 @@ EM.phonics = {
   },
 
   /* ===== 把不同分类的数据统一成卡片项数组 =====
-   * 每项字段：id(唯一)、group(分组标题，可空)、symbol(主显示)、sound(音标)、words(例词)、cn(中文)、speakText(朗读文本)、emoji
+   * 每项字段：
+   *   id(唯一) / group(分组) / symbol(主显示) / sound(音标)
+   *   words(例词数组) / cn(中文) / emoji / speakText(朗读文本)
+   *   quizType: 该分类用的题型 'letter'(字母辨识) | 'sound'(听音选字母组合) | 'split' | 'magic' | 'listen'
+   *   optionsPool: 该分类用于干扰选项的候选数组
    */
   _getItems(tabKey) {
     const d = this.data;
@@ -150,34 +158,48 @@ EM.phonics = {
     const items = [];
     switch (tabKey) {
       case 'letters':
+        // 字母分类：测验用"听字母名→选字母"题型，主显示就是字母本身
+        // 关键：TTS 直接朗读单字母"A"会被识别为不定冠词读成 /ə/，
+        //      所以 speakText 用 "The letter A. A." 明确朗读字母名 /eɪ/
         (d.letters || []).forEach(o => {
+          const up = o.letter.toUpperCase();
           items.push({
-            id: 'letters:' + o.letter,
+            id: 'letters:' + up,                          // 用大写字母做 id 后缀
             group: '',
-            symbol: o.letter.toUpperCase() + ' ' + o.letter.toLowerCase(),
+            symbol: up,                                   // 主显示：纯大写字母
+            subSymbol: o.letter.toLowerCase(),            // 副显示：小写字母
             sound: o.sound,
-            words: [o.word],
+            words: [o.word],                              // 仅作辅助例词
             cn: o.cn,
             emoji: o.emoji,
-            speakText: o.letter + '. ' + o.word
+            speakText: 'The letter ' + up + '. ' + up + '.',  // 明确朗读字母名
+            quizType: 'letter',
+            quizAnswer: up,                               // 测验答案用大写
+            optionsPool: (d.letters || []).map(x => x.letter.toUpperCase())
           });
         });
         break;
       case 'vowels':
+        // 元音分类：测验用"听元音字母名→选元音字母"
         (d.vowels || []).forEach(o => {
+          const up = (o.combo || '').toUpperCase();
           items.push({
-            id: 'vowels:' + o.combo,
+            id: 'vowels:' + up,                          // 用大写做 id 后缀
             group: '',
-            symbol: o.combo.toUpperCase() + ' ' + o.combo.toLowerCase(),
+            symbol: up,                                  // 主显示：纯大写
+            subSymbol: o.combo,
             sound: '短 ' + o.short + '  长 ' + o.long,
             words: [o.shortEg, o.longEg],
             cn: '短音例词:' + o.shortEg + ' · 长音例词:' + o.longEg,
-            speakText: o.shortEg + '. ' + o.longEg
+            speakText: 'The letter ' + up + '. ' + up + '.',
+            quizType: 'letter',
+            quizAnswer: up,
+            optionsPool: (d.vowels || []).map(x => (x.combo || '').toUpperCase())
           });
         });
         break;
       case 'consonants':
-        // 单辅音 + 辅音连缀，分两组展示
+        // 单辅音 + 辅音连缀：测验用"听字母组合发音→选组合"
         (d.consonants || []).forEach(o => {
           items.push({
             id: 'consonants:' + o.combo,
@@ -186,7 +208,9 @@ EM.phonics = {
             sound: o.sound,
             words: o.words,
             cn: o.cn,
-            speakText: o.words.join('. ')
+            speakText: o.words.join('. '),
+            quizType: 'sound',
+            optionsPool: (d.consonants || []).concat(d.blends || []).map(x => x.combo)
           });
         });
         (d.blends || []).forEach(o => {
@@ -197,7 +221,9 @@ EM.phonics = {
             sound: o.sound,
             words: o.words,
             cn: o.cn,
-            speakText: o.words.join('. ')
+            speakText: o.words.join('. '),
+            quizType: 'sound',
+            optionsPool: (d.consonants || []).concat(d.blends || []).map(x => x.combo)
           });
         });
         break;
@@ -211,7 +237,8 @@ EM.phonics = {
             split: o.split,
             words: [o.word],
             cn: o.cn,
-            speakText: o.word
+            speakText: o.word,
+            quizType: 'split'
           });
         });
         break;
@@ -224,7 +251,8 @@ EM.phonics = {
             sound: '',
             words: [o.short, o.long],
             cn: o.cn,
-            speakText: o.short + '. ' + o.long
+            speakText: o.short + '. ' + o.long,
+            quizType: 'magic'
           });
         });
         break;
@@ -237,7 +265,9 @@ EM.phonics = {
             sound: o.sound,
             words: o.words,
             cn: '',
-            speakText: o.words.join('. ')
+            speakText: o.words.join('. '),
+            quizType: 'sound',
+            optionsPool: (d.vowelTeams || []).map(x => x.combo)
           });
         });
         break;
@@ -250,7 +280,9 @@ EM.phonics = {
             sound: o.sound,
             words: o.words,
             cn: '',
-            speakText: o.words.join('. ')
+            speakText: o.words.join('. '),
+            quizType: 'sound',
+            optionsPool: (d.rControlled || []).map(x => x.combo)
           });
         });
         break;
@@ -281,7 +313,10 @@ EM.phonics = {
     return null;
   },
 
-  /* ===== 学习模式：渲染卡片网格 ===== */
+  /* ===== 学习模式：渲染卡片网格 =====
+   * 字母/元音分类：主显示纯大写字母，副显示小写，例词+emoji+中文作为辅助
+   * 其他分类：主显示字母组合/单词，例词和中文辅助
+   */
   _renderLearn(el) {
     const items = this._getItems(this.activeTab);
     if (!items.length) {
@@ -291,6 +326,9 @@ EM.phonics = {
     const p = EM.progress.get();
     const mastered = new Set(p.modules.phonics.mastered || []);
 
+    // 是否是纯字母类分类（letters/vowels）
+    const isLetterTab = (this.activeTab === 'letters' || this.activeTab === 'vowels');
+
     let html = '<div class="card"><div class="phonics-grid">';
     let lastGroup = '__none__';
     items.forEach(it => {
@@ -299,13 +337,15 @@ EM.phonics = {
         lastGroup = it.group;
       }
       const isM = mastered.has(it.id);
-      const symbol = it.emoji ? (it.emoji + ' ' + it.symbol) : it.symbol;
+      // 字母类：主显示就是大字母；其他：原样
+      const mainSymbol = isLetterTab ? it.symbol : (it.emoji ? (it.emoji + ' ' + it.symbol) : it.symbol);
       const eg = (it.words && it.words.length) ? it.words.slice(0, 2).join(' · ') : '';
       html += `
         <div class="phonics-cell ${isM ? 'mastered' : ''}" data-id="${EM.ui.esc(it.id)}">
           <button class="phonics-mark" data-mark="${EM.ui.esc(it.id)}" title="标记已掌握">${isM ? '✓' : '○'}</button>
-          <div class="phonics-symbol">${EM.ui.esc(symbol)}</div>
-          <div class="phonics-eg">${EM.ui.esc(eg)}</div>
+          <div class="phonics-symbol">${EM.ui.esc(mainSymbol)}</div>
+          ${it.subSymbol ? `<div class="phonics-sub">${EM.ui.esc(it.subSymbol)}</div>` : ''}
+          ${eg ? `<div class="phonics-eg">例词:${EM.ui.esc(eg)}${it.emoji ? ' '+it.emoji : ''}</div>` : ''}
           ${it.sound ? `<div class="phonics-sound">${EM.ui.esc(it.sound)}</div>` : ''}
           ${it.cn ? `<div class="phonics-cn">${EM.ui.esc(it.cn)}</div>` : ''}
         </div>`;
@@ -336,7 +376,9 @@ EM.phonics = {
     EM.tts.speak(text);
   },
 
-  /* ===== 标记/取消"已掌握"，写入进度，并局部刷新 ===== */
+  /* ===== 标记/取消"已掌握"，写入进度，并局部刷新 =====
+   * 关键：每次新增掌握后自动调 EM.path.advanceToNext() 推进路径
+   */
   _toggleMastered(id) {
     const p = EM.progress.get();
     const has = (p.modules.phonics.mastered || []).includes(id);
@@ -352,6 +394,8 @@ EM.phonics = {
       // 新掌握则移除对应弱项
       EM.progress.removeWeakness('phonics', id);
       EM.ui.toast('已标记掌握 ✓');
+      // 自动尝试推进路径
+      this._autoAdvancePath();
     }
     // 局部更新该卡片视觉
     const cell = document.querySelector('.phonics-cell[data-id="' + id + '"]');
@@ -361,6 +405,52 @@ EM.phonics = {
       if (mark) mark.textContent = !has ? '✓' : '○';
     }
     this._refreshStats();
+  },
+
+  /* ===== 测验答对一题后自动把对应卡片标记为已掌握 ===== */
+  _markMasteredSilent(id) {
+    const p = EM.progress.get();
+    if ((p.modules.phonics.mastered || []).includes(id)) return false; // 已存在
+    EM.progress.update(d => {
+      if (!d.modules.phonics.mastered) d.modules.phonics.mastered = [];
+      if (!d.modules.phonics.mastered.includes(id)) {
+        d.modules.phonics.mastered.push(id);
+      }
+    });
+    EM.progress.removeWeakness('phonics', id);
+    this._refreshStats();
+    return true; // 新增
+  },
+
+  /* ===== 自动推进路径：若当前步骤达标则完成本步并提示 =====
+   * 用 setTimeout 确保不阻塞 UI；多次调用安全(内部有幂等检查)
+   */
+  _autoAdvancePath() {
+    setTimeout(async () => {
+      try {
+        const before = EM.progress.get().pathStep || 0;
+        const step = EM.path.currentStep();
+        if (!step) return;
+        // 仅当当前步骤属于 phonics 模块才推进，避免越权
+        if (step.module !== 'phonics') return;
+        if (!EM.path.isCurrentStepDone()) return;
+        // 推进到下一个未完成步骤
+        const after = await EM.path.advanceToNext();
+        if (after > before) {
+          // 推进了
+          EM.ui.toast(`🎉 第 ${step.step + 1} 课目标达成！自动进入第 ${after + 1} 课`, 4000);
+          // 顶部 banner 也更新(若在模块内)
+          const banner = document.querySelector('.lesson-banner');
+          if (banner) {
+            const ns = EM.path.currentStep();
+            if (ns) {
+              banner.querySelector('.lesson-banner-title').innerHTML =
+                `📍 当前课程:第 ${ns.index + 1} 课 · ${ns.title}`;
+            }
+          }
+        }
+      } catch (e) { console.warn('autoAdvancePath err', e); }
+    }, 300);
   },
 
   /* ===== 局部刷新顶部进度数字 ===== */
@@ -379,25 +469,46 @@ EM.phonics = {
 
   /* ================= 测验模式 ================= */
 
-  /* 生成一题 */
+  /* 生成一题：依据每张卡片的 quizType 派题 */
   _nextQuiz() {
-    const items = this._getItems(this.activeTab).filter(i => i.words && i.words.length);
+    const items = this._getItems(this.activeTab);
     if (!items.length) { this.quizState = null; return; }
 
-    // 根据分类选择题型
-    let type;
-    if (this.activeTab === 'cvc') type = 'split';        // 看词选拆分
-    else if (this.activeTab === 'magicE') type = 'magic'; // 看短词选长词
-    else type = 'listen';                                  // 听音选词
+    // 优先抽尚未掌握的题(否则容易一直答重复)
+    const p = EM.progress.get();
+    const mastered = new Set(p.modules.phonics.mastered || []);
+    const todoItems = items.filter(i => !mastered.has(i.id));
+    const pool = todoItems.length ? todoItems : items;
+    const target = pool[Math.floor(Math.random() * pool.length)];
+    const type = target.quizType || 'listen';
 
-    const target = items[Math.floor(Math.random() * items.length)];
     let question, options, answer, speakText, showWord;
 
-    if (type === 'split') {
+    if (type === 'letter') {
+      // 听字母名/元音名 → 选字母
+      answer = target.quizAnswer || target.symbol.split(' ')[0]; // 大写字母
+      speakText = target.speakText;
+      showWord = null;
+      const distractors = this._sample(
+        (target.optionsPool || items.map(i => i.quizAnswer || i.symbol.split(' ')[0]))
+          .filter(s => s !== answer), 3);
+      options = this._shuffle([answer].concat(distractors));
+      question = '🔊 听字母名,选出你听到的字母(可点听发音重复听)';
+    } else if (type === 'sound') {
+      // 听单词发音 → 选出正确的字母组合
+      const correctCombo = target.symbol;
+      answer = correctCombo;
+      speakText = target.speakText; // 朗读例词
+      showWord = null;
+      const distractors = this._sample(
+        (target.optionsPool || items.map(i => i.symbol))
+          .filter(s => s !== correctCombo), 3);
+      options = this._shuffle([correctCombo].concat(distractors));
+      question = '🔊 听例词发音，选出包含的字母组合';
+    } else if (type === 'split') {
       answer = target.split;
       speakText = target.words[0];
       showWord = target.words[0];
-      // 干扰项：用其他 CVC 词的拆分
       const others = items.filter(i => i !== target && i.split && i.split !== target.split).map(i => i.split);
       const distractors = this._sample(this._unique(others), 3);
       options = this._shuffle([target.split].concat(distractors));
@@ -406,26 +517,26 @@ EM.phonics = {
       answer = target.words[1]; // 长词
       speakText = target.words[1];
       showWord = target.words[0];
-      const pool = items.filter(i => i !== target).map(i => i.words[1]);
-      const distractors = this._sample(this._unique(pool), 3);
+      const pool2 = items.filter(i => i !== target).map(i => i.words[1]);
+      const distractors = this._sample(this._unique(pool2), 3);
       options = this._shuffle([target.words[1]].concat(distractors));
       question = '把短词加上 Magic E，会变成哪个词？';
     } else {
-      // 听音选词
+      // 听音选词(默认)
       const correctWord = target.words[Math.floor(Math.random() * target.words.length)];
       answer = correctWord;
       speakText = correctWord;
       showWord = null;
-      const pool = items.filter(i => i !== target).reduce((arr, i) => arr.concat(i.words), []);
-      const uniq = this._unique(pool).filter(w => w !== correctWord);
+      const all = items.filter(i => i !== target).reduce((arr, i) => arr.concat(i.words), []);
+      const uniq = this._unique(all).filter(w => w !== correctWord);
       const distractors = this._sample(uniq, 3);
       options = this._shuffle([correctWord].concat(distractors));
       question = '🔊 听发音，选出你听到的单词';
     }
 
     this.quizState = {
-      type: type, target: target, answer: answer, options: options,
-      question: question, speakText: speakText, showWord: showWord, answered: false
+      type, target, answer, options,
+      question, speakText, showWord, answered: false
     };
   },
 
@@ -444,7 +555,11 @@ EM.phonics = {
         <div class="quiz-meta">🎯 ${this.tabs.find(t => t.key === this.activeTab).label} · 累计得分 <b id="quizScore">${score}</b> · 答错自动记入弱项</div>
         <div class="quiz-question">${EM.ui.esc(q.question)}</div>
         ${q.showWord ? `<div class="quiz-prompt-word">${EM.ui.esc(q.showWord)}</div>` : ''}
-        <button class="btn btn-primary quiz-replay" id="quizReplay">🔊 ${q.type === 'listen' ? '再听一次' : '听发音'}</button>
+        <button class="btn btn-primary quiz-replay" id="quizReplay">🔊 ${
+          q.type === 'letter' ? '再听字母名' :
+          (q.type === 'sound' ? '再听例词发音' :
+          (q.type === 'listen' ? '再听一次' : '听发音'))
+        }</button>
         <div class="quiz-options">
           ${q.options.map(opt => `<button class="quiz-option" data-opt="${EM.ui.esc(opt)}">${EM.ui.esc(opt)}</button>`).join('')}
         </div>
@@ -454,8 +569,9 @@ EM.phonics = {
         </div>
       </div>`;
 
-    // 听力题自动播放一次（延迟以确保按钮就绪；iOS 需用户手势链，由点击切到测验触发）
-    if (q.type === 'listen') {
+    // 听力题自动播放一次（letter/sound/listen 都是听音题）
+    // iOS 需用户手势链：由点击切到测验或点击下一题触发
+    if (q.type === 'letter' || q.type === 'sound' || q.type === 'listen') {
       setTimeout(() => EM.tts.speak(q.speakText), 250);
     }
     const replay = document.getElementById('quizReplay');
@@ -491,7 +607,18 @@ EM.phonics = {
       EM.progress.update(d => { d.modules.phonics.score = (d.modules.phonics.score || 0) + 1; });
       const sc = document.getElementById('quizScore');
       if (sc) sc.textContent = (parseInt(sc.textContent, 10) || 0) + 1;
-      EM.ui.toast('答对了 ✓ +1');
+      // 关键：把答对的卡片自动标记为已掌握(若未标记)
+      const newly = this._markMasteredSilent(q.target.id);
+      // 同步更新学习模式卡片的视觉
+      const cell = document.querySelector('.phonics-cell[data-id="' + q.target.id + '"]');
+      if (cell) {
+        cell.classList.add('mastered');
+        const mk = cell.querySelector('[data-mark]');
+        if (mk) mk.textContent = '✓';
+      }
+      EM.ui.toast(newly ? '答对了 ✓ 已自动标记掌握' : '答对了 ✓ +1');
+      // 触发路径推进检查
+      this._autoAdvancePath();
     } else {
       // 记入弱项
       EM.progress.addWeakness('phonics', q.target.id);

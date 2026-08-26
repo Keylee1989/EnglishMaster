@@ -1,15 +1,140 @@
 /* ===== 核心应用框架 (路由/状态/UI/数据/路径控制) ===== */
 window.EM = window.EM || {};
 
-// ===== 级别系统 (L0-L5 对应 CEFR Pre-A1 到 C2) =====
+// ===== 级别系统 (L0-L5 对应 CEFR Pre-A1 到 C2,每级细分3小阶段) =====
 EM.LEVELS = [
-  { id: 0, code: 'Pre-A1', name: '零基础', cn: '零基础', target: '字母/音标/拼读', hours: 0, words: 0 },
-  { id: 1, code: 'A1', name: '入门', cn: '生存英语', target: '1000-2000词', hours: 100, words: 1500 },
-  { id: 2, code: 'A2', name: '初级', cn: '日常交流', target: '3000词', hours: 200, words: 3000 },
-  { id: 3, code: 'B1', name: '中级', cn: '工作学习', target: '5000词', hours: 400, words: 5000 },
-  { id: 4, code: 'C1', name: '高级', cn: '流利表达', target: '8000词', hours: 700, words: 8000 },
-  { id: 5, code: 'C2', name: '精通', cn: '母语水平', target: '16000+词', hours: 1200, words: 16000 }
+  { id: 0, code: 'Pre-A1', name: '零基础', cn: '零基础', target: '字母/音标/拼读', hours: 0, words: 0,
+    substages: ['L0.1 学字母', 'L0.2 学拼读规则', 'L0.3 拼读毕业测试'] },
+  { id: 1, code: 'A1', name: '入门', cn: '生存英语', target: '1000-2000词', hours: 100, words: 1500,
+    substages: ['L1.1 词汇积累', 'L1.2 基础语法', 'L1.3 听读入门'] },
+  { id: 2, code: 'A2', name: '初级', cn: '日常交流', target: '3000词', hours: 200, words: 3000,
+    substages: ['L2.1 时态精通', 'L2.2 听读强化', 'L2.3 说写训练'] },
+  { id: 3, code: 'B1', name: '中级', cn: '工作学习', target: '5000词', hours: 400, words: 5000,
+    substages: ['L3.1 从句掌握', 'L3.2 听读进阶', 'L3.3 说写提升'] },
+  { id: 4, code: 'C1', name: '高级', cn: '流利表达', target: '8000词', hours: 700, words: 8000,
+    substages: ['L4.1 虚拟语气', 'L4.2 长篇阅读', 'L4.3 流利写作'] },
+  { id: 5, code: 'C2', name: '精通', cn: '母语水平', target: '16000+词', hours: 1200, words: 16000,
+    substages: ['L5.1 大量阅读', 'L5.2 听力训练', 'L5.3 毕业测试'] }
 ];
+
+// 由 pathStep(0-45) 推算当前级别
+EM.levelFromStep = (pathStep) => {
+  if (pathStep <= 6) return 0;
+  if (pathStep <= 15) return 1;
+  if (pathStep <= 23) return 2;
+  if (pathStep <= 31) return 3;
+  if (pathStep <= 39) return 4;
+  return 5;
+};
+
+// 由 pathStep 推算当前小阶段(每级3小阶段)
+EM.substageFromStep = (pathStep) => {
+  const lv = EM.levelFromStep(pathStep);
+  const localStep = pathStep - (lv === 0 ? 0 : (lv * 8 + (lv === 1 ? -1 : 0)));
+  // 简化映射:把每级8步平均分3段
+  const subIdx = localStep < 3 ? 0 : (localStep < 6 ? 1 : 2);
+  const subs = EM.LEVELS[lv].substages;
+  return { subIdx, subName: subs[subIdx], allSubs: subs, level: lv };
+};
+
+/* ===== 今日学习计划拆分 =====
+ * 基于当前步骤,智能拆分成 5-7 天的每日小任务,用户直接跟着点
+ * 返回: { dayCount, tasks:[{day, title, target, module, submodule, done:bool}] }
+ */
+EM.dailyPlan = (step) => {
+  if (!step) return { dayCount: 0, tasks: [] };
+  const p = EM.progress.get();
+  const tasks = [];
+  const mod = step.module;
+  const target = step.target || '';
+
+  if (mod === 'phonics') {
+    // 拼读:按数量拆分,每天5-6个字母/规则
+    const tabKey = step.submodule || 'letters';
+    let total = 26, perDay = 6;
+    if (tabKey === 'vowels') { total = 5; perDay = 5; }
+    else if (tabKey === 'consonants') { total = 5; perDay = 3; }
+    else if (tabKey === 'cvc') { total = 20; perDay = 4; }
+    else if (tabKey === 'magicE') { total = 8; perDay = 2; }
+    else if (tabKey === 'vowelTeams') { total = 8; perDay = 2; }
+    else if (tabKey === 'rControlled') { total = 5; perDay = 3; }
+    const days = Math.max(1, Math.ceil(total / perDay));
+    for (let i = 0; i < days; i++) {
+      const start = i * perDay + 1;
+      const end = Math.min((i + 1) * perDay, total);
+      tasks.push({
+        day: i + 1,
+        title: `第${i+1}天:学第 ${start}-${end} 个${tabKey === 'letters' ? '字母' : '拼读项'}`,
+        target: `${start}-${end}`,
+        module: 'phonics',
+        submodule: tabKey,
+        done: false
+      });
+    }
+  } else if (mod === 'vocabulary') {
+    // 词汇:从目标数50/100/200等拆分,每天10词
+    const m = target.match(/(\d+)/);
+    const targetCount = m ? parseInt(m[1], 10) : 50;
+    const perDay = 10;
+    const days = Math.max(1, Math.ceil(targetCount / perDay));
+    const learned = (p.modules.vocabulary.learned || []).length;
+    for (let i = 0; i < days; i++) {
+      const start = i * perDay + 1;
+      const end = Math.min((i + 1) * perDay, targetCount);
+      const dayLearned = Math.max(0, Math.min(perDay, learned - i * perDay));
+      tasks.push({
+        day: i + 1,
+        title: `第${i+1}天:学第 ${start}-${end} 个词(已学${dayLearned}/${perDay})`,
+        target: `${start}-${end}`,
+        module: 'vocabulary',
+        submodule: 'L' + EM.levelFromStep(p.pathStep || 0),
+        done: dayLearned >= perDay
+      });
+    }
+  } else if (mod === 'grammar') {
+    // 语法:1个语法点1天搞定,附讲解+练习
+    tasks.push({
+      day: 1,
+      title: `今日:学习${target} + 完成练习`,
+      target: target,
+      module: 'grammar',
+      submodule: step.submodule,
+      done: (p.modules.grammar.mastered || []).includes(step.submodule)
+    });
+  } else if (mod === 'listening' || mod === 'reading' || mod === 'speaking' || mod === 'writing') {
+    // 听/读/说/写:每天1篇/1次,共3天
+    for (let i = 0; i < 3; i++) {
+      tasks.push({
+        day: i + 1,
+        title: `第${i+1}天:完成1篇${mod === 'listening' ? '听力' : (mod === 'reading' ? '阅读' : (mod === 'speaking' ? '口语' : '写作'))}`,
+        target: '1篇',
+        module: mod,
+        submodule: step.submodule,
+        done: (p.modules[mod].completed || []).length > i
+      });
+    }
+  } else if (mod === 'test') {
+    tasks.push({
+      day: 1,
+      title: `今日:完成${target}`,
+      target: target,
+      module: 'test',
+      submodule: step.submodule,
+      done: false
+    });
+  } else {
+    tasks.push({
+      day: 1,
+      title: `今日:${step.title}`,
+      target: target,
+      module: mod,
+      submodule: step.submodule,
+      done: false
+    });
+  }
+
+  return { dayCount: tasks.length, tasks };
+};
 
 // ===== UI 工具 =====
 EM.ui = {
@@ -107,83 +232,90 @@ EM.path = {
     return this._isStepDone(step, p);
   },
 
+  // 内部: 判定 completed id 是否属于某级别(支持 l1_1/a1_1/L1_1/A1_1 各种命名)
+  //   例: _lvlMatch('l1_3', 1) → true  ; _lvlMatch('a2_1', 2) → true ; _lvlMatch('l1_3', 2) → false
+  _lvlMatch(id, level) {
+    const m = String(id).match(/^[a-zA-Z](\d+)[_:]/);
+    return !!(m && parseInt(m[1], 10) === level);
+  },
+
   // 内部: 判定某步骤是否完成
+  // 关键: phonics 模块的 mastered id 格式是 "<tabKey>:<symbol>"
+  //      字母/元音: letters:A / vowels:A (统一大写,与 _getItems 一致)
+  //      辅音组合: blends:sh / cvc:cat / magicE:cap / vowelTeams:ai / rControlled:ar
+  //      listening/reading completed id 是小写 l1_1 / a1_1(必须用 _lvlMatch 判定级别)
   _isStepDone(step, p) {
     // 已在completedSteps数组中,视为完成
     if ((p.completedSteps || []).includes(step.step)) return true;
 
-    // 自动判定逻辑
-    const sm = step.submodule || '';
+    const mastered = p.modules.phonics.mastered || [];
+    const vocabLearned = (p.modules.vocabulary.learned || []).length;
+    const grammarM = p.modules.grammar.mastered || [];
+    const listen = p.modules.listening.completed || [];
+    const reading = p.modules.reading.completed || [];
+    const speaking = p.modules.speaking.completed || [];
+    const writing = p.modules.writing.completed || [];
+
+    // L0 拼读阶段(按 submodule 区分)
     switch (step.step) {
-      // L0 拼读阶段: 检查 phonics.mastered
-      case 0: return (p.modules.phonics.mastered || []).length >= 26;
-      case 1: return (p.modules.phonics.mastered || []).filter(m =>
-        ['a','e','i','o','u','a_long','e_long','i_long','o_long','u_long'].includes(m)
-      ).length >= 5;
-      case 2: return (p.modules.phonics.mastered || []).filter(m =>
-        ['sh','ch','th','ph','wh'].includes(m)
-      ).length >= 3;
-      case 3: return (p.modules.phonics.mastered || []).filter(m =>
-        ['cat','dog','bat','pig','hat','bed','sit','hop','run','cut'].includes(m)
-      ).length >= 5;
-      case 4: return (p.modules.phonics.mastered || []).filter(m =>
-        ['magic_e','cap_cape','hop_hope','kit_kite'].includes(m)
-      ).length >= 2;
-      case 5: return (p.modules.phonics.mastered || []).filter(m =>
-        ['ai','ee','oa','oo','ay','ey'].includes(m)
-      ).length >= 3;
+      case 0: // 26个字母: 'letters:A' ~ 'letters:Z' 共26个
+        return mastered.filter(m => m.startsWith('letters:')).length >= 26;
+      case 1: // 5个元音: 'vowels:A/E/I/O/U'(大写)
+        return ['A','E','I','O','U'].every(v => mastered.includes('vowels:' + v));
+      case 2: // 5个辅音组合 sh/ch/th/ph/wh: 'blends:X'(小写)
+        return ['sh','ch','th','ph','wh'].every(c => mastered.includes('blends:' + c));
+      case 3: // CVC词掌握>=10: 'cvc:X'
+        return mastered.filter(m => m.startsWith('cvc:')).length >= 10;
+      case 4: // Magic E 对比>=4: 'magicE:X'
+        return mastered.filter(m => m.startsWith('magicE:')).length >= 4;
+      case 5: // 元音组合>=3: 'vowelTeams:X'
+        return mastered.filter(m => m.startsWith('vowelTeams:')).length >= 3;
       // L0 毕业测试: level >= 1
       case 6: return (p.level || 0) >= 1;
       // L1阶段: 检查词汇数 / 语法掌握 / 听力阅读完成数
-      case 7: return (p.modules.vocabulary.learned || []).length >= 50;
-      case 8: return (p.modules.vocabulary.learned || []).length >= 100;
-      case 9: return (p.modules.grammar.mastered || []).includes('be_verb');
-      case 10: return (p.modules.grammar.mastered || []).includes('pronouns');
-      case 11: return (p.modules.listening.completed || []).filter(c => String(c).startsWith('L1')).length >= 3;
-      case 12: return (p.modules.reading.completed || []).filter(c => String(c).startsWith('L1')).length >= 3;
-      case 13: return (p.modules.vocabulary.learned || []).length >= 200;
-      case 14: return (p.modules.speaking.completed || []).length >= 5;
+      case 7: return vocabLearned >= 50;
+      case 8: return vocabLearned >= 100;
+      case 9: return grammarM.includes('be_verb');
+      case 10: return grammarM.includes('personal_pronouns') || grammarM.some(g => g.startsWith('pronoun'));
+      case 11: return listen.filter(c => this._lvlMatch(c, 1)).length >= 3;
+      case 12: return reading.filter(c => this._lvlMatch(c, 1)).length >= 3;
+      case 13: return vocabLearned >= 200;
+      case 14: return speaking.length >= 5;
       case 15: return (p.level || 0) >= 2;
       // L2阶段
-      case 16: return (p.modules.vocabulary.learned || []).length >= 2050;
-      case 17: return (p.modules.grammar.mastered || []).filter(g =>
-        ['simple_present','simple_past','future_tense'].includes(g)
-      ).length >= 2;
-      case 18: return (p.modules.listening.completed || []).filter(c => String(c).startsWith('L2')).length >= 3;
-      case 19: return (p.modules.reading.completed || []).filter(c => String(c).startsWith('L2')).length >= 3;
-      case 20: return (p.modules.vocabulary.learned || []).length >= 2200;
-      case 21: return (p.modules.speaking.completed || []).length >= 8;
-      case 22: return (p.modules.writing.completed || []).length >= 10;
+      case 16: return vocabLearned >= 2050;
+      case 17: return ['present_simple','past_simple','future_will','future_be_going_to'].filter(g => grammarM.includes(g)).length >= 2;
+      case 18: return listen.filter(c => this._lvlMatch(c, 2)).length >= 3;
+      case 19: return reading.filter(c => this._lvlMatch(c, 2)).length >= 3;
+      case 20: return vocabLearned >= 2200;
+      case 21: return speaking.length >= 8;
+      case 22: return writing.length >= 10;
       case 23: return (p.level || 0) >= 3;
       // L3阶段
-      case 24: return (p.modules.vocabulary.learned || []).length >= 3050;
-      case 25: return (p.modules.grammar.mastered || []).filter(g =>
-        ['object_clause','attributive_clause','adverbial_clause'].includes(g)
-      ).length >= 2;
-      case 26: return (p.modules.listening.completed || []).filter(c => String(c).startsWith('L3')).length >= 3;
-      case 27: return (p.modules.reading.completed || []).filter(c => String(c).startsWith('L3')).length >= 3;
-      case 28: return (p.modules.vocabulary.learned || []).length >= 3300;
-      case 29: return (p.modules.speaking.completed || []).length >= 11;
-      case 30: return (p.modules.writing.completed || []).length >= 12;
+      case 24: return vocabLearned >= 3050;
+      case 25: return ['object_clause_that','subject_clause','predicative_clause','attributive_which_that','adverbial_time'].filter(g => grammarM.includes(g)).length >= 2;
+      case 26: return listen.filter(c => this._lvlMatch(c, 3)).length >= 3;
+      case 27: return reading.filter(c => this._lvlMatch(c, 3)).length >= 3;
+      case 28: return vocabLearned >= 3300;
+      case 29: return speaking.length >= 11;
+      case 30: return writing.length >= 12;
       case 31: return (p.level || 0) >= 4;
       // L4阶段
-      case 32: return (p.modules.vocabulary.learned || []).length >= 5050;
-      case 33: return (p.modules.grammar.mastered || []).filter(g =>
-        ['subjunctive','inversion','non_finite'].includes(g)
-      ).length >= 2;
-      case 34: return (p.modules.reading.completed || []).filter(c => String(c).startsWith('L4')).length >= 3;
-      case 35: return (p.modules.listening.completed || []).filter(c => String(c).startsWith('L4')).length >= 3;
-      case 36: return (p.modules.vocabulary.learned || []).length >= 5200;
-      case 37: return (p.modules.writing.completed || []).length >= 13;
-      case 38: return (p.modules.speaking.completed || []).length >= 14;
+      case 32: return vocabLearned >= 5050;
+      case 33: return ['subjunctive_if','inversion_full','non_finite_verbs'].filter(g => grammarM.includes(g)).length >= 2;
+      case 34: return reading.filter(c => this._lvlMatch(c, 4)).length >= 3;
+      case 35: return listen.filter(c => this._lvlMatch(c, 4)).length >= 3;
+      case 36: return vocabLearned >= 5200;
+      case 37: return writing.length >= 13;
+      case 38: return speaking.length >= 14;
       case 39: return (p.level || 0) >= 5;
       // L5阶段
-      case 40: return (p.modules.vocabulary.learned || []).length >= 16050;
-      case 41: return (p.modules.grammar.mastered || []).length >= 80;
-      case 42: return (p.modules.reading.completed || []).filter(c => String(c).startsWith('L5')).length >= 3;
-      case 43: return (p.modules.listening.completed || []).filter(c => String(c).startsWith('L5')).length >= 3;
-      case 44: return (p.modules.writing.completed || []).length >= 15;
-      case 45: return (p.graduation && p.graduation.passed) === true;
+      case 40: return vocabLearned >= 16050;
+      case 41: return grammarM.length >= 80;
+      case 42: return reading.filter(c => this._lvlMatch(c, 5)).length >= 3;
+      case 43: return listen.filter(c => this._lvlMatch(c, 5)).length >= 3;
+      case 44: return writing.length >= 15;
+      case 45: return p.graduation && p.graduation.passed === true;
       default: return false;
     }
   },
@@ -461,11 +593,12 @@ EM.renderHome = async (container) => {
 
       <div class="flex gap-8 flex-wrap" style="margin-top:16px;">
         ${isDone
-          ? `<button class="btn btn-primary" style="font-size:16px; padding:14px 28px;" onclick="EM.goNextStep()">✅ 已完成,进入下一课 →</button>`
-          : `<button class="btn btn-primary" style="font-size:16px; padding:14px 28px;" onclick="EM.startCurrentStep()">🚀 开始本课学习</button>
+          ? `<button class="btn btn-primary" style="font-size:18px; padding:16px 32px;" onclick="EM.goNextStep()">✅ 已完成,进入下一课 →</button>`
+          : `<button class="btn btn-primary" style="font-size:18px; padding:16px 32px; background:linear-gradient(135deg, var(--accent), var(--accent-light));" onclick="EM.startCurrentStep()">🚀 今日学习(开始本课)</button>
+             <button class="btn btn-secondary" onclick="EM.showDailyPlan()">📋 查看每日计划</button>
              <button class="btn btn-secondary" onclick="EM.markCurrentDone()">我已完成本课</button>`
         }
-        <button class="btn btn-secondary" onclick="EM.checkinToday()">✅ 今日打卡</button>
+        <button class="btn btn-secondary" onclick="EM.checkinToday()">🔥 今日打卡</button>
       </div>
 
       ${grad.passed
@@ -473,6 +606,31 @@ EM.renderHome = async (container) => {
         : ''}
     </div>
   ` : '<div class="card"><p>路径加载中...</p></div>';
+
+  // 今日学习计划预览(显示当日小任务)
+  const dp = step ? EM.dailyPlan(step) : null;
+  const todayCard = (dp && dp.tasks.length) ? `
+    <div class="card" style="border-left:4px solid var(--accent);">
+      <div class="flex justify-between align-center mb-16">
+        <div class="card-title" style="margin:0;">📅 今日学习计划(${dp.dayCount} 天拆分)</div>
+        <span class="font-sm text-secondary">本课共 ${dp.dayCount} 天 · 你只管每天点一项</span>
+      </div>
+      <div class="grid grid-2">
+        ${dp.tasks.map(t => `
+          <div class="card ${t.done ? 'mastered' : ''}" style="padding:14px; ${t.done ? 'border-color:var(--success); background:rgba(76,175,136,0.10);' : 'border:1px dashed var(--border);'}">
+            <div class="flex align-center gap-8">
+              <span style="font-size:22px;">${t.done ? '✅' : '▶️'}</span>
+              <div style="flex:1;">
+                <div class="font-sm" style="font-weight:700;">${EM.ui.esc(t.title)}</div>
+                <div class="font-sm text-secondary">目标: ${EM.ui.esc(t.target)} · 模块: ${t.module}</div>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="font-sm text-secondary mt-16">💡 提示:点击上方"今日学习(开始本课)"按钮直接开始今日任务,系统会自动按天推进。</div>
+    </div>
+  ` : '';
 
   // 学习路径地图(折叠)
   const pathMap = all.map((s, i) => {
@@ -593,6 +751,59 @@ EM.jumpToStep = (idx) => {
   }
   EM.progress.update(d => { d.pathStep = idx; });
   EM.router.navigate('home');
+};
+
+// 弹出每日学习计划详情
+EM.showDailyPlan = () => {
+  const step = EM.path.currentStep();
+  if (!step) { EM.ui.toast('路径加载中,稍后再试'); return; }
+  const dp = EM.dailyPlan(step);
+  if (!dp.tasks.length) { EM.ui.toast('当前任务无法按天拆分'); return; }
+
+  const doneCount = dp.tasks.filter(t => t.done).length;
+  const todayIdx = dp.tasks.findIndex(t => !t.done);
+  const todayTask = todayIdx >= 0 ? dp.tasks[todayIdx] : null;
+
+  const body = `
+    <div class="font-sm text-secondary mb-16">
+      📅 当前课程: <b>${EM.ui.esc(step.title)}</b><br>
+      本课共拆分 <b>${dp.dayCount}</b> 天,你已完成 <b>${doneCount}</b> 天
+      ${todayTask ? `<br>📌 今日任务: <span style="color:var(--accent);">${EM.ui.esc(todayTask.title)}</span>` : '<br>🎉 全部完成,可点击"已完成,进入下一课"'}
+    </div>
+    <div class="path-map">
+      ${dp.tasks.map((t, i) => `
+        <div class="path-step ${t.done ? 'done' : (i === todayIdx ? 'current' : 'locked')}"
+             style="cursor:pointer; ${t.done ? '' : (i === todayIdx ? '' : 'opacity:0.5;')}"
+             onclick="EM.startDailyTask(${i})">
+          <span style="font-size:18px;">${t.done ? '✅' : (i === todayIdx ? '▶️' : '🔒')}</span>
+          <div style="flex:1;">
+            <div class="font-sm" style="font-weight:${i === todayIdx ? 700 : 400};">${EM.ui.esc(t.title)}</div>
+            <div class="font-sm text-secondary">目标 ${EM.ui.esc(t.target)} · 模块 ${t.module}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="flex gap-8 mt-16">
+      ${todayTask
+        ? `<button class="btn btn-primary" onclick="EM.startDailyTask(${todayIdx})">🚀 立即开始今日任务</button>`
+        : `<button class="btn btn-primary" onclick="EM.goNextStep(); EM.ui.closeModal();">✅ 进入下一课</button>`}
+      <button class="btn btn-secondary" data-close>关闭</button>
+    </div>
+  `;
+  EM.ui.modal(body, { title: '📅 每日学习计划' });
+};
+
+// 跳转到指定每日任务(打开对应模块并定位到目标)
+EM.startDailyTask = (dayIdx) => {
+  const step = EM.path.currentStep();
+  if (!step) return;
+  const dp = EM.dailyPlan(step);
+  if (!dp.tasks[dayIdx]) return;
+  const t = dp.tasks[dayIdx];
+  // 跳到对应模块
+  EM.router.navigateWithSubmodule(t.module, t.submodule);
+  EM.ui.closeModal();
+  EM.ui.toast(`📅 ${t.title}`, 3500);
 };
 
 // ===== 进度详情页 =====

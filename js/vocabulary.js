@@ -69,9 +69,7 @@ EM.vocabulary = {
       .word-card.mastered { border-color:var(--success); background:rgba(76,175,136,0.10); }
       .word-card.weak { border-color:var(--warning); background:rgba(240,160,64,0.10); }
       .word-action-bar { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:16px; }
-      .flip-card {
-        perspective:1200px; min-height:280px; cursor:pointer;
-      }
+      .flip-card { perspective:1200px; min-height:280px; cursor:pointer; }
       .flip-inner {
         position:relative; width:100%; min-height:280px;
         transition:transform 0.6s; transform-style:preserve-3d;
@@ -113,8 +111,122 @@ EM.vocabulary = {
       .word-card .word-spelling:hover { color:var(--accent); }
       .word-card .word-phonetic:hover { color:var(--accent); cursor:pointer; }
       .word-card .word-example:hover { color:var(--accent-light); cursor:pointer; }
+      /* 记忆口诀区(醒目) */
+      .vocab-mnemonic {
+        background: linear-gradient(135deg, rgba(255,193,7,0.18), rgba(76,175,136,0.10));
+        border-left:4px solid var(--warning);
+        padding:12px 14px; border-radius:var(--radius-sm); margin-top:10px;
+      }
+      .vocab-mnemonic-title { font-size:13px; font-weight:700; color:var(--warning); }
+      .vocab-mnemonic-body { font-size:14px; line-height:1.7; margin-top:6px; color:var(--text-primary); }
+      /* 复习提醒 */
+      .vocab-review-box {
+        margin-top:10px; padding:10px 12px; border-radius:var(--radius-sm);
+        background:var(--bg-secondary); border:1px dashed var(--border);
+        font-size:13px; color:var(--text-secondary);
+      }
+      .vocab-review-box.due { border-color:var(--warning); background:rgba(240,160,64,0.12); color:var(--text-primary); }
+      /* 词性 emoji */
+      .word-emoji { font-size:24px; margin-right:6px; vertical-align:middle; }
     `;
     document.head.appendChild(style);
+  },
+
+  /* ===== 词性→emoji 映射,用于加强视觉记忆 ===== */
+  _posEmoji(pos) {
+    const p = (pos || '').toLowerCase();
+    if (p.indexOf('n.') === 0 || p.indexOf('noun') === 0) return '📦';
+    if (p.indexOf('v.') === 0 || p.indexOf('vi.') === 0 || p.indexOf('vt.') === 0 || p.indexOf('verb') === 0) return '🏃';
+    if (p.indexOf('adj.') === 0 || p.indexOf('adjective') === 0) return '🎨';
+    if (p.indexOf('adv.') === 0 || p.indexOf('adverb') === 0) return '💨';
+    if (p.indexOf('prep.') === 0) return '📍';
+    if (p.indexOf('conj.') === 0) return '🔗';
+    if (p.indexOf('pron.') === 0) return '👥';
+    if (p.indexOf('interj.') === 0) return '❗';
+    if (p.indexOf('num.') === 0) return '🔢';
+    if (p.indexOf('abbr.') === 0) return '🔤';
+    if (p.indexOf('art.') === 0) return '🟰';
+    if (p.indexOf('aux.') === 0) return '🛠️';
+    if (p.indexOf('modal') === 0) return '🛠️';
+    return '📘';
+  },
+
+  /* ===== 艾宾浩斯复习计划:基于首次学习时间返回提醒信息 =====
+   * 复习节点:1天/2天/4天/7天/15天/30天
+   * 返回 { due:bool, nextStage:string, daysToNext:int, learnedDays:int }
+   */
+  _reviewStatus(word) {
+    const p = EM.progress.get();
+    const reviews = p.modules.vocabulary.reviews || {};
+    const firstAt = reviews[word] ? reviews[word].firstAt : null;
+    if (!firstAt) return { due:false, learned:false };
+    const now = Date.now();
+    const dayMs = 86400000;
+    const learnedDays = Math.floor((now - firstAt) / dayMs);
+    const stages = [1, 2, 4, 7, 15, 30];
+    // 找下一个未到的复习节点
+    let nextStage = null;
+    const reviewHistory = (reviews[word].history || []).slice();
+    for (const s of stages) {
+      if (!reviewHistory.includes(s) && learnedDays >= s) {
+        return { due:true, learned:true, nextStage:'立即复习', learnedDays, stage:s };
+      }
+      if (!reviewHistory.includes(s) && nextStage === null) {
+        nextStage = s;
+        const daysToNext = s - learnedDays;
+        return { due:false, learned:true, nextStage:'第'+s+'天复习', daysToNext:Math.max(0,daysToNext), learnedDays };
+      }
+    }
+    return { due:false, learned:true, nextStage:'已永久记忆', learnedDays };
+  },
+
+  /* ===== 标记某词为已学习(首次学习时记录时间戳) =====
+   * 用于艾宾浩斯复习追踪。返回 true 表示首次学习。
+   */
+  _markLearnedSilent(word) {
+    const p = EM.progress.get();
+    if ((p.modules.vocabulary.learned || []).includes(word)) return false;
+    EM.progress.update(d => {
+      if (!d.modules.vocabulary.learned) d.modules.vocabulary.learned = [];
+      if (!d.modules.vocabulary.learned.includes(word)) d.modules.vocabulary.learned.push(word);
+      if (!d.modules.vocabulary.reviews) d.modules.vocabulary.reviews = {};
+      if (!d.modules.vocabulary.reviews[word]) {
+        d.modules.vocabulary.reviews[word] = { firstAt: Date.now(), history: [] };
+      }
+    });
+    EM.progress.removeWeakness('vocabulary', word);
+    this._refreshStats();
+    return true;
+  },
+
+  /* ===== 记录一次复习(把当前节点加入history) ===== */
+  _recordReview(word, stage) {
+    EM.progress.update(d => {
+      if (!d.modules.vocabulary.reviews) d.modules.vocabulary.reviews = {};
+      if (!d.modules.vocabulary.reviews[word]) {
+        d.modules.vocabulary.reviews[word] = { firstAt: Date.now(), history: [] };
+      }
+      const h = d.modules.vocabulary.reviews[word].history;
+      if (!h.includes(stage)) h.push(stage);
+    });
+  },
+
+  /* ===== 路径自动推进:词汇学习完成后通知 app.js 检查路径 ===== */
+  _autoAdvancePath() {
+    setTimeout(async () => {
+      try {
+        const before = EM.progress.get().pathStep || 0;
+        const step = EM.path.currentStep();
+        if (!step) return;
+        // 仅当当前步骤属于 vocabulary 模块才推进
+        if (step.module !== 'vocabulary') return;
+        if (!EM.path.isCurrentStepDone()) return;
+        const after = await EM.path.advanceToNext();
+        if (after > before) {
+          EM.ui.toast(`🎉 第 ${step.step + 1} 课目标达成!自动进入第 ${after + 1} 课`, 4000);
+        }
+      } catch (e) { console.warn('vocab autoAdvance err', e); }
+    }, 300);
   },
 
   /* ===== 渲染外壳：进度条 + 模式/级别切换 + 内容占位 ===== */
@@ -267,6 +379,20 @@ EM.vocabulary = {
     const lvl = this._getLevel(this.activeLevel);
     const total = lvl.words.length;
     const pos = (this.currentIdx + 1) + ' / ' + total;
+    const emoji = this._posEmoji(w.pos);
+    const review = this._reviewStatus(w.word);
+
+    // 复习提醒框
+    let reviewBox = '';
+    if (review.learned) {
+      const dueCls = review.due ? 'due' : '';
+      const reviewText = review.due
+        ? `📅 该词已学 ${review.learnedDays} 天,到了第 ${review.stage} 天复习节点,建议立即复习巩固`
+        : `📅 已学 ${review.learnedDays} 天,下次复习:${review.nextStage}${review.daysToNext!==undefined ? '(还有 '+review.daysToNext+' 天)' : ''}`;
+      reviewBox = `<div class="vocab-review-box ${dueCls}">${reviewText}${
+        review.due ? `<button class="btn btn-secondary" style="margin-left:8px;padding:4px 10px;font-size:12px;" id="wordReview">✓ 已复习</button>` : ''
+      }</div>`;
+    }
 
     el.innerHTML = `
       <div class="card">
@@ -275,12 +401,20 @@ EM.vocabulary = {
           <span class="font-sm text-secondary">L${this.activeLevel} · ${EM.ui.esc(lvl.name)}</span>
         </div>
         <div class="word-card ${isLearned ? 'mastered' : ''} ${isWeak ? 'weak' : ''}">
-          <div class="word-spelling" data-speak="word" title="点击发音">${EM.ui.esc(w.word)}</div>
+          <div class="word-spelling" data-speak="word" title="点击发音">
+            <span class="word-emoji">${emoji}</span>${EM.ui.esc(w.word)}
+          </div>
           <div class="word-phonetic" data-speak="phonetic" title="点击音标发音">${EM.ui.esc(w.phonetic)}</div>
           <div class="word-meaning"><b>${EM.ui.esc(w.meaning)}</b><span class="word-pos">${EM.ui.esc(w.pos)}</span></div>
           <div class="word-example" data-speak="example" title="点击朗读例句">${EM.ui.esc(w.example)}</div>
           <div class="font-sm text-secondary">${EM.ui.esc(w.exampleCn)}</div>
-          <div class="word-association">💡 ${EM.ui.esc(w.association)}</div>
+          ${w.association ? `
+            <div class="vocab-mnemonic">
+              <div class="vocab-mnemonic-title">💡 记忆口诀(关键!)</div>
+              <div class="vocab-mnemonic-body">${EM.ui.esc(w.association)}</div>
+            </div>
+          ` : ''}
+          ${reviewBox}
           ${w.roots ? `<div class="word-extras">🌱 词根: ${EM.ui.esc(w.roots)}</div>` : ''}
           ${(w.synonyms && w.synonyms.length) ? `<div class="word-extras">🔁 同义: ${w.synonyms.map(s => EM.ui.esc(s)).join(', ')}</div>` : ''}
           ${(w.antonyms && w.antonyms.length) ? `<div class="word-extras">↔ 反义: ${w.antonyms.map(s => EM.ui.esc(s)).join(', ')}</div>` : ''}
@@ -308,6 +442,12 @@ EM.vocabulary = {
     document.getElementById('wordNext').onclick = () => this._go(1);
     document.getElementById('wordLearn').onclick = () => this._toggleLearned(w.word);
     document.getElementById('wordWeak').onclick = () => this._toggleWeak(w.word);
+    const reviewBtn = document.getElementById('wordReview');
+    if (reviewBtn) reviewBtn.onclick = () => {
+      this._recordReview(w.word, review.stage);
+      EM.ui.toast('已记录本次复习 ✓');
+      this._renderContent();
+    };
   },
 
   /* 前进/后退 */
@@ -331,20 +471,21 @@ EM.vocabulary = {
   _toggleLearned(word) {
     const p = EM.progress.get();
     const has = (p.modules.vocabulary.learned || []).includes(word);
-    EM.progress.update(d => {
-      if (!d.modules.vocabulary.learned) d.modules.vocabulary.learned = [];
-      if (has) {
+    if (has) {
+      // 取消已学标记
+      EM.progress.update(d => {
+        if (!d.modules.vocabulary.learned) d.modules.vocabulary.learned = [];
         d.modules.vocabulary.learned = d.modules.vocabulary.learned.filter(x => x !== word);
-      } else {
-        d.modules.vocabulary.learned.push(word);
-      }
-    });
-    if (!has) {
-      // 新学会则移除弱项
-      EM.progress.removeWeakness('vocabulary', word);
-      EM.ui.toast('已标记学会 ✓');
+        // 同时移除复习记录
+        if (d.modules.vocabulary.reviews) delete d.modules.vocabulary.reviews[word];
+      });
+      EM.ui.toast('已取消已学标记');
     } else {
-      EM.ui.toast('已取消学会标记');
+      // 标记为已学,并记录首次学习时间(用于艾宾浩斯复习)
+      this._markLearnedSilent(word);
+      EM.ui.toast('已标记学会 ✓');
+      // 触发路径推进检查
+      this._autoAdvancePath();
     }
     this._refreshStats();
     this._renderContent();
@@ -595,7 +736,11 @@ EM.vocabulary = {
       EM.progress.update(d => { d.modules.vocabulary.score = (d.modules.vocabulary.score || 0) + 1; });
       const sc = document.getElementById('quizScore');
       if (sc) sc.textContent = (parseInt(sc.textContent, 10) || 0) + 1;
-      EM.ui.toast('答对了 ✓ +1');
+      // 关键:答对自动标记为已学(若未标记)
+      const newly = this._markLearnedSilent(q.target.word);
+      EM.ui.toast(newly ? '答对了 ✓ 已自动标记已学' : '答对了 ✓ +1');
+      // 触发路径推进检查
+      this._autoAdvancePath();
     } else {
       EM.progress.addWeakness('vocabulary', q.target.word);
       EM.ui.toast('答错了，已记入弱项 ✗');
@@ -636,7 +781,11 @@ EM.vocabulary = {
       EM.progress.update(d => { d.modules.vocabulary.score = (d.modules.vocabulary.score || 0) + 1; });
       const sc = document.getElementById('quizScore');
       if (sc) sc.textContent = (parseInt(sc.textContent, 10) || 0) + 1;
-      EM.ui.toast('拼写正确 ✓ +1');
+      // 关键:答对自动标记为已学(若未标记)
+      const newly = this._markLearnedSilent(q.target.word);
+      EM.ui.toast(newly ? '拼写正确 ✓ 已自动标记已学' : '拼写正确 ✓ +1');
+      // 触发路径推进检查
+      this._autoAdvancePath();
     } else {
       EM.progress.addWeakness('vocabulary', q.target.word);
       EM.ui.toast('拼写错误，已记入弱项 ✗');
