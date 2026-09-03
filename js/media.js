@@ -367,6 +367,10 @@ EM.media = {
         p.modules.media.completed.push(v.id);
         EM.progress.save(p);
       }
+      // 学生模型 + XP
+      EM.student.record('listening', 70, 1);
+      EM.achieve.addXP(EM.achieve.XP.listen, '音视频课');
+      EM.achieve.check();
     }
     document.getElementById('mediaResultBack').addEventListener('click', () => {
       if (passed) {

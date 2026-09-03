@@ -410,7 +410,12 @@ EM.phonics = {
     if (!has) {
       // 新掌握则移除对应弱项
       EM.progress.removeWeakness('phonics', id);
-      EM.ui.toast('已标记掌握 ✓');
+      EM.errors.correct('phonics', id);
+      EM.achieve.addXP(EM.achieve.XP.phonics, '拼读掌握');
+      EM.achieve.check();
+      EM.student.record('pronunciation', 60 + Math.min(40, (p.modules.phonics.mastered || []).length), 1);
+      EM.recordDailyActivity('phonics', 1);
+      EM.ui.toast('已标记掌握 ✓ +2 XP');
       // 自动尝试推进路径
       this._autoAdvancePath();
     }
@@ -435,6 +440,9 @@ EM.phonics = {
       }
     });
     EM.progress.removeWeakness('phonics', id);
+    EM.errors.correct('phonics', id);
+    EM.achieve.addXP(EM.achieve.XP.phonics, '拼读测验答对');
+    EM.achieve.check();
     this._refreshStats();
     return true; // 新增
   },
@@ -637,8 +645,9 @@ EM.phonics = {
       // 触发路径推进检查
       this._autoAdvancePath();
     } else {
-      // 记入弱项
+      // 记入弱项 + 错误银行
       EM.progress.addWeakness('phonics', q.target.id);
+      EM.errors.add('phonics', q.target.id);
       EM.ui.toast('答错了，已记入弱项，回头重点复习 ✗');
     }
   },

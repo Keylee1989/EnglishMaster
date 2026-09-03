@@ -29,15 +29,24 @@ EM.progress = {
         speaking: { completed: [], score: 0 },
         reading: { completed: [], score: 0 },
         writing: { completed: [], score: 0 },
+        media: { completed: [], score: 0 },
         test: { history: [], currentLevel: 0 },
         rag: { queryCount: 0 }
       },
       // 弱项记录(用于自适应)
-      weaknesses: { phonics: [], vocabulary: [], grammar: [] },
+      weaknesses: { phonics: [], vocabulary: [], grammar: [], listening: [], reading: [], speaking: [], writing: [] },
       // 毕业测试
       graduation: { passed: false, date: null, scores: {} },
       // 成就
-      achievements: []
+      achievements: [],
+      // XP 经验值
+      xp: 0,
+      xpLog: [],
+      // 学生模型(能力分) / 错误银行 (惰性初始化)
+      student: null,
+      errors: null,
+      // 学习历史 (按天聚合, 供进度页曲线)
+      dayHistory: []
     };
   },
 
@@ -82,12 +91,18 @@ EM.progress = {
     localStorage.setItem(this.SETTINGS_KEY, JSON.stringify({ ...cur, ...s }));
   },
 
-  // 跨设备: 导出
+  // 跨设备: 导出 (进度 + 设置 + SRS 复习数据)
   export() {
     const data = this.get();
     const settings = this.getSettings();
-    const blob = new Blob([JSON.stringify({ progress: data, settings, exportedAt: new Date().toISOString() }, null, 2)],
-      { type: 'application/json' });
+    const srs = (typeof EM.srs !== 'undefined') ? EM.srs.load() : null;
+    const blob = new Blob([JSON.stringify({
+      schemaVersion: 2,
+      progress: data,
+      settings,
+      srs,
+      exportedAt: new Date().toISOString()
+    }, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
@@ -106,6 +121,10 @@ EM.progress = {
           if (obj.progress) {
             this.save(this._merge(this.defaultData(), obj.progress));
             if (obj.settings) this.saveSettings(obj.settings);
+            // 恢复 SRS 复习数据
+            if (obj.srs && obj.srs.cards && typeof EM.srs !== 'undefined') {
+              try { localStorage.setItem(EM.srs.KEY, JSON.stringify(obj.srs)); } catch (err2) { console.warn('SRS 导入失败:', err2); }
+            }
             resolve(true);
           } else if (obj.version) {
             // 兼容旧格式

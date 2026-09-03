@@ -97,6 +97,24 @@ EM.vocabulary = {
         color:var(--text-primary); font-size:18px; text-align:center; margin-bottom:12px;
       }
       .quiz-spell-input:focus { outline:none; border-color:var(--accent); }
+      /* SRS 复习 */
+      .srs-word {
+        font-size: 42px; font-weight: 700; text-align: center;
+        color: var(--accent); cursor: pointer; margin: 20px 0 4px;
+      }
+      .srs-speak-hint { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+      .srs-phonetic { text-align: center; font-size: 17px; color: var(--text-secondary); margin-bottom: 22px; }
+      .srs-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+      .srs-option { text-align: left; }
+      .srs-option.correct { border-color: var(--success) !important; background: rgba(76,175,136,0.15) !important; }
+      .srs-option.wrong { border-color: var(--danger) !important; background: rgba(232,90,90,0.15) !important; }
+      .srs-answer {
+        border: 1px solid var(--accent); background: var(--accent-bg);
+        border-radius: var(--radius-sm); padding: 16px; margin: 8px 0 16px;
+      }
+      .srs-meaning { font-size: 22px; text-align: center; margin-bottom: 10px; }
+      .srs-example { text-align: center; font-size: 15px; margin-bottom: 6px; }
+      .srs-grades { margin-top: 10px; }
       .search-result-item {
         padding:10px 14px; border:1px solid var(--border); border-radius:var(--radius-sm);
         background:var(--bg-card); margin-bottom:8px; cursor:pointer; transition:var(--transition);
@@ -195,6 +213,7 @@ EM.vocabulary = {
       }
     });
     EM.progress.removeWeakness('vocabulary', word);
+    EM.srs.add(word);
     this._refreshStats();
     return true;
   },
@@ -252,21 +271,24 @@ EM.vocabulary = {
           <button class="btn ${this.mode === 'learn' ? 'btn-primary' : 'btn-secondary'}" data-mode="learn">📖 学习</button>
           <button class="btn ${this.mode === 'flip' ? 'btn-primary' : 'btn-secondary'}" data-mode="flip">🔄 翻卡</button>
           <button class="btn ${this.mode === 'quiz' ? 'btn-primary' : 'btn-secondary'}" data-mode="quiz">🎯 测验</button>
+          <button class="btn ${this.mode === 'review' ? 'btn-primary' : 'btn-secondary'}" data-mode="review">🧠 复习<span id="srsDueBadge"></span></button>
           <button class="btn ${this.mode === 'search' ? 'btn-primary' : 'btn-secondary'}" data-mode="search">🔍 搜索</button>
         </div>
-        ${this.mode !== 'search' ? `
+        ${this.mode === 'search' ? `
+          <div class="vocab-toolbar">
+            <input type="text" class="vocab-search-input" id="vocabSearch" placeholder="输入英文单词或中文释义..." value="${EM.ui.esc(this.searchQuery)}">
+            <button class="btn btn-secondary" id="vocabSearchBtn">搜索</button>
+          </div>
+          <div class="vocab-hint">💡 在所有级别的词汇中本地搜索。点击结果可跳转到该词的学习卡片。</div>
+        ` : this.mode === 'review' ? `
+          <div class="vocab-hint">🧠 间隔重复复习: 系统按遗忘曲线安排每个词的复习时间。<b>先看词选意思, 再自评记忆牢固度。</b>答错的词会自动重排。</div>
+        ` : `
           <div class="level-selector">
             ${this.data.levels.map(lv => `
               <button class="level-btn ${lv.level === this.activeLevel ? 'active' : ''}" data-level="${lv.level}">L${lv.level} · ${lv.name}</button>
             `).join('')}
           </div>
           <div class="vocab-hint">💡 学习路径：从 L1 第一个词开始按顺序学习。点击单词拼写或音标可播放发音，点击例句可朗读整句。</div>
-        ` : `
-          <div class="vocab-toolbar">
-            <input type="text" class="vocab-search-input" id="vocabSearch" placeholder="输入英文单词或中文释义..." value="${EM.ui.esc(this.searchQuery)}">
-            <button class="btn btn-secondary" id="vocabSearchBtn">搜索</button>
-          </div>
-          <div class="vocab-hint">💡 在所有级别的词汇中本地搜索。点击结果可跳转到该词的学习卡片。</div>
         `}
       </div>
 
@@ -320,8 +342,217 @@ EM.vocabulary = {
     if (this.mode === 'learn') this._renderLearn(el);
     else if (this.mode === 'flip') this._renderFlip(el);
     else if (this.mode === 'quiz') this._renderQuiz(el);
+    else if (this.mode === 'review') this._renderReview(el);
     else if (this.mode === 'search') this._renderSearchResults(el);
   },
+
+  /* ===== 查找任意级别的单词 ===== */
+  _findWord(word) {
+    for (const lv of (this.data && this.data.levels || [])) {
+      const found = (lv.words || []).find(w => w.word === word);
+      if (found) return { w: found, level: lv.level };
+    }
+    return null;
+  },
+
+  /* ================= SRS 复习模式 =================
+   * 每次复习: 1) 看英文选中文意思(主动回忆) 2) 自评牢固度 3) SRS 调度
+   */
+  _reviewState: null,
+
+  // 供计划器/首页调用的入口
+  startReview() {
+    this.mode = 'review';
+    this._reviewState = null;
+    const tryRender = (attempt) => {
+      if (this.data) {
+        this._renderShell();
+        EM.ui.toast('🧠 开始 SRS 复习');
+      } else if (attempt < 20) {
+        setTimeout(() => tryRender(attempt + 1), 300);
+      }
+    };
+    tryRender(0);
+  },
+
+  _renderReview(el) {
+    const st = this._reviewState;
+    const due = EM.srs.dueWords(30);
+    const badge = document.getElementById('srsDueBadge');
+    if (badge) {
+      badge.textContent = due.length ? ` (${due.length})` : '';
+    }
+
+    // 未开始或已结束 → 概览页
+    if (!st || st.done) {
+      const stats = EM.srs.stats();
+      el.innerHTML = `
+        <div class="card">
+          <div class="card-title">🧠 间隔重复复习</div>
+          <div class="grid grid-3">
+            <div class="stat-card"><div class="stat-value">${stats.total}</div><div class="stat-label">已进入复习的词</div></div>
+            <div class="stat-card"><div class="stat-value">${stats.due}</div><div class="stat-label">今天到期</div></div>
+            <div class="stat-card"><div class="stat-value">${stats.mature}</div><div class="stat-label">长期记忆(成熟)</div></div>
+          </div>
+          <div class="font-sm text-secondary mt-16">
+            学习中 ${stats.learning} · 复习中 ${stats.review} · 遗忘过 ${stats.lapsed} · 24h内到期 ${stats.dueSoon}
+          </div>
+          ${st && st.done ? `
+            <div class="card mt-16" style="border-color:var(--success);">
+              <div class="card-title">✅ 本轮复习完成</div>
+              <div class="font-lg">正确率 <b>${Math.round(st.correct / Math.max(1, st.total) * 100)}%</b> (${st.correct}/${st.total}) · 答错 ${st.wrong} 个已自动重排</div>
+            </div>
+          ` : ''}
+          <div class="flex gap-8 mt-16">
+            <button class="btn btn-primary" id="srsStart" ${due.length ? '' : 'disabled'}>🚀 开始复习 (${due.length} 词)</button>
+            <button class="btn btn-secondary" id="srsAddNew" ${stats.total ? '' : 'disabled'}>➕ 复习已学未入队词</button>
+            <div class="font-sm text-secondary" style="align-self:center;">${due.length ? '' : '暂无到期词 — 今天记忆很稳固, 可学新词或改天再来。'}</div>
+          </div>
+        </div>
+      `;
+      const startBtn = document.getElementById('srsStart');
+      if (startBtn) startBtn.onclick = () => {
+        this._reviewState = { queue: due.map(c => c.word), idx: 0, correct: 0, wrong: 0, total: due.length, done: false };
+        this._renderContent();
+      };
+      const addNewBtn = document.getElementById('srsAddNew');
+      if (addNewBtn) addNewBtn.onclick = () => {
+        // 把已学但无 SRS 卡的词全部入队
+        const p = EM.progress.get();
+        const learned = p.modules.vocabulary.learned || [];
+        const added = EM.srs.ensureCards(learned);
+        EM.ui.toast(added ? `已将 ${added} 个已学词加入复习队列` : '已学词都已入队');
+        this._renderContent();
+      };
+      return;
+    }
+
+    // 复习进行中
+    const word = st.queue[st.idx];
+    if (!word) {
+      st.done = true;
+      EM.recordDailyActivity('srs_review', st.total);
+      // 学生模型: 词汇能力
+      const acc = st.total ? Math.round(st.correct / st.total * 100) : 0;
+      EM.student.record('vocabulary', acc, 2);
+      EM.student.record('retention', Math.round(EM.srs.stats().mature / Math.max(1, EM.srs.stats().total) * 100), 1);
+      EM.achieve.check();
+      this._renderContent();
+      return;
+    }
+    const found = this._findWord(word);
+    if (!found) {
+      st.queue.splice(st.idx, 1);
+      this._renderContent();
+      return;
+    }
+    const w = found.w;
+
+    // 干扰项: 同级别随机3个中文释义
+    const lvl = this._getLevel(found.level);
+    const poolMeanings = lvl ? lvl.words.map(x => x.meaning).filter(m => m !== w.meaning) : [];
+    const distractorMeanings = this._sample(poolMeanings, 3);
+    if (distractorMeanings.length < 3) {
+      // 补充其他级别
+      for (const lv2 of (this.data && this.data.levels || [])) {
+        if (distractorMeanings.length >= 3) break;
+        for (const x of (lv2.words || [])) {
+          if (x.meaning !== w.meaning && !distractorMeanings.includes(x.meaning)) {
+            distractorMeanings.push(x.meaning);
+            if (distractorMeanings.length >= 3) break;
+          }
+        }
+      }
+    }
+    const options = this._shuffle([w.meaning].concat(distractorMeanings.slice(0, 3)));
+    const card = EM.srs.getCard(word);
+    const intervalText = card && card.interval ? ` · 上次间隔 ${card.interval} 天` : '';
+    const answered = st.answeredWord === word;
+
+    el.innerHTML = `
+      <div class="card">
+        <div class="flex justify-between align-center mb-16">
+          <span class="font-sm text-secondary">第 <b>${st.idx + 1}</b> / ${st.queue.length} 词 · 本轮答对 ${st.correct} · 答错 ${st.wrong}</span>
+          <span class="font-sm text-secondary">L${found.level}${intervalText}</span>
+        </div>
+
+        <div class="srs-word" data-speak="word">${EM.ui.esc(w.word)} <span class="srs-speak-hint">🔊 点击发音</span></div>
+        <div class="srs-phonetic">${EM.ui.esc(w.phonetic)}</div>
+
+        ${answered ? `
+          <div class="srs-answer">
+            <div class="srs-meaning"><b>${EM.ui.esc(w.meaning)}</b><span class="word-pos">${EM.ui.esc(w.pos)}</span></div>
+            <div class="srs-example">${EM.ui.esc(w.example)}</div>
+            <div class="font-sm text-secondary">${EM.ui.esc(w.exampleCn)}</div>
+            ${w.association ? `<div class="vocab-mnemonic-body" style="margin-top:8px;">💡 ${EM.ui.esc(w.association)}</div>` : ''}
+          </div>
+          <div class="srs-grades">
+            <div class="font-sm text-secondary mb-16" style="text-align:center;">这次记得多牢? (决定下次复习时间)</div>
+            <div class="flex gap-8 flex-wrap" style="justify-content:center;">
+              <button class="btn btn-secondary" data-grade="1">🤔 困难</button>
+              <button class="btn btn-primary" data-grade="2">😊 认识</button>
+              <button class="btn btn-success" data-grade="3">🌟 简单</button>
+            </div>
+          </div>
+        ` : `
+          <div class="font-sm text-secondary mb-16" style="text-align:center;">这个英文单词是什么意思?</div>
+          <div class="srs-options">
+            ${options.map((opt, i) => `<button class="test-option srs-option" data-opt="${i}">${EM.ui.esc(opt)}</button>`).join('')}
+          </div>
+        `}
+      </div>
+    `;
+
+    const speakEl = el.querySelector('[data-speak="word"]');
+    if (speakEl) speakEl.onclick = () => EM.tts.speak(w.word);
+
+    if (!answered) {
+      el.querySelectorAll('.srs-option').forEach(btn => {
+        btn.onclick = () => {
+          const correctChoice = btn.dataset.opt === String(options.indexOf(w.meaning));
+          const allOpts = el.querySelectorAll('.srs-option');
+          allOpts.forEach(b => {
+            b.disabled = true;
+            if (b.dataset.opt === String(options.indexOf(w.meaning))) b.classList.add('correct');
+            else if (b === btn) b.classList.add('wrong');
+          });
+          if (correctChoice) {
+            st.correct++;
+            st.answeredWord = word;
+            this._renderContent();
+          } else {
+            // 答错: SRS 记 0 (遗忘), 卡片重排到队尾
+            EM.srs.review(word, 0);
+            EM.errors.add('vocabulary', word);
+            st.wrong++;
+            st.queue.push(word);
+            st.queue.splice(st.idx, 1);
+            this._renderContent();
+          }
+        };
+      });
+    } else {
+      el.querySelectorAll('[data-grade]').forEach(btn => {
+        btn.onclick = () => {
+          const grade = parseInt(btn.dataset.grade, 10);
+          const strict = EM.planner.passGrade();
+          EM.srs.review(word, grade);
+          if (grade >= strict) {
+            EM.errors.correct('vocabulary', word);
+            EM.progress.removeWeakness('vocabulary', word);
+            EM.achieve.addXP(EM.achieve.XP.reviewWord * grade, 'SRS复习');
+          } else {
+            EM.achieve.addXP(EM.achieve.XP.reviewWord, 'SRS复习');
+          }
+          EM.achieve.check();
+          st.idx++;
+          st.answeredWord = null;
+          this._renderContent();
+        };
+      });
+    }
+  },
+
 
   /* ===== 工具：获取级别数据 ===== */
   _getLevel(level) {
@@ -478,12 +709,18 @@ EM.vocabulary = {
         d.modules.vocabulary.learned = d.modules.vocabulary.learned.filter(x => x !== word);
         // 同时移除复习记录
         if (d.modules.vocabulary.reviews) delete d.modules.vocabulary.reviews[word];
+        EM.srs.remove(word);
       });
       EM.ui.toast('已取消已学标记');
     } else {
       // 标记为已学,并记录首次学习时间(用于艾宾浩斯复习)
-      this._markLearnedSilent(word);
-      EM.ui.toast('已标记学会 ✓');
+      const first = this._markLearnedSilent(word);
+      // 进入 SRS 队列 + XP
+      EM.srs.add(word);
+      EM.achieve.addXP(EM.achieve.XP.learnWord, '学习新词');
+      EM.achieve.check();
+      EM.recordDailyActivity('words', 1);
+      EM.ui.toast(first ? '已标记学会 ✓ +2 XP' : '已标记学会 ✓');
       // 触发路径推进检查
       this._autoAdvancePath();
     }
@@ -738,11 +975,17 @@ EM.vocabulary = {
       if (sc) sc.textContent = (parseInt(sc.textContent, 10) || 0) + 1;
       // 关键:答对自动标记为已学(若未标记)
       const newly = this._markLearnedSilent(q.target.word);
+      EM.errors.correct('vocabulary', q.target.word);
+      EM.srs.review(q.target.word, 2);
+      EM.achieve.addXP(EM.achieve.XP.quizCorrect, '测验答对');
+      EM.achieve.check();
       EM.ui.toast(newly ? '答对了 ✓ 已自动标记已学' : '答对了 ✓ +1');
       // 触发路径推进检查
       this._autoAdvancePath();
     } else {
       EM.progress.addWeakness('vocabulary', q.target.word);
+      EM.errors.add('vocabulary', q.target.word);
+      EM.srs.review(q.target.word, 0);
       EM.ui.toast('答错了，已记入弱项 ✗');
       this._refreshStats();
     }
@@ -783,11 +1026,17 @@ EM.vocabulary = {
       if (sc) sc.textContent = (parseInt(sc.textContent, 10) || 0) + 1;
       // 关键:答对自动标记为已学(若未标记)
       const newly = this._markLearnedSilent(q.target.word);
+      EM.errors.correct('vocabulary', q.target.word);
+      EM.srs.review(q.target.word, 2);
+      EM.achieve.addXP(EM.achieve.XP.quizCorrect, '测验答对');
+      EM.achieve.check();
       EM.ui.toast(newly ? '拼写正确 ✓ 已自动标记已学' : '拼写正确 ✓ +1');
       // 触发路径推进检查
       this._autoAdvancePath();
     } else {
       EM.progress.addWeakness('vocabulary', q.target.word);
+      EM.errors.add('vocabulary', q.target.word);
+      EM.srs.review(q.target.word, 0);
       EM.ui.toast('拼写错误，已记入弱项 ✗');
       this._refreshStats();
     }

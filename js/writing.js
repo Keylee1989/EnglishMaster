@@ -454,12 +454,19 @@ EM.writing = {
       });
       this._refreshStats();
       EM.ui.toast('造句通过！已记录');
+      // 学生模型 + XP
+      EM.student.record('writing', Math.min(100, Math.round(similarity / 2)), 1);
+      EM.student.record('naturalness', Math.min(100, Math.round(similarity / 2)), 1);
+      EM.achieve.addXP(EM.achieve.XP.write, '造句');
+      EM.achieve.check();
+      EM.recordDailyActivity('writing', 1);
       // 完成造句后自动检查路径推进(满足阈值时进入下一课)
       if (EM.path && typeof EM.path.advanceToNext === 'function') {
         setTimeout(() => EM.path.advanceToNext(), 1200);
       }
     } else {
       EM.progress.addWeakness('writing', 'sentence_' + item.word);
+      EM.errors.add('writing', 'sentence_' + item.word);
       EM.ui.toast('相似度较低，已记入弱项');
     }
   },
@@ -567,6 +574,11 @@ EM.writing = {
       });
       this._refreshStats();
       EM.ui.toast('短文已提交，已记录完成');
+      // 学生模型 + XP
+      EM.student.record('writing', Math.min(90, 40 + Math.floor(wordCount / 10)), 2);
+      EM.achieve.addXP(EM.achieve.XP.write, '短文写作');
+      EM.achieve.check();
+      EM.recordDailyActivity('writing', 1);
     }
 
     // 调用 AI 批改
@@ -633,6 +645,11 @@ EM.writing = {
       });
       this._refreshStats();
       EM.ui.toast('已保存并记录完成');
+      // 学生模型 + XP
+      EM.student.record('writing', Math.min(90, 30 + Math.floor(wordCount / 5)), 2);
+      EM.achieve.addXP(EM.achieve.XP.write, '自由写作');
+      EM.achieve.check();
+      EM.recordDailyActivity('writing', 1);
     };
     document.getElementById('freeClear').onclick = () => {
       if (confirm('确定清空当前内容？')) {

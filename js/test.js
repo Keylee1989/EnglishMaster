@@ -144,7 +144,9 @@ EM.test = {
     const history = (p.modules.test && p.modules.test.history) || [];
     const last = history[history.length - 1];
     const weakCount = Object.values(p.weaknesses).reduce((s, a) => s + a.length, 0);
+    const errStats = EM.errors.stats();
     const curLevel = (p.modules.test && p.modules.test.currentLevel) || p.level;
+    const intensity = EM.planner.intensity();
 
     const lv = EM.LEVELS[curLevel] || EM.LEVELS[0];
     const grad = p.graduation || { passed:false, date:null, scores:{} };
@@ -200,6 +202,13 @@ EM.test = {
             <div class="ttc-desc">拼读 + 词汇 + 语法混合</div>
             <span class="ttc-tag">L0+ · 全面摸底</span>
           </div>
+          ${errStats.unresolved > 0 ? `
+          <div class="test-type-card" data-type="errors" style="border-color:var(--warning);">
+            <div class="ttc-icon">❌</div>
+            <div class="ttc-name">错题强化</div>
+            <div class="ttc-desc">针对你的错误银行生成训练</div>
+            <span class="ttc-tag">${errStats.unresolved} 项待纠正</span>
+          </div>` : ''}
         </div>
       </div>
 
@@ -230,13 +239,13 @@ EM.test = {
       </div>
 
       <div class="card">
-        <div class="card-title">📋 自适应说明</div>
+        <div class="card-title">📋 自适应说明 <span class="font-sm text-secondary">(${intensity.label}强度 · 每次 ${this._questionCount()} 题)</span></div>
         <div class="font-sm text-secondary" style="line-height:1.8;">
           • 起始难度根据你的当前级别自动设置<br>
           • 答对一题 → 下一题难度 +1（封顶 L5）<br>
-          • 答错一题 → 下一题难度 -1（封底 L0），并自动记入弱项<br>
-          • 弱项会在「学习进度」页显示，下次测试优先抽取弱项相关题型<br>
-          • 每次测试共 ${this.totalQuestions} 题，含选择题与拼写题
+          • 答错一题 → 下一题难度 -1（封底 L0），并自动记入错误银行<br>
+          • 错误银行会在「学习进度」页显示，错题强化按严重度优先训练<br>
+          • 每次测试共 ${this._questionCount()} 题（强度 ${intensity.mult}×），含选择题与拼写题
         </div>
       </div>
     `;
@@ -260,6 +269,7 @@ EM.test = {
     this.correct = 0;
     this.wrongList = [];
     this.answered = false;
+    this.totalQuestions = this._questionCount();
 
     // 起始难度：综合进度中的测试级别 + 用户主级别取大
     const p = EM.progress.get();
@@ -283,9 +293,99 @@ EM.test = {
     this._renderQuestion();
   },
 
+  /* ===== 题目数量: 随强度设置变化 ===== */
+  _questionCount() {
+    const mult = EM.planner.intensity().mult;
+    if (mult <= 0.6) return 8;
+    if (mult >= 1.4) return 12;
+    if (mult >= 1.8) return 14;
+    return 10;
+  },
+
+  /* ===== 错题强化: 从错误银行生成针对性题目 ===== */
+  _generateErrorQuestions() {
+    const list = [];
+    const errors = EM.errors.unresolved(24);
+    if (!errors.length) return list;
+
+    for (const e of errors) {
+      try {
+        if (e.category === 'vocabulary' && this.vocabData) {
+          // 找该词
+          let w = null, vl = 1;
+          for (const lv of (this.vocabData.levels || [])) {
+            const hit = (lv.words || []).find(x => x.word === e.item);
+            if (hit) { w = hit; vl = lv.level; break; }
+          }
+          if (!w) continue;
+          // 与 _pickVocab 相同的三种题型
+          const pool = [];
+          for (const lv of (this.vocabData.levels || [])) {
+            if (Math.abs(lv.level - vl) <= 1) pool.push(...(lv.words || []));
+          }
+          const r = Math.random();
+          if (r < 0.4) {
+            const dists = this._randomDistractors(pool.map(x => x.meaning), w.meaning, 3);
+            list.push({ type: 'mc', category: 'vocabulary', level: vl,
+              prompt: `错题: 英文「${w.word}」是什么意思？`, options: this._shuffle([w.meaning].concat(dists)),
+              answer: w.meaning, speakText: w.word, weakness: w.word,
+              explain: `${w.word} (${w.phonetic}) ${w.pos}：${w.meaning}。例：${w.example}` });
+          } else if (r < 0.8) {
+            const dists = this._randomDistractors(pool.map(x => x.word), w.word, 3);
+            list.push({ type: 'mc', category: 'vocabulary', level: vl,
+              prompt: `错题: 中文「${w.meaning}」用英语怎么说？`, options: this._shuffle([w.word].concat(dists)),
+              answer: w.word, speakText: w.word, weakness: w.word,
+              explain: `${w.meaning} → ${w.word} (${w.phonetic})。例：${w.example}` });
+          } else {
+            list.push({ type: 'spell', category: 'vocabulary', level: vl,
+              prompt: `错题: 请拼写（${w.pos} ${w.meaning}）\n音标：${w.phonetic}`,
+              answer: w.word, speakText: w.word, weakness: w.word,
+              explain: `正确拼写：${w.word}（${w.meaning}）。例：${w.example}` });
+          }
+        } else if (e.category === 'grammar' && this.grammarData) {
+          const topic = (this.grammarData.topics || []).find(t => t.id === e.item);
+          if (!topic || !topic.quiz || !topic.quiz.length) continue;
+          const q = topic.quiz[Math.floor(Math.random() * topic.quiz.length)];
+          list.push({ type: 'mc', category: 'grammar', level: topic.level || 1,
+            prompt: `错题: ${q.q}`, options: q.options.slice(), answer: q.options[q.answer],
+            answerIdx: q.answer, speakText: q.q.replace(/___/g, q.options[q.answer]),
+            weakness: topic.id, topicTitle: topic.title,
+            explain: `【${topic.title}】正确答案：${q.options[q.answer]}。${topic.summary || ''}` });
+        } else if (e.category === 'phonics' && this.phonicsData) {
+          // 错误键格式: letter:A / cvc:cat / blend:sh / vowel:A / magice:cap / vowelteam:ai / rctrl:ar
+          const [kind, val] = String(e.item).split(':');
+          const map = {
+            letter: { list: this.phonicsData.letters, key: 'letter', label: '字母' },
+            cvc: { list: this.phonicsData.cvc, key: 'word', label: 'CVC词' },
+            blend: { list: this.phonicsData.blends, key: 'combo', label: '辅音组合' },
+            vowel: { list: this.phonicsData.vowels, key: 'combo', label: '元音' },
+            magice: { list: this.phonicsData.magicE, key: 'short', label: 'Magic E' },
+            vowelteam: { list: this.phonicsData.vowelTeams, key: 'combo', label: '元音组合' },
+            rctrl: { list: this.phonicsData.rControlled, key: 'combo', label: 'R控制元音' }
+          };
+          const src = map[kind];
+          const item = src && (src.list || []).find(x => String(x[src.key]).toLowerCase() === String(val).toLowerCase());
+          if (!item) continue;
+          const sound = item.sound || item.short || '';
+          const opts = this._randomDistractors((src.list || []).map(x => x.sound || x.short).filter(Boolean), sound, 3);
+          list.push({ type: 'mc', category: 'phonics', level: 1,
+            prompt: `错题: ${src.label}「${item[src.key]}」的发音是？`, options: this._shuffle([sound].concat(opts)),
+            answer: sound, speakText: item.letter || item.word || item.combo, weakness: e.item,
+            explain: `${src.label} ${item[src.key]} 发音为 ${sound}。` });
+        }
+      } catch (err) {
+        console.warn('错题生成失败:', e, err);
+      }
+      if (list.length >= this._questionCount()) break;
+    }
+    return list;
+  },
+
   /* ===== 生成题目列表（按类型与初始难度） ===== */
   _generateQuestions(type, initLevel) {
     const list = [];
+    // 错题强化: 直接由错误银行生成, 不走难度池
+    if (type === 'errors') return this._generateErrorQuestions();
     let diff = initLevel;
     const types = type === 'mixed' ? ['phonics', 'vocabulary', 'grammar'] : [type];
 
@@ -716,13 +816,19 @@ EM.test = {
       // 该题对应的弱项视为已掌握，从弱项列表移除
       if (q.weakness) {
         EM.progress.removeWeakness(q.category, q.weakness);
+        EM.errors.correct(q.category, q.weakness);
       }
+      // 学生模型 + XP
+      EM.student.record(q.category, Math.min(100, 60 + this.difficulty * 8), 1);
+      EM.achieve.addXP(EM.achieve.XP.quizCorrect, q.category + '答对');
+      EM.achieve.check();
     } else {
       // 难度下降（封底 0）
       if (this.difficulty > 0) this.difficulty--;
-      // 记入弱项
+      // 记入错误银行 + 弱项
       if (q.weakness) {
         EM.progress.addWeakness(q.category, q.weakness);
+        EM.errors.add(q.category, q.weakness);
         this.wrongList.push({
           category: q.category,
           weakness: q.weakness,
@@ -730,6 +836,8 @@ EM.test = {
           answer: q.answer
         });
       }
+      // 学生模型
+      EM.student.record(q.category, Math.max(0, 40 - this.difficulty * 5), 1);
     }
 
     // 为下一题在该难度补充一道题（如果原列表中没有，则即时生成）
@@ -818,6 +926,15 @@ EM.test = {
       date: new Date().toISOString(),
       weaknesses: this.wrongList.map(w => w.category + ':' + w.weakness)
     };
+    // 学生模型: 本次测试整体表现
+    const skillKey = (this.testType === 'mixed' || this.testType === 'errors') ? 'retention' : this.testType;
+    EM.student.record('test', accuracy * 100, 3);
+    EM.student.record(skillKey, accuracy * 100, 2);
+    // XP + 日常统计
+    EM.achieve.addXP(EM.achieve.XP.test, this.testType === 'errors' ? '错题强化' : '自适应测试');
+    EM.achieve.check();
+    EM.recordDailyActivity('tests', 1);
+
     EM.progress.update(d => {
       if (!d.modules.test) d.modules.test = { history: [], currentLevel: 0 };
       if (!d.modules.test.history) d.modules.test.history = [];

@@ -1,0 +1,30 @@
+# ===== Agent / local workspace (never commit) =====
+.freebuff/
+
+# ===== Secrets: NEVER commit these (contain GitHub tokens) =====
+tools/upload_extras.py
+tools/check_pages.py
+tools/github_upload.py
+tools/github_upload.ps1
+
+# ===== Raw dictionary source dumps (kept on disk; the app uses data/*.json) =====
+tools/ECDICT-master/ecdict.csv
+tools/ECDICT-master/ecdict.mini.csv
+tools/ECDICT-master/stardict.7z
+tools/ECDICT-master/lemma.en.txt
+tools/ECDICT-master/resemble.txt
+tools/ECDICT-master/wordroot.txt
+tools/ECDICT-master/dictutils.py
+tools/ECDICT-master/linguist.py
+tools/ECDICT-master/stardict.py
+tools/ECDICT-master/del_bfz.py
+tools/ECDICT-master/LICENSE
+tools/ECDICT-master/README.md
+
+# ===== Generated/audit output =====
+tools/_audit_out.txt
+
+# ===== OS / editor noise =====
+.DS_Store
+Thumbs.db
+*.log

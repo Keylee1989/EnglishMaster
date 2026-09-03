@@ -367,12 +367,17 @@ EM.path = {
   async completeCurrent() {
     const step = this.currentStep();
     if (!step) return;
+    const isNew = !(EM.progress.get().completedSteps || []).includes(step.step);
     await EM.progress.update(d => {
       if (!(d.completedSteps || []).includes(step.step)) {
         d.completedSteps.push(step.step);
       }
       d.pathStep = Math.min(d.pathStep + 1, (this.all().length - 1));
     });
+    if (isNew && EM.achieve) {
+      EM.achieve.addXP(20, '完成一课');
+      EM.achieve.check();
+    }
     return EM.path.currentStep();
   },
 
@@ -493,8 +498,35 @@ EM.router = {
 EM.updateLevelBadge = () => {
   const p = EM.progress.get();
   const lv = EM.LEVELS[p.level] || EM.LEVELS[0];
-  document.getElementById('levelBadge').textContent = `L${lv.id} · ${lv.cn}`;
-  document.getElementById('streakInfo').textContent = `🔥 连续 ${p.streak} 天`;
+  const xpLevel = EM.achieve ? EM.achieve.level(p.xp) : 1;
+  document.getElementById('levelBadge').textContent = `L${lv.id} · ${lv.cn} · LV${xpLevel}`;
+  document.getElementById('streakInfo').textContent = `🔥 连续 ${p.streak} 天 · ⚡${p.xp || 0} XP`;
+};
+
+// 更新设置弹窗中强度/严格度的描述文字
+EM.updateAdaptiveDesc = () => {
+  const s = EM.progress.getSettings();
+  const inten = EM.planner.INTENSITY_OPTIONS.find(o => o.id === (s.intensity || 'standard'));
+  const strict = EM.planner.STRICTNESS_OPTIONS.find(o => o.id === (s.strictness || 'standard'));
+  const iEl = document.getElementById('intensityDesc');
+  const sEl = document.getElementById('strictnessDesc');
+  if (iEl && inten) iEl.textContent = '· ' + inten.desc;
+  if (sEl && strict) sEl.textContent = '· ' + strict.desc;
+};
+
+// 记录今日学习统计 (供进度页曲线与 SRS 优先级使用)
+EM.recordDailyActivity = (type, count = 1) => {
+  const p = EM.progress.get();
+  if (!p.dayHistory) p.dayHistory = [];
+  const today = new Date().toISOString().slice(0, 10);
+  let day = p.dayHistory.find(d => d.date === today);
+  if (!day) {
+    day = { date: today, actions: {}, minutes: 0 };
+    p.dayHistory.push(day);
+    if (p.dayHistory.length > 60) p.dayHistory.shift();
+  }
+  day.actions[type] = (day.actions[type] || 0) + count;
+  EM.progress.save(p);
 };
 
 // ===== 侧边栏锁状态更新 =====
@@ -526,8 +558,11 @@ EM.updateNavLocks = () => {
 EM.checkinToday = () => {
   EM.progress.updateStreak();
   const p = EM.progress.get();
-  EM.ui.toast('✅ 打卡成功！已连续学习 ' + p.streak + ' 天');
+  EM.achieve.addXP(EM.achieve.XP.streakDay, '每日打卡');
+  EM.achieve.check();
+  EM.ui.toast('✅ 打卡成功！已连续学习 ' + p.streak + ' 天 +5 XP');
   EM.updateLevelBadge();
+  EM.renderHome(document.getElementById('content'));
 };
 
 // ===== 首页: 强制引导式 =====
@@ -607,6 +642,58 @@ EM.renderHome = async (container) => {
     </div>
   ` : '<div class="card"><p>路径加载中...</p></div>';
 
+  // ===== 能力仪表盘 (学生模型) =====
+  const skills = EM.student.all();
+  const overall = EM.student.overall();
+  const compLevel = EM.student.level();
+  const skillBars = skills.map(s => `
+    <div class="skill-row">
+      <span class="skill-label">${s.icon} ${s.label}${s.n > 0 ? '' : '<span class="font-sm text-muted"> 未测</span>'}</span>
+      <div class="progress-bar skill-bar"><div class="progress-fill" style="width:${s.score}%; ${s.score < 30 ? 'background:var(--warning);' : ''}"></div></div>
+      <span class="skill-score">${s.score}${s.n >= 2 ? '' : '<span class="font-sm text-muted">·</span>'}</span>
+    </div>
+  `).join('');
+  const skillDash = `
+    <div class="card">
+      <div class="flex justify-between align-center mb-16">
+        <div class="card-title" style="margin:0;">🧭 真实能力 (Student Model)</div>
+        <div class="font-sm" style="color:${compLevel.score >= 40 ? 'var(--success)' : 'var(--text-secondary)'};">
+          ${compLevel.score > 0 ? `综合 ${compLevel.score}/100 · ${compLevel.code} ${compLevel.cn}${compLevel.reliable ? '' : ' (数据积累中)'}` : '完成训练后显示能力分'}
+        </div>
+      </div>
+      <div class="skill-grid">${skillBars}</div>
+      <div class="font-sm text-secondary mt-16">能力分来自你的真实训练表现(正确率/迁移), 不是打卡数。弱项会自动进入今日计划。</div>
+    </div>
+  `;
+
+  // ===== 今日计划 (Planner) =====
+  const plan = EM.planner.today();
+  const planBlocks = plan.blocks.map(b => `
+    <div class="plan-block ${b.minutes === 0 ? 'plan-block-done' : ''}" ${b.minutes > 0 ? `onclick="EM.planner.run('${b.id}')"` : ''}>
+      <span class="plan-pri">P${b.priority}</span>
+      <div class="plan-icon">${b.icon}</div>
+      <div class="plan-info">
+        <div class="plan-title">${b.title}</div>
+        <div class="font-sm text-secondary">${b.desc}</div>
+      </div>
+      <div class="plan-min">${b.minutes > 0 ? b.minutes + '分' : '✓'}</div>
+    </div>
+  `).join('');
+  const planTotal = plan.blocks.reduce((a, b) => a + b.minutes, 0);
+  const todayPlan = `
+    <div class="card" style="border-left:4px solid var(--accent);">
+      <div class="flex justify-between align-center mb-16">
+        <div class="card-title" style="margin:0;">📅 今日学习计划 <span class="font-sm text-secondary">(${plan.settings.adaptiveMode === 'auto' ? '自动' : '手动'} · ${EM.planner.intensity().label}强度)</span></div>
+        <button class="btn btn-secondary btn-sm" onclick="document.getElementById('settingsBtn').click()">⚙️ 调整</button>
+      </div>
+      ${planBlocks}
+      <div class="font-sm text-secondary mt-16">
+        预算 <b>${plan.alloc.budget}</b> 分钟 (设置 ${plan.settings.dailyMinutes} × ${EM.planner.intensity().mult}) · 已分配 ${planTotal} 分钟
+        · 时间不够? 系统优先保证 <b>复习</b> 与 <b>弱项</b>。
+      </div>
+    </div>
+  `;
+
   // 今日学习计划预览(显示当日小任务)
   const dp = step ? EM.dailyPlan(step) : null;
   const todayCard = (dp && dp.tasks.length) ? `
@@ -680,6 +767,12 @@ EM.renderHome = async (container) => {
       <div class="stat-card"><div class="stat-value">${grammarMastered}</div><div class="stat-label">语法掌握</div></div>
       <div class="stat-card"><div class="stat-value">${curIdx}/${totalSteps}</div><div class="stat-label">路径步骤</div></div>
     </div>
+
+    <!-- 能力仪表盘 -->
+    ${skillDash}
+
+    <!-- 今日计划 -->
+    ${todayPlan}
 
     <!-- 当前任务大卡片 -->
     ${currentCard}
@@ -810,14 +903,55 @@ EM.startDailyTask = (dayIdx) => {
 EM.renderProgressPage = (container) => {
   const p = EM.progress.get();
   const lv = EM.LEVELS[p.level] || EM.LEVELS[0];
+  const xpLevel = EM.achieve.level(p.xp);
+  const nextXp = xpLevel * 500;
+
+  // 能力分
+  const skillRows = EM.student.all().map(s => `
+    <div class="skill-row">
+      <span class="skill-label">${s.icon} ${s.label}</span>
+      <div class="progress-bar skill-bar"><div class="progress-fill" style="width:${s.score}%;"></div></div>
+      <span class="skill-score">${s.score}${s.n >= 2 ? '' : '<span class="font-sm text-muted">·</span>'}</span>
+    </div>
+  `).join('');
+
+  // 错误银行
+  const errStats = EM.errors.stats();
+  const errList = EM.errors.all().slice(0, 12);
+  const errRows = errList.map(e => `
+    <div class="flex justify-between align-center" style="padding:8px 0;border-bottom:1px solid var(--border);">
+      <span>${EM.errors.CATEGORY_LABEL[e.category] || e.category} · <b>${EM.ui.esc(String(e.item).slice(0, 24))}</b>
+        ${e.resolved ? '<span class="tag tag-l1">已纠正</span>' : ''}</span>
+      <span class="text-secondary">犯 ${e.count} 次</span>
+    </div>
+  `).join('');
+
+  // 成就
+  const badges = EM.achieve.allWithState();
+  const badgeHtml = badges.map(b => `
+    <div class="badge ${b.unlocked ? '' : 'badge-locked'}" title="${b.desc}">
+      <div class="badge-icon">${b.icon}</div>
+      <div class="badge-name">${b.name}</div>
+      ${b.unlocked ? '' : '<div class="badge-lock">🔒</div>'}
+    </div>
+  `).join('');
+
   container.innerHTML = `
     <div class="card">
       <div class="card-title">📊 总览</div>
-      <div class="grid grid-3">
+      <div class="grid grid-4">
+        <div class="stat-card"><div class="stat-value">⚡${p.xp || 0}</div><div class="stat-label">经验值 · LV${xpLevel}</div></div>
         <div class="stat-card"><div class="stat-value">${p.streak}</div><div class="stat-label">连续天数</div></div>
         <div class="stat-card"><div class="stat-value">${Math.floor(p.totalStudyTime/3600)}</div><div class="stat-label">总学时</div></div>
-        <div class="stat-card"><div class="stat-value">L${lv.id}</div><div class="stat-label">当前级别</div></div>
+        <div class="stat-card"><div class="stat-value">L${lv.id}</div><div class="stat-label">路径级别</div></div>
       </div>
+      <div class="progress-bar mt-16"><div class="progress-fill" style="width:${Math.min(100, p.xp / nextXp * 100)}%"></div></div>
+      <div class="font-sm text-secondary mt-16">距下一级还需 ${Math.max(0, nextXp - p.xp)} XP (真实学习行为可获得 XP)</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🧭 能力模型 (Student Model)</div>
+      <div class="skill-grid">${skillRows}</div>
+      <div class="font-sm text-secondary mt-16">能力分 = 加权平均真实表现 · 样本越多越可信 · 弱项自动进入今日计划</div>
     </div>
     <div class="card">
       <div class="card-title">🛣️ 学习路径状态</div>
@@ -846,15 +980,23 @@ EM.renderProgressPage = (container) => {
       `).join('')}
     </div>
     <div class="card">
-      <div class="card-title">⚠️ 弱项记录 (自适应优先复习)</div>
-      ${Object.entries(p.weaknesses).map(([mod, items]) => items.length ?
-        `<div class="mb-16"><div class="font-sm text-secondary">${mod}</div>
-         <div class="flex gap-8 flex-wrap mt-16">${items.slice(0,20).map(i => `<span class="tag tag-l3">${EM.ui.esc(i)}</span>`).join('')}</div></div>` : ''
-      ).join('') || '<p class="text-secondary font-sm">暂无弱项记录</p>'}
+      <div class="card-title">❌ 错误银行 (Error Bank)
+        <span class="font-sm text-secondary">· 共 ${errStats.total} 项 · 未纠正 ${errStats.unresolved} 项${errStats.topCategory ? ' · 最常犯: ' + errStats.topCategoryLabel : ''}</span>
+      </div>
+      ${errRows || '<p class="text-secondary font-sm">暂无错误记录。答错会自动进入这里并生成针对性训练。</p>'}
+      <div class="flex gap-8 mt-16">
+        <button class="btn btn-primary" ${errStats.unresolved ? '' : 'disabled'} onclick="EM.router.navigate('test')">🎯 错题强化训练</button>
+        <button class="btn btn-secondary" onclick="EM.errors.clearResolved(); EM.renderProgressPage(document.getElementById('content'));">🧹 清理已纠正项</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏅 成就 (已解锁 ${badges.filter(b => b.unlocked).length}/${badges.length})</div>
+      <div class="badge-grid">${badgeHtml}</div>
+      <div class="font-sm text-secondary mt-16">成就由真实学习里程碑解锁, 每个成就 +50 XP。</div>
     </div>
     <div class="card">
       <div class="card-title">💾 跨设备同步</div>
-      <p class="font-sm text-secondary mb-16">导出进度文件到本地,在其他设备上导入即可继续学习</p>
+      <p class="font-sm text-secondary mb-16">导出进度文件到本地,在其他设备上导入即可继续学习 (进度含学生模型/错误银行/成就/XP)</p>
       <button class="btn btn-primary" onclick="EM.progress.export()">📤 导出进度</button>
       <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📥 导入进度</button>
     </div>
@@ -901,6 +1043,12 @@ EM.init = async () => {
     document.getElementById('speechRate').value = s.speechRate || 0.9;
     document.getElementById('rateValue').textContent = s.speechRate || 0.9;
     document.getElementById('themeSelect').value = s.theme || 'dark';
+    // 自适应设置
+    document.getElementById('dailyMinutes').value = s.dailyMinutes || 240;
+    document.getElementById('adaptiveMode').value = s.adaptiveMode || 'auto';
+    document.getElementById('intensitySelect').value = s.intensity || 'standard';
+    document.getElementById('strictnessSelect').value = s.strictness || 'standard';
+    EM.updateAdaptiveDesc();
     document.getElementById('aiApiUrl').value = s.aiApiUrl || '';
     document.getElementById('aiApiKey').value = s.aiApiKey || '';
     // 预设选择:根据 URL 反推
@@ -950,6 +1098,27 @@ EM.init = async () => {
   document.getElementById('themeSelect').onchange = e => {
     EM.progress.saveSettings({ theme: e.target.value });
     EM.applyTheme(e.target.value);
+  };
+
+  // 自适应设置
+  document.getElementById('dailyMinutes').onchange = e => {
+    EM.progress.saveSettings({ dailyMinutes: parseInt(e.target.value, 10) });
+    EM.ui.toast('已保存: 每日 ' + e.target.value + ' 分钟');
+    EM.router.navigate('home');
+  };
+  document.getElementById('adaptiveMode').onchange = e => {
+    EM.progress.saveSettings({ adaptiveMode: e.target.value });
+    EM.ui.toast(e.target.value === 'auto' ? '已切换为自动模式: 系统按能力安排学习' : '已切换为手动模式: 你自己选择学什么');
+  };
+  document.getElementById('intensitySelect').onchange = e => {
+    EM.progress.saveSettings({ intensity: e.target.value });
+    EM.updateAdaptiveDesc();
+    EM.ui.toast('已保存强度');
+  };
+  document.getElementById('strictnessSelect').onchange = e => {
+    EM.progress.saveSettings({ strictness: e.target.value });
+    EM.updateAdaptiveDesc();
+    EM.ui.toast('已保存严格度');
   };
   // AI 设置:预设选择 → 自动填 URL
   const presetSel = document.getElementById('aiPreset');
@@ -1108,6 +1277,7 @@ EM.init = async () => {
     if (confirm('确定重置所有进度?此操作不可撤销。')) {
       EM.progress.reset();
       EM.path.reset();
+      if (EM.srs) EM.srs.reset();
       EM.ui.toast('进度已重置,从第1步重新开始');
       EM.updateLevelBadge();
       EM.updateNavLocks();
@@ -1122,14 +1292,28 @@ EM.init = async () => {
     EM.ui.toast(on ? '语音已开启' : '语音已关闭');
   };
 
+  // 主题快捷切换
+  document.getElementById('themeToggle').onclick = () => EM.cycleTheme();
+
   // 主题
   const theme = EM.progress.getSettings().theme || 'dark';
   EM.applyTheme(theme);
+
+  // 初始化: 迁移旧弱项到错误银行 + 旧艾宾浩斯数据到 SRS + 成就检查
+  EM.errors.migrateLegacy();
+  const learned = EM.progress.get().modules.vocabulary.learned || [];
+  EM.srs.migrateLegacy(learned);
+  const unlocked = EM.achieve.check();
+  if (unlocked.length) {
+    setTimeout(() => EM.ui.toast('🏅 获得成就: ' + unlocked.map(b => b.name).join('、'), 4000), 1500);
+  }
 
   // 首页
   EM.router.navigate('home');
 };
 
+// 主题: dark / light / auto(跟随系统)
+// 应用主题并同步: data-theme 属性、color-scheme(原生控件)、theme-color(浏览器/状态栏)、快捷切换按钮图标
 EM.applyTheme = (theme) => {
   if (theme === 'auto') {
     const dark = matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1137,6 +1321,40 @@ EM.applyTheme = (theme) => {
   } else {
     document.documentElement.setAttribute('data-theme', theme);
   }
+  const effective = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  document.documentElement.style.colorScheme = effective;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', effective === 'light' ? '#ffffff' : '#1a1a2e');
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    const saved = EM.progress.getSettings().theme || 'dark';
+    btn.textContent = saved === 'auto' ? '🖥️' : (effective === 'light' ? '☀️' : '🌙');
+    btn.title = saved === 'auto' ? '跟随系统(点击切换)' : (effective === 'light' ? '当前: 浅色 · 点击切换' : '当前: 深色 · 点击切换');
+  }
+};
+
+// 跟随系统模式下的实时响应(系统主题变化立即生效, 无需刷新)
+(function setupThemeListener() {
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const onChange = () => {
+    const s = EM.progress.getSettings();
+    if ((s.theme || 'dark') === 'auto') EM.applyTheme('auto');
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onChange);
+  else if (mq.addListener) mq.addListener(onChange); // iOS 13 及更早
+})();
+
+// 顶栏快捷切换: 深色 -> 浅色 -> 跟随系统 -> 循环
+EM.cycleTheme = () => {
+  const order = ['dark', 'light', 'auto'];
+  const cur = EM.progress.getSettings().theme || 'dark';
+  const next = order[(order.indexOf(cur) + 1) % order.length];
+  EM.progress.saveSettings({ theme: next });
+  EM.applyTheme(next);
+  const sel = document.getElementById('themeSelect');
+  if (sel) sel.value = next;
+  const names = { dark: '深色', light: '浅色', auto: '跟随系统' };
+  EM.ui.toast('主题已切换为: ' + names[next]);
 };
 
 // 启动

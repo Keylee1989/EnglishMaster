@@ -539,8 +539,9 @@ EM.listening = {
       if (fb) fb.innerHTML = `<div class="quiz-result text-success">✓ 答对了！</div>`;
     } else {
       if (fb) fb.innerHTML = `<div class="quiz-result text-danger">✗ 答错了。正确答案：<b>${EM.ui.esc(q.options[q.answer])}</b></div>`;
-      // 记入弱项
+      // 记入弱项 + 错误银行
       EM.progress.addWeakness('listening', item.id);
+      EM.errors.add('listening', item.id);
     }
 
     // 下一题按钮
@@ -584,7 +585,15 @@ EM.listening = {
     // 全对则移除该对话的弱项标记
     if (allCorrect) {
       EM.progress.removeWeakness('listening', item.id);
+      EM.errors.correct('listening', item.id);
     }
+
+    // 学生模型 + XP
+    const acc = Math.round(correct / total * 100);
+    EM.student.record('listening', acc, 2);
+    EM.achieve.addXP(EM.achieve.XP.listen, '完成听力测验');
+    EM.achieve.check();
+    EM.recordDailyActivity('listening', 1);
 
     this._quizState = null;
     this._refreshStats();

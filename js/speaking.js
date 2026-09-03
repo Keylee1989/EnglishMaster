@@ -486,9 +486,17 @@ EM.speaking = {
       d.modules.speaking.score = (d.modules.speaking.score || 0) + Math.round(score / 5);
     });
     this._refreshStats();
-    // 完成一句跟读后自动检查路径推进(满足阈值时进入下一课)
-    if (ok && EM.path && typeof EM.path.advanceToNext === 'function') {
-      setTimeout(() => EM.path.advanceToNext(), 1200);
+    // 学生模型 + XP: 跟读得分影响口语/发音/流利度
+    EM.student.record('pronunciation', Math.max(0, Math.min(100, score)), 1);
+    EM.student.record('fluency', Math.max(0, Math.min(100, score)), 1);
+    if (ok) {
+      EM.achieve.addXP(EM.achieve.XP.speak, '口语跟读');
+      EM.achieve.check();
+      EM.recordDailyActivity('speaking', 1);
+      // 完成一句跟读后自动检查路径推进(满足阈值时进入下一课)
+      if (EM.path && typeof EM.path.advanceToNext === 'function') {
+        setTimeout(() => EM.path.advanceToNext(), 1200);
+      }
     }
   },
 
@@ -542,6 +550,12 @@ EM.speaking = {
         d.modules.speaking.score = (d.modules.speaking.score || 0) + 10;
       });
       this._refreshStats();
+      // 学生模型 + XP
+      EM.student.record('speaking', 70, 2);
+      EM.student.record('naturalness', 70, 1);
+      EM.achieve.addXP(EM.achieve.XP.speak, '情景对话');
+      EM.achieve.check();
+      EM.recordDailyActivity('speaking', 1);
       el.innerHTML = `
         <div class="card">
           <div class="quiz-result text-success">🎉 场景对话完成！</div>

@@ -8,7 +8,10 @@
   <meta name="theme-color" content="#1a1a2e">
   <title>英语大师 · 从零基础到C2</title>
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="英语大师">
+  <link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
   <div id="app">
@@ -46,6 +49,7 @@
         <h1 class="page-title" id="pageTitle">学习中心</h1>
         <div class="topbar-right">
           <button class="icon-btn" id="ttsToggle" title="语音开关">🔊</button>
+          <button class="icon-btn" id="themeToggle" title="切换主题">🌙</button>
           <button class="icon-btn" id="settingsBtn" title="设置">⚙️</button>
         </div>
       </header>
@@ -82,6 +86,44 @@
             <option value="light">浅色</option>
             <option value="auto">跟随系统</option>
           </select>
+        </div>
+        <div class="setting-group" style="border-top:1px solid var(--border); padding-top:14px;">
+          <label>⏱️ 每日学习时间预算</label>
+          <select id="dailyMinutes">
+            <option value="30">30 分钟 (碎片)</option>
+            <option value="60">60 分钟</option>
+            <option value="90">90 分钟</option>
+            <option value="120">2 小时</option>
+            <option value="180">3 小时</option>
+            <option value="240">4 小时 (推荐)</option>
+          </select>
+          <div class="font-sm text-secondary" style="margin-top:6px;">计划器按此预算分配复习/新课/输入/输出的时间。时间不足时优先关键复习，不会产生“没完成”的失败感。</div>
+        </div>
+        <div class="setting-group">
+          <label>🎛️ 自适应模式</label>
+          <select id="adaptiveMode">
+            <option value="auto">自动 (系统根据你的能力安排)</option>
+            <option value="manual">手动 (自己选择学什么)</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label>⚡ 强度 <span id="intensityDesc" style="font-size:12px; color:var(--text-muted);"></span></label>
+          <select id="intensitySelect">
+            <option value="light">轻松 (0.6×)</option>
+            <option value="standard">标准 (1×)</option>
+            <option value="intensive">强化 (1.4×)</option>
+            <option value="extreme">极限 (1.8×)</option>
+          </select>
+        </div>
+        <div class="setting-group">
+          <label>🎯 严格度 <span id="strictnessDesc" style="font-size:12px; color:var(--text-muted);"></span></label>
+          <select id="strictnessSelect">
+            <option value="relaxed">宽松</option>
+            <option value="standard">标准</option>
+            <option value="strict">严格</option>
+            <option value="extreme">极严</option>
+          </select>
+          <div class="font-sm text-secondary" style="margin-top:6px;">严格度决定“掌握”的标准：越严格，复习越多、推进越稳。系统不会偷偷修改你的设置。</div>
         </div>
         <div class="setting-group">
           <label>AI 问答接口 (可选 · 配置后可启用 AI 模式)</label>
@@ -127,19 +169,34 @@
   <!-- 通用弹窗 -->
   <div class="modal-overlay" id="toastOverlay"></div>
 
-  <script src="js/tts.js"></script>
-  <script src="js/progress.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/phonics.js"></script>
-  <script src="js/vocabulary.js"></script>
-  <script src="js/grammar.js"></script>
-  <script src="js/listening.js"></script>
-  <script src="js/speaking.js"></script>
-  <script src="js/reading.js"></script>
-  <script src="js/media.js"></script>
-  <script src="js/writing.js"></script>
-  <script src="js/test.js"></script>
-  <script src="js/dictionary.js"></script>
-  <script src="js/rag.js"></script>
+  <script src="js/tts.js?v=5"></script>
+  <script src="js/progress.js?v=5"></script>
+  <script src="js/app.js?v=5"></script>
+  <script src="js/phonics.js?v=5"></script>
+  <script src="js/vocabulary.js?v=5"></script>
+  <script src="js/grammar.js?v=5"></script>
+  <script src="js/listening.js?v=5"></script>
+  <script src="js/speaking.js?v=5"></script>
+  <script src="js/reading.js?v=5"></script>
+  <script src="js/media.js?v=5"></script>
+  <script src="js/writing.js?v=5"></script>
+  <script src="js/test.js?v=5"></script>
+  <script src="js/dictionary.js?v=5"></script>
+  <script src="js/rag.js?v=5"></script>
+  <script src="js/srs.js?v=5"></script>
+  <script src="js/student.js?v=5"></script>
+  <script src="js/errors.js?v=5"></script>
+  <script src="js/planner.js?v=5"></script>
+  <script src="js/achievements.js?v=5"></script>
+  <script>
+  // PWA: 注册 Service Worker (需要 HTTPS 或 localhost; GitHub Pages 满足)
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('[PWA] SW 注册成功, scope:', reg.scope))
+        .catch(err => console.warn('[PWA] SW 注册失败:', err));
+    });
+  }
+  </script>
 </body>
 </html>

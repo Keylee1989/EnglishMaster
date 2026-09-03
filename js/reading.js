@@ -738,10 +738,18 @@ EM.reading = {
     // 答错记弱项：用文章 id 作为弱项标识，方便提示复习哪篇
     if (wrongIdx.length) {
       EM.progress.addWeakness('reading', articleKey);
+      EM.errors.add('reading', articleKey);
     } else {
       // 全对则移除该文章的弱项标记
       EM.progress.removeWeakness('reading', articleKey);
+      EM.errors.correct('reading', articleKey);
     }
+
+    // 学生模型 + XP
+    EM.student.record('reading', score, 2);
+    EM.achieve.addXP(EM.achieve.XP.read, '完成阅读');
+    EM.achieve.check();
+    EM.recordDailyActivity('reading', 1);
 
     // 禁用提交按钮，避免重复
     const submitBtn = document.getElementById('submitQuiz');

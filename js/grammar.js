@@ -513,13 +513,20 @@ EM.grammar = {
         if (!d.modules.grammar.mastered.includes(t.id)) d.modules.grammar.mastered.push(t.id);
       });
       EM.progress.removeWeakness('grammar', t.id);
+      EM.errors.correct('grammar', t.id);
+      EM.achieve.addXP(EM.achieve.XP.grammar, '语法掌握');
+      EM.achieve.check();
+      EM.student.record('grammar', Math.min(100, 55 + Math.round(correct / total * 40)), 2);
+      EM.recordDailyActivity('grammar', 1);
       // 掌握一个语法点后自动检查路径推进(满足阈值时进入下一课)
       if (EM.path && typeof EM.path.advanceToNext === 'function') {
         setTimeout(() => EM.path.advanceToNext(), 1200);
       }
     } else {
-      // 记入弱项
+      // 记入弱项 + 错误银行
       EM.progress.addWeakness('grammar', t.id);
+      EM.errors.add('grammar', t.id);
+      EM.student.record('grammar', Math.round(correct / total * 50), 1);
     }
 
     el.innerHTML = `
