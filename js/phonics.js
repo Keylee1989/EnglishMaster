@@ -1,6 +1,10 @@
 /* ===== 自然拼读模块 (Phonics) =====
  * 循序渐进学习路径：字母 → 元音长短 → 辅音组合 → CVC拼读 → Magic E → 元音组合 → R控制音
- * 学习模式：点卡片听发音 + 一键标记"已掌握"
+ * 学习模式：字形 / 音标(IPA) / 每个例词 全部【分开独立点击】发音，互不干扰，绝不一键连读
+ *   - 点字母或字母组合  → 听字形代表的读音
+ *   - 点音标小胶囊      → 听该音发音要点(IPA 无法被 TTS 完美朗读,用最接近的拼读示范 + 中文口型提示)
+ *   - 点任意一个例词    → 只读那一个词
+ *   - CVC 卡片可逐个点字母音，再点“连起来读”体验拼读过程
  * 测验模式：听音选词 / 看词选拆分 / 看短词选Magic E长词，答错记入弱项
  * 兼容 iOS Safari（仅使用标准 Web Speech API，所有发音由用户点击触发）
  */
@@ -63,14 +67,45 @@ EM.phonics = {
         position:absolute; top:6px; right:6px; width:24px; height:24px; border-radius:50%;
         border:1px solid var(--border); background: var(--bg-secondary); color: var(--text-secondary);
         font-size:13px; cursor:pointer; display:flex; align-items:center; justify-content:center;
-        line-height:1; padding:0;
+        line-height:1; padding:0; z-index:2;
       }
       .phonics-mark:hover { border-color: var(--success); color: var(--success); }
+      .phonics-sub   { font-size:16px; color: var(--text-secondary); margin-top:0; line-height:1.2; }
+
+      /* —— 独立发音区 —— */
+      .ph-listen { touch-action: manipulation; cursor:pointer; user-select:none; -webkit-user-select:none; }
+      .ph-listen:active { transform: scale(0.94); }
+      .ph-sym {
+        display:flex; align-items:center; justify-content:center; gap:4px; width:100%;
+        text-align:center; font-size:30px; font-weight:800; line-height:1.15;
+        background:none; border:none; color:inherit; padding:4px 6px 0; cursor:pointer;
+      }
+      .ph-sym .ph-ic { font-size:11px; opacity:.5; transform:translateY(1px); }
+      .ph-zone { display:flex; flex-wrap:wrap; gap:5px; margin-top:7px; justify-content:center; }
+      .ph-chip, .ph-word, .ph-split {
+        display:inline-flex; align-items:center; gap:3px; font-size:13px; line-height:1;
+        padding:5px 9px; border-radius:999px; background:var(--bg-secondary,#fff);
+        border:1px solid var(--border,#ddd); color:var(--text,#222);
+      }
+      .ph-chip { border-color:var(--accent); color:var(--accent); font-size:12.5px; }
+      .ph-chip .ph-ic { font-size:10px; opacity:.7; }
+      .ph-word { font-size:13.5px; padding:6px 10px; }
+      .ph-word .ph-ic { font-size:10px; opacity:.6; }
+      .ph-word .ph-wipa { font-style:normal; font-size:10px; opacity:.75; color:var(--accent); margin-left:2px; }
+      .ph-split { font-size:17px; font-weight:700; padding:4px 11px; border-color:var(--accent); color:var(--accent); }
+      .ph-actions { display:flex; flex-wrap:wrap; gap:6px; margin-top:7px; justify-content:center; }
+      .ph-blend, .ph-pair {
+        font-size:12px; padding:5px 10px; border-radius:999px; border:1px dashed var(--accent);
+        color:var(--accent); background:transparent; cursor:pointer; line-height:1.2;
+      }
+      .ph-blend:active, .ph-pair:active { transform:scale(0.95); }
+      .ph-hint { min-height:0; font-size:11px; color:var(--accent); margin-top:5px; text-align:center;
+        opacity:0; transition:opacity .18s; line-height:1.3; }
+      .ph-hint.show { opacity:1; }
       .phonics-symbol { font-size:34px; font-weight:700; line-height:1.1; }
-      .phonics-sub   { font-size:18px; color: var(--text-secondary); margin-top:2px; }
       .phonics-eg   { font-size:12px; color: var(--text-secondary); margin-top:4px; }
       .phonics-sound { font-size:13px; color: var(--accent); margin-top:4px; font-family: Georgia, serif; }
-      .phonics-cn { font-size:12px; color: var(--text-secondary); margin-top:2px; }
+      .phonics-cn { font-size:11px; color: var(--text-secondary); margin-top:5px; text-align:center; line-height:1.35; }
       .group-header { width:100%; font-size:14px; font-weight:600; color: var(--text-secondary); margin:10px 0 4px; padding-left:4px; }
       .quiz-question { font-size:18px; font-weight:600; margin-bottom:14px; }
       .quiz-meta { font-size:13px; color: var(--text-secondary); margin-bottom:12px; }
@@ -107,7 +142,7 @@ EM.phonics = {
         <div class="phonics-tabs level-selector">
           ${this.tabs.map(t => `<button class="level-btn ${t.key === this.activeTab ? 'active' : ''}" data-tab="${t.key}">${t.icon} ${t.label}</button>`).join('')}
         </div>
-        <div class="phonics-hint">💡 学习路径：字母 → 元音 → 辅音 → CVC → Magic E → 元音组合 → R控制音，按顺序逐关攻克。点卡片听发音，点右上角 ○ 标记"已掌握"。</div>
+        <div class="phonics-hint">💡 发音全部【分开点】：「字形/字母组合」读整体、「音标」读发音要点、「每个例词」单独朗读。点右上角 ○ 标记"已掌握"。</div>
       </div>
 
       <div id="phonicsContent"></div>
@@ -145,16 +180,83 @@ EM.phonics = {
     else this._renderQuiz(el);
   },
 
-  /* ===== 把不同分类的数据统一成卡片项数组 =====
-   * 每项字段：
-   *   id(唯一) / group(分组) / symbol(主显示) / sound(音标)
-   *   words(例词数组) / cn(中文) / emoji / speakText(朗读文本)
-   *   quizType: 该分类用的题型 'letter'(字母辨识) | 'sound'(听音选字母组合) | 'split' | 'magic' | 'listen'
-   *   optionsPool: 该分类用于干扰选项的候选数组
+  /* ==================== IPA 音标朗读辅助 ====================
+   * Web Speech API 只能朗读“词/字母名”，无法直接朗读音标符号。
+   * 这里为每个音标提供“最接近的拼读示范文本”：
+   *   - 元音/双元音用其自然拼写读出(如 /eɪ/→"ay"、/iː/→"ee")
+   *   - 辅音用“辅音+弱读 ə”的声母读法(如 /b/→"buh")，这是中文母语者学英语辅音的标准方式，
+   *     注意发音时把末尾的 ə 去掉即是纯辅音
+   *   - 中文 cn 提示在点击后短暂显示，帮助掌握口型
    */
-  // 字母名发音映射:用单词形式拼写字母名,避免 Web Speech API 把单字母读成不定冠词
-  // 例: A→"Ayy", B→"Bee", C→"See", D→"Dee", E→"Ee", F→"Ef", G→"Gee", H→"Aich", ...
-  // 这样 TTS 读到的就是纯字母名 /eɪ/ /biː/ /siː/ /diː/ /iː/ 等,无任何前缀
+  _IPA_TALK: {
+    // 元音/双元音
+    '/eɪ/': { t: 'ay' }, '/iː/': { t: 'ee' }, '/aɪ/': { t: 'eye' }, '/oʊ/': { t: 'oh' },
+    '/uː/': { t: 'oo' }, '/juː/': { t: 'you' }, '/aʊ/': { t: 'ow' }, '/ɔɪ/': { t: 'oy' },
+    '/ɔː/': { t: 'aw' },
+    '/ɑːr/': { t: 'ar' }, '/ɜːr/': { t: 'er' }, '/ər/': { t: 'er' }, '/ɔːr/': { t: 'or' },
+    '/ɛər/': { t: 'air' }, '/ɪər/': { t: 'ear' },
+    // 短元音（口型提示）
+    '/æ/': { t: 'aa', cn: '/æ/：嘴巴向两侧拉开、短促，介于“啊”和“诶”之间（apple/cat 里的 a）' },
+    '/ɛ/': { t: 'eh', cn: '/ɛ/：短促的“诶”，嘴半开（bed/egg 里的 e）' },
+    '/ɪ/': { t: 'ih', cn: '/ɪ/：短促的“衣”，不拉长（sit/pig 里的 i）' },
+    '/ɑː/': { t: 'ah', cn: '/ɑː/：嘴张大像“啊”拉长（美式 hot/dog 里的 o）' },
+    '/ʌ/': { t: 'uh', cn: '/ʌ/：短促的“啊”，腹部用力（cup/sun 里的 u）' },
+    '/ʊ/': { t: 'uhh', cn: '/ʊ/：短“乌”，嘴唇微圆、比 /uː/ 短（book 里的 oo）' },
+    // 辅音（声母读法）
+    '/b/': { t: 'buh' }, '/k/': { t: 'kuh' }, '/d/': { t: 'duh' }, '/f/': { t: 'fuh' },
+    '/g/': { t: 'guh' }, '/h/': { t: 'huh' }, '/dʒ/': { t: 'juh' }, '/l/': { t: 'luh' },
+    '/m/': { t: 'muh' }, '/n/': { t: 'nuh' },
+    '/ŋ/': { t: 'uhng', cn: '/ŋ/：软腭鼻音，像“嗯”从鼻腔发出（sing/ring 的结尾音）' },
+    '/p/': { t: 'puh' }, '/r/': { t: 'ruh' }, '/s/': { t: 'suh' }, '/t/': { t: 'tuh' },
+    '/v/': { t: 'vuh' }, '/w/': { t: 'wuh' }, '/j/': { t: 'yuh' }, '/z/': { t: 'zuh' },
+    '/ʃ/': { t: 'shh', cn: '/ʃ/：嘘声，舌尖靠近上颚送气（she/ship）' },
+    '/tʃ/': { t: 'chuh' },
+    '/θ/': { t: 'thh', cn: '/θ/：舌尖轻咬、只吐气不震动声带（think/three）' },
+    '/ð/': { t: 'the', cn: '/ð/：舌尖轻咬、声带震动出声（this）' },
+    '/ks/': { t: 'kuhss', cn: '/ks/：/k/+/s/ 快速连读（six/fox 的结尾）' },
+    '/kw/': { t: 'kwuh', cn: '/kw/：/k/+/w/ 连读（queen）' },
+    // 辅音连缀
+    '/bl/': { t: 'bluh' }, '/kl/': { t: 'kluh' }, '/fl/': { t: 'fluh' }, '/gl/': { t: 'gluh' },
+    '/pl/': { t: 'pluh' }, '/sl/': { t: 'sluh' }, '/br/': { t: 'bruh' }, '/kr/': { t: 'kruh' },
+    '/dr/': { t: 'druh' }, '/fr/': { t: 'fruh' }, '/gr/': { t: 'gruh' }, '/tr/': { t: 'truh' },
+    '/str/': { t: 'struh' }, '/sp/': { t: 'spuh' }, '/st/': { t: 'stuh' }, '/sk/': { t: 'skuh' },
+    '/sm/': { t: 'smuh' }, '/sn/': { t: 'snuh' }, '/sw/': { t: 'swuh' }
+  },
+
+  /* 音标 → 拼读文本 */
+  _talk(ipa) {
+    const m = this._IPA_TALK[ipa];
+    return m ? (m.t || '') : '';
+  },
+  /* 音标 → 中文口型提示 */
+  _cn(ipa) {
+    const m = this._IPA_TALK[ipa];
+    return m ? (m.cn || '') : '';
+  },
+
+  /* CVC 逐字母拼读：字母 → 该字母在短元音 CVC 里的读音示范 */
+  _LETTER_SOUND: {
+    a: 'aa', b: 'buh', c: 'kuh', d: 'duh', e: 'eh', f: 'fuh', g: 'guh', h: 'huh',
+    i: 'ih', j: 'juh', k: 'kuh', l: 'luh', m: 'muh', n: 'nuh', o: 'ah', p: 'puh',
+    q: 'kwuh', r: 'ruh', s: 'suh', t: 'tuh', u: 'uh', v: 'vuh', w: 'wuh',
+    x: 'kuhss', y: 'yuh', z: 'zuh'
+  },
+  _letterSound(ch) {
+    return this._LETTER_SOUND[(ch || '').toLowerCase()] || (ch || '').toLowerCase();
+  },
+
+  /* 朗读一个音标（找不到示范时返回 false，由调用方回退） */
+  _speakIpa(ipa, rate) {
+    const t = this._talk(ipa);
+    if (!t) return false;
+    EM.tts.speak(t, { rate: rate || 0.9 });
+    return true;
+  },
+
+  /* 字母名发音映射:用单词形式拼写字母名,避免 Web Speech API 把单字母读成不定冠词
+   * 例: A→"Ayy", B→"Bee", C→"See", D→"Dee", E→"Ee", F→"Ef", G→"Gee", H→"Aich", ...
+   * 这样 TTS 读到的就是纯字母名 /eɪ/ /biː/ /siː/ /diː/ /iː/ 等,无任何前缀
+   */
   _letterName(letter) {
     const map = {
       'A':'Ayy','B':'Bee','C':'See','D':'Dee','E':'Ee','F':'Ef','G':'Gee',
@@ -165,14 +267,22 @@ EM.phonics = {
     return map[(letter || '').toUpperCase()] || (letter || '').toUpperCase();
   },
 
+  /* ===== 把不同分类的数据统一成卡片项数组 =====
+   * 学习模式用：
+   *   zones[]   音标发音区 [{ipa, text?, label?}] —— 一个卡片可有多个音(如 th=/θ/ 和 /ð/)
+   *   symbolTts 字形按钮点击后朗读的文本
+   *   words[]   例词(每个词独立可点)
+   *   wordIpas  {词: 该词含有的目标音标} —— 显示在例词胶囊下方
+   *   splitLetters[]  CVC 逐字母
+   * 测验模式用：quizType / quizAnswer / optionsPool / speakText(朗读文本,单个词或字母名)
+   */
   _getItems(tabKey) {
     const d = this.data;
     if (!d) return [];
     const items = [];
     switch (tabKey) {
       case 'letters':
-        // 字母分类:测验用"听字母名→选字母"题型,主显示就是字母本身
-        // TTS 用字母名的拼写形式(Ayy/Bee/See...)直接读出纯正字母名,无前缀
+        // 字母卡片：字形=字母；音标区=字母名读音(/eɪ/...)；例词=1个代表词
         (d.letters || []).forEach(o => {
           const up = o.letter.toUpperCase();
           const name = this._letterName(up);
@@ -183,10 +293,12 @@ EM.phonics = {
             subSymbol: o.letter.toLowerCase(),
             sound: o.sound,
             words: [o.word],
-            cn: o.cn,
+            wordIpas: {},
             emoji: o.emoji,
-            speakText: name,                       // 直接读字母名,如 "Ayy" /eɪ/
-            speakLabel: up + ' /' + name + '/',   // UI 显示辅助
+            cn: o.cn,
+            zones: [{ ipa: o.sound, text: name }],
+            symbolTts: name,
+            speakText: name,                       // 测验:直接读字母名
             quizType: 'letter',
             quizAnswer: up,
             optionsPool: (d.letters || []).map(x => x.letter.toUpperCase())
@@ -194,7 +306,7 @@ EM.phonics = {
         });
         break;
       case 'vowels':
-        // 元音分类:测验用"听元音字母名→选元音字母"
+        // 元音卡片：字形=字母(读字母名)；音标区=短音 + 长音两个独立音；例词=短/长各一个
         (d.vowels || []).forEach(o => {
           const up = (o.combo || '').toUpperCase();
           const name = this._letterName(up);
@@ -205,9 +317,14 @@ EM.phonics = {
             subSymbol: o.combo,
             sound: '短 ' + o.short + '  长 ' + o.long,
             words: [o.shortEg, o.longEg],
-            cn: '短音例词:' + o.shortEg + ' · 长音例词:' + o.longEg,
-            speakText: name,                        // 直接读字母名
-            speakLabel: up + ' /' + name + '/',
+            wordIpas: { [o.shortEg]: o.short, [o.longEg]: o.long },
+            cn: '',
+            zones: [
+              { ipa: o.short, label: '短音', text: this._talk(o.short) || undefined },
+              { ipa: o.long,  label: '长音', text: name }
+            ],
+            symbolTts: name,
+            speakText: name,
             quizType: 'letter',
             quizAnswer: up,
             optionsPool: (d.vowels || []).map(x => (x.combo || '').toUpperCase())
@@ -215,35 +332,24 @@ EM.phonics = {
         });
         break;
       case 'consonants':
-        // 单辅音 + 辅音连缀：测验用"听字母组合发音→选组合"
+        // 辅音分类 = 单辅音 + 双字母/辅音组合：可能有多个读音(如 th: /θ/或/ð/)，每个读音独立成胶囊
         (d.consonants || []).forEach(o => {
-          items.push({
-            id: 'consonants:' + o.combo,
-            group: '单辅音',
-            symbol: o.combo,
-            sound: o.sound,
-            words: o.words,
-            cn: o.cn,
-            speakText: o.words.join('. '),
-            quizType: 'sound',
-            optionsPool: (d.consonants || []).concat(d.blends || []).map(x => x.combo)
-          });
+          items.push(this._soundItem('consonants:' + o.combo, '单辅音', o, (d.consonants || []).map(x => x.combo)));
         });
         (d.blends || []).forEach(o => {
-          items.push({
-            id: 'blends:' + o.combo,
-            group: '辅音连缀',
-            symbol: o.combo,
-            sound: o.sound,
-            words: o.words,
-            cn: o.cn,
-            speakText: o.words.join('. '),
-            quizType: 'sound',
-            optionsPool: (d.consonants || []).concat(d.blends || []).map(x => x.combo)
-          });
+          items.push(this._soundItem('blends:' + o.combo, '辅音组合', o,
+            (d.consonants || []).concat(d.blends || []).map(x => x.combo)));
+        });
+        break;
+      case 'blends':
+        // 辅音组合(备用入口，与 consonants 分类共用同一份数据)
+        (d.blends || []).forEach(o => {
+          items.push(this._soundItem('blends:' + o.combo, '', o,
+            (d.consonants || []).concat(d.blends || []).map(x => x.combo)));
         });
         break;
       case 'cvc':
+        // CVC：字形区=逐字母音(c-a-t 每个字母可点)；音标区=整词音标；例词=整词
         (d.cvc || []).forEach(o => {
           items.push({
             id: 'cvc:' + o.word,
@@ -251,14 +357,19 @@ EM.phonics = {
             symbol: o.word,
             sound: o.sound,
             split: o.split,
+            splitLetters: (o.split || o.word).split('-'),
             words: [o.word],
+            wordIpas: {},
             cn: o.cn,
+            zones: [{ ipa: o.sound }],            // 点击→慢速读整词
+            symbolTts: o.word,
             speakText: o.word,
             quizType: 'split'
           });
         });
         break;
       case 'magicE':
+        // Magic E：两个字都独立可点 + “对比读”按钮
         (d.magicE || []).forEach(o => {
           items.push({
             id: 'magicE:' + o.short,
@@ -266,44 +377,48 @@ EM.phonics = {
             symbol: o.short + ' → ' + o.long,
             sound: '',
             words: [o.short, o.long],
+            wordIpas: {},
             cn: o.cn,
-            speakText: o.short + '. ' + o.long,
+            zones: [],
+            symbolTts: '',
+            speakText: o.long,
             quizType: 'magic'
           });
         });
         break;
       case 'vowelTeams':
         (d.vowelTeams || []).forEach(o => {
-          items.push({
-            id: 'vowelTeams:' + o.combo,
-            group: '',
-            symbol: o.combo,
-            sound: o.sound,
-            words: o.words,
-            cn: '',
-            speakText: o.words.join('. '),
-            quizType: 'sound',
-            optionsPool: (d.vowelTeams || []).map(x => x.combo)
-          });
+          items.push(this._soundItem('vowelTeams:' + o.combo, '', o, (d.vowelTeams || []).map(x => x.combo)));
         });
         break;
       case 'rControlled':
         (d.rControlled || []).forEach(o => {
-          items.push({
-            id: 'rControlled:' + o.combo,
-            group: '',
-            symbol: o.combo,
-            sound: o.sound,
-            words: o.words,
-            cn: '',
-            speakText: o.words.join('. '),
-            quizType: 'sound',
-            optionsPool: (d.rControlled || []).map(x => x.combo)
-          });
+          items.push(this._soundItem('rControlled:' + o.combo, '', o, (d.rControlled || []).map(x => x.combo)));
         });
         break;
     }
     return items;
+  },
+
+  /* 通用“字形+音标+例词”卡片项：单音或多个音(oo/th/ow...)通用 */
+  _soundItem(id, group, o, optionsPool) {
+    const ipas = (o.sounds && o.sounds.length) ? o.sounds : [o.sound];
+    const zones = ipas.map(ipa => ({ ipa, text: this._talk(ipa) || undefined }));
+    return {
+      id,
+      group,
+      symbol: o.combo,
+      sound: o.sound,
+      words: (o.words || []).slice(),
+      wordIpas: o.wordSounds || {},
+      cn: o.cn || '',
+      zones,
+      symbolTts: zones[0] ? (zones[0].text || undefined) : '',
+      speakText: (o.words && o.words[0]) || o.combo,   // 测验只读一个例词,不连读
+      quizType: 'sound',
+      quizAnswer: o.combo,
+      optionsPool: optionsPool || []
+    };
   },
 
   /* ===== 计算总进度 ===== */
@@ -330,8 +445,9 @@ EM.phonics = {
   },
 
   /* ===== 学习模式：渲染卡片网格 =====
-   * 字母/元音分类：主显示纯大写字母，副显示小写，例词+emoji+中文作为辅助
-   * 其他分类：主显示字母组合/单词，例词和中文辅助
+   * 每个卡片上所有发声元素都是独立的小按钮：
+   *   [字形按钮] / [音标胶囊...] / [例词胶囊...] / [逐字母(CVC)] / [对比读(MagicE)]
+   * 卡片本身不再有任何“整卡连读”，杜绝一点全出
    */
   _renderLearn(el) {
     const items = this._getItems(this.activeTab);
@@ -341,8 +457,6 @@ EM.phonics = {
     }
     const p = EM.progress.get();
     const mastered = new Set(p.modules.phonics.mastered || []);
-
-    // 是否是纯字母类分类（letters/vowels）
     const isLetterTab = (this.activeTab === 'letters' || this.activeTab === 'vowels');
 
     let html = '<div class="card"><div class="phonics-grid">';
@@ -353,31 +467,101 @@ EM.phonics = {
         lastGroup = it.group;
       }
       const isM = mastered.has(it.id);
-      // 字母类：主显示就是大字母；其他：原样
-      const mainSymbol = isLetterTab ? it.symbol : (it.emoji ? (it.emoji + ' ' + it.symbol) : it.symbol);
-      const eg = (it.words && it.words.length) ? it.words.slice(0, 2).join(' · ') : '';
+      const isCvc = this.activeTab === 'cvc';
+      const isMagic = this.activeTab === 'magicE';
+
+      /* ---- 字形按钮：字母/元音读字母名；组合读其读音 ---- */
+      let symbolHtml = '';
+      if (isCvc) {
+        // CVC:逐字母音按钮
+        const splits = it.splitLetters.map(ch =>
+          `<button class="ph-split ph-listen" data-tts="${EM.ui.esc(this._letterSound(ch))}" data-tip="${EM.ui.esc(ch + ' 的读音')}">${EM.ui.esc(ch)}</button>`).join('');
+        symbolHtml = `<div class="ph-zone">${splits}</div>`;
+      } else if (isMagic) {
+        // Magic E: 两个词并排展示(各自在例词区可点),这里放规则文字
+        symbolHtml = `<div class="phonics-symbol" style="font-size:20px;">${EM.ui.esc(it.symbol)}</div>`;
+      } else {
+        const tts = it.symbolTts || '';
+        symbolHtml = `<button class="ph-sym ph-listen" data-tts="${EM.ui.esc(tts)}" data-tip="${EM.ui.esc(isLetterTab ? '字母名' : '字形读音')}">${EM.ui.esc(it.symbol)}<i class="ph-ic">🔊</i></button>`;
+      }
+      const subHtml = (it.subSymbol && !isCvc) ? `<div class="phonics-sub">${EM.ui.esc(it.subSymbol)}</div>` : '';
+
+      /* ---- 音标胶囊区：每个音独立 ---- */
+      let zoneHtml = '';
+      if (it.zones && it.zones.length) {
+        const chips = it.zones.map(z => {
+          const rate = this._talk(z.ipa) ? '1' : '0.55';  // 无示范文本(整词音标)时慢速读例词
+          const label = z.label ? EM.ui.esc(z.label) + ' ' : '';
+          return `<button class="ph-chip ph-listen" data-tts="${EM.ui.esc(z.text || '')}" data-ipa="${EM.ui.esc(z.ipa)}" data-rate="${rate}" data-word="${EM.ui.esc(isCvc ? (it.words[0] || '') : '')}" data-cn="${EM.ui.esc(this._cn(z.ipa))}" data-tip="音标读音">🔊 ${label}${EM.ui.esc(z.ipa)}</button>`;
+        }).join('');
+        zoneHtml = `<div class="ph-zone">${chips}</div>`;
+      }
+
+      /* ---- 例词区：每个词独立可点 ---- */
+      let wordHtml = '';
+      if (it.words && it.words.length) {
+        const wchips = it.words.map(w => {
+          const ipaMini = it.wordIpas && it.wordIpas[w];
+          const extra = it.emoji && isLetterTab ? ' ' + it.emoji : '';
+          const mark = (it.wordIpas && Object.keys(it.wordIpas).length) ? `<i class="ph-wipa">${EM.ui.esc(ipaMini || '')}</i>` : '';
+          return `<button class="ph-word ph-listen" data-tts="${EM.ui.esc(w)}" data-tip="例词 ${EM.ui.esc(w)}">🔊 ${EM.ui.esc(w)}${extra}${mark}</button>`;
+        }).join('');
+        const caption = isCvc ? '整词(先点上面字母，再把它们连起来)' : '例词(逐个点，只读单个词)';
+        wordHtml = `<div class="ph-zone" style="margin-top:6px;"><span style="font-size:10px;color:var(--text-secondary);opacity:.8;width:100%;">${isMagic ? '两个词逐个听，体会 Magic E 的威力' : caption}</span>${wchips}</div>`;
+      }
+
+      /* ---- 附加按钮 ---- */
+      let actionHtml = '';
+      if (isCvc) {
+        actionHtml = `<div class="ph-actions"><button class="ph-blend" data-seq="${it.splitLetters.map(ch => this._letterSound(ch)).join(',')}" data-word="${EM.ui.esc(it.words[0])}">🔊 连起来读 ${EM.ui.esc((it.splitLetters || []).join('-'))}</button></div>`;
+      } else if (isMagic) {
+        actionHtml = `<div class="ph-actions"><button class="ph-pair" data-seq="${EM.ui.esc(it.words[0])},${EM.ui.esc(it.words[1])}">🔊 对比读 (${EM.ui.esc(it.words[0])} → ${EM.ui.esc(it.words[1])})</button></div>`;
+      }
+
       html += `
         <div class="phonics-cell ${isM ? 'mastered' : ''}" data-id="${EM.ui.esc(it.id)}">
           <button class="phonics-mark" data-mark="${EM.ui.esc(it.id)}" title="标记已掌握">${isM ? '✓' : '○'}</button>
-          <div class="phonics-symbol">${EM.ui.esc(mainSymbol)}</div>
-          ${it.subSymbol ? `<div class="phonics-sub">${EM.ui.esc(it.subSymbol)}</div>` : ''}
-          ${it.speakLabel ? `<div class="phonics-speak-label" style="font-size:11px;color:var(--accent);opacity:0.7;margin-top:2px;">🔊 ${EM.ui.esc(it.speakLabel)} 点击听</div>` : ''}
-          ${eg ? `<div class="phonics-eg">例词:${EM.ui.esc(eg)}${it.emoji ? ' '+it.emoji : ''}</div>` : ''}
-          ${it.sound ? `<div class="phonics-sound">${EM.ui.esc(it.sound)}</div>` : ''}
+          ${symbolHtml}${subHtml}
+          ${zoneHtml}
+          ${wordHtml}
+          ${actionHtml}
           ${it.cn ? `<div class="phonics-cn">${EM.ui.esc(it.cn)}</div>` : ''}
+          <div class="ph-hint"></div>
         </div>`;
     });
     html += '</div></div>';
     el.innerHTML = html;
 
-    // 点击卡片播放发音；点击右上角标记按钮切换掌握
-    el.querySelectorAll('.phonics-cell').forEach(cell => {
-      cell.onclick = (e) => {
-        if (e.target.closest('[data-mark]')) return; // 标记按钮单独处理
-        const it = this._findItem(cell.dataset.id);
-        if (it) this._playItem(it);
+    // 所有发声元素统一绑定：点谁只读谁
+    el.querySelectorAll('.ph-listen').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        this._onSpeakClick(btn);
       };
     });
+
+    // Magic E / CVC 的序列按钮
+    el.querySelectorAll('.ph-blend').forEach(btn => {
+      btn.onclick = () => {
+        const parts = btn.dataset.seq.split(',');
+        const word = btn.dataset.word;
+        EM.tts.speakSequence(parts, { rate: 0.9 });
+        const cell = btn.closest('.phonics-cell');
+        if (cell) this._showHint(cell, '拼读示范：' + parts.map(p => '“' + p + '”').join(' · ') + (word ? ' → ' + word : ''));
+        // 读完字母音后自动读整词(speakSequence 每个音约 1 秒)
+        setTimeout(() => { if (word) EM.tts.speak(word); }, parts.length * 1000 + 250);
+      };
+    });
+    el.querySelectorAll('.ph-pair').forEach(btn => {
+      btn.onclick = () => {
+        const [a, b] = btn.dataset.seq.split(',');
+        EM.tts.speakSequence([a, b], { rate: 0.9 });
+        const cell = btn.closest('.phonics-cell');
+        if (cell) this._showHint(cell, '对比读：' + a + ' → ' + b + '（末尾多了不发音的 e，元音变长音）');
+      };
+    });
+
+    // 标记已掌握
     el.querySelectorAll('[data-mark]').forEach(btn => {
       btn.onclick = (e) => {
         e.stopPropagation();
@@ -386,11 +570,39 @@ EM.phonics = {
     });
   },
 
-  /* ===== 朗读：调用 EM.tts.speak ===== */
-  _playItem(it) {
-    if (!it) return;
-    const text = it.speakText || (it.words && it.words[0]) || it.symbol;
-    EM.tts.speak(text);
+  /* 点击发音元素：只播放该元素对应的声音，并显示口型提示 */
+  _onSpeakClick(btn) {
+    const cell = btn.closest('.phonics-cell');
+    const tip = btn.dataset.tip;
+    const tts = btn.dataset.tts || '';
+    const ipa = btn.dataset.ipa || '';
+    const word = btn.dataset.word || '';
+    const rate = parseFloat(btn.dataset.rate || '1');
+    const cn = btn.dataset.cn || '';
+
+    if (tts) {
+      EM.tts.speak(tts, { rate: rate || 1 });
+      // 中文口型提示
+      const hint = cn || (ipa ? '🔊 ' + ipa + (tip ? ' · ' + tip : '') : (tip || ''));
+      if (cell) this._showHint(cell, hint);
+    } else if (ipa && word) {
+      // 整词音标(如 /kæt/)：慢速读例词帮助辨音
+      EM.tts.speak(word, { rate: 0.55 });
+      if (cell) this._showHint(cell, '🔊 ' + ipa + '（慢速读 ' + word + '，听清每个音）');
+    } else if (tip) {
+      EM.tts.speak(tip, { rate: rate || 1 });
+      if (cell) this._showHint(cell, tip);
+    }
+  },
+
+  /* 短暂显示一行口型/读法提示(2.6 秒后淡出) */
+  _showHint(cell, text) {
+    const box = cell.querySelector('.ph-hint');
+    if (!box) return;
+    box.textContent = text || '';
+    box.classList.add('show');
+    clearTimeout(box._t);
+    box._t = setTimeout(() => box.classList.remove('show'), 2600);
   },
 
   /* ===== 标记/取消"已掌握"，写入进度，并局部刷新 =====
@@ -520,10 +732,10 @@ EM.phonics = {
       options = this._shuffle([answer].concat(distractors));
       question = '🔊 听字母名,选出你听到的字母(可点听发音重复听)';
     } else if (type === 'sound') {
-      // 听单词发音 → 选出正确的字母组合
+      // 听单个例词发音 → 选出正确的字母组合
       const correctCombo = target.symbol;
       answer = correctCombo;
-      speakText = target.speakText; // 朗读例词
+      speakText = target.speakText; // 只读第一个例词
       showWord = null;
       const distractors = this._sample(
         (target.optionsPool || items.map(i => i.symbol))

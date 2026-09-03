@@ -9,7 +9,7 @@
  */
 'use strict';
 
-const CACHE_NAME = 'english-master-v2';
+const CACHE_NAME = 'english-master-v4';
 const APP_SHELL = [
   './',
   './index.html',
@@ -92,11 +92,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 数据文件: cache-first + 后台更新
+  // 数据文件: cache-first + 后台更新 (后台请求绕过HTTP缓存,保证数据更新)
   if (url.pathname.startsWith('/data/')) {
     event.respondWith(
       caches.match(req).then((cached) => {
-        const network = fetch(req)
+        const network = fetch(req, { cache: 'no-store' })
           .then((res) => {
             if (res && res.ok) {
               const copy = res.clone();
@@ -111,10 +111,10 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // 其余静态资源: cache-first + 后台更新
+  // 其余静态资源: cache-first + 后台更新 (后台请求绕过HTTP缓存,保证更新)
   event.respondWith(
     caches.match(req).then((cached) => {
-      const network = fetch(req)
+      const network = fetch(req, { cache: 'no-store' })
         .then((res) => {
           if (res && res.ok) {
             const copy = res.clone();
