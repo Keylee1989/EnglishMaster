@@ -38,7 +38,7 @@ index.html ── 路由容器 / 设置弹窗
 ├── js/test.js         自适应测试 + 毕业测试 + 错题强化
 ├── js/dictionary.js   查询中心
 └── js/rag.js          RAG 智能问答 + AI Provider
-data/*.json            内置课程数据（词汇 55k / 语法 87+ / 拼读 / 对话 / 文章 / 路径）
+data/*.json            内置课程数据（词汇 20k 真实高频词 / 语法 87+463 / 拼读 / 对话 / 文章 / 路径）
 sw.js                  Service Worker（离线缓存）
 manifest.json          PWA manifest
 ```
@@ -160,12 +160,25 @@ XP 只奖励真实行为：学词 2、复习 1-3、测验答对 3、听力 15、
 | 限制 | 影响 | 方案/替代 |
 |---|---|---|
 | iOS 无语音识别 | 口语无法自动评分 | 降级自评；后续接入语音上传到云端评测 |
-| 19.5MB vocabulary.json | 首次加载慢 | SW 缓存后离线秒开；可拆分为按级别懒加载 |
+| 19.5MB→6MB vocabulary.json | 2026-09 已按真实语料频率重建为 20k 高频词（6MB），首载明显加快 | SW 缓存后离线秒开；可再拆分为按级别懒加载 |
 | localStorage 5MB | 极端词量下可能紧张 | 数据带 schema，迁移 IndexedDB 即可 |
 | 无后端 | 无账号/云同步/AI 代理 | 预留 Sync Adapter + 可选安全代理（Supabase/Firebase/自建） |
 | 评估多用已学材料 | 迁移能力验证不足 | 里程碑评估（Day30/90/180/270/360）逐步加入 unseen 材料 |
 
-## 9. 开发与测试
+## 9. 数据生成管线（tools/）
+
+```bash
+# 依赖: tools/ECDICT-master/ecdict.csv + wordroot.txt (见 tools/ECDICT-master/README.md)
+python tools/convert_ecdict.py    # 重建 data/vocabulary.json (20k 词, 真实频率分级)
+python tools/enhance_vocab.py     # 重建 data/vocabulary_enhanced.json (真实词根/词形/英英释义)
+python tools/validate_json.py     # 校验全部 data/*.json
+```
+
+词库分级依据 **min(BNC排名, COCA排名)** 真实语料频率；无任何语料频率信号的词
+（公司名/生僻医学词等）不进入词库 —— 这是 2026-09 数据审计后确定的原则：
+宁可词少而真，不可词多而假。
+
+## 10. 开发与测试
 
 - 无构建/无 npm：`python3 -m http.server 8000` 即可；
 - `tools/validate_json.py` 校验数据文件；

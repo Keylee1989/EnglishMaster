@@ -10,7 +10,7 @@ window.EM = window.EM || {};
 
 EM.rag = {
   data: null,           // knowledge.json 数据缓存(精选 QA)
-  vocab: null,          // vocabulary.json (55000 词)
+  vocab: null,          // vocabulary.json (20000 高频词)
   enhanced: null,       // vocabulary_enhanced.json (L1-L3 增强字段)
   grammar: null,        // grammar.json + grammar_extra.json 合并(550 条)
   _container: null,     // 当前渲染容器
@@ -33,7 +33,7 @@ EM.rag = {
     container.innerHTML = '<div class="loading">加载知识库中...</div>';
 
     // 异步加载数据（EM.data 带缓存）
-    // 知识库 + 55000 词汇 + 550 语法 全部纳入 RAG 检索源
+    // 知识库 + 20000 词汇 + 550 语法 全部纳入 RAG 检索源
     if (!this.data) {
       this.data = await EM.data.load('knowledge');
     }
@@ -70,7 +70,7 @@ EM.rag = {
     if (this.messages.length === 0) {
       this.messages.push({
         role: 'bot',
-        text: '你好!我是英语学习助手 🤖 (已加载 55000 词汇 + 550 语法),可以问我:\n'
+        text: '你好!我是英语学习助手 🤖 (已加载 20000 高频词 + 550 语法),可以问我:\n'
               + '• 单词: 直接输入英文(如 "apple") 或"单词 xxx" → 返回音标/词性/中文/例句/搭配/记忆方法\n'
               + '• 语法: 直接问 "be动词"、"定语从句"、"虚拟语气" → 返回精讲+例句\n'
               + '• 翻译: 问 "苹果用英语怎么说" → 返回英文表达\n'
@@ -443,7 +443,7 @@ EM.rag = {
     return { text, cite };
   },
 
-  /* ===== 词汇检索:从 55000 词库中查询单词完整信息 ===== */
+  /* ===== 词汇检索:从 20000 词库中查询单词完整信息 ===== */
   _searchVocab(word) {
     if (!this.vocab || !this.vocab.levels) return null;
     const w = word.toLowerCase().trim();

@@ -9,7 +9,7 @@
  */
 'use strict';
 
-const CACHE_NAME = 'english-master-v6';
+const CACHE_NAME = 'english-master-v7';
 const APP_SHELL = [
   './',
   './index.html',

@@ -319,6 +319,25 @@ EM.dictionary = {
     // 怎么使用(用法)
     const usage = enhanced.usage || this._genUsage(w);
 
+    // 真实词典数据(来自 ecdict.csv): 英英释义 / 词形变化 / 语料频率
+    let defsHtml = '';
+    if (Array.isArray(enhanced.englishDefs) && enhanced.englishDefs.length) {
+      defsHtml = `
+        <div class="word-section">
+          <div class="word-section-title">📖 英英释义(WordNet)</div>
+          <div style="font-size:13px; line-height:1.7; color:var(--text-secondary);">
+            ${enhanced.englishDefs.map(d => `<div style="margin-bottom:4px;">• ${EM.ui.esc(d)}</div>`).join('')}
+          </div>
+        </div>`;
+    }
+    let exchHtml = '';
+    if (Array.isArray(enhanced.exchange) && enhanced.exchange.length) {
+      exchHtml = enhanced.exchange.map(e2 =>
+        `<span class="collocation-tag" data-word-speak="${EM.ui.esc(e2.form)}" title="点击朗读">${EM.ui.esc(e2.label)}: ${EM.ui.esc(e2.form)}</span>`).join('');
+    }
+    const freqHtml = enhanced.freqInfo ?
+      `<div class="font-sm text-secondary" style="margin-top:6px;">📊 ${EM.ui.esc(enhanced.freqInfo)}</div>` : '';
+
     return `
       <div class="word-card">
         <div class="word-head">
@@ -333,6 +352,13 @@ EM.dictionary = {
             <span data-word-speak="${w.example}" style="cursor:pointer;">🔊</span> ${w.example}
             ${w.exampleCn ? `<div class="word-example-cn">${w.exampleCn}</div>` : ''}
           </div>` : ''}
+        ${exchHtml ? `
+          <div class="word-section">
+            <div class="word-section-title">🔀 词形变化(点击朗读)</div>
+            <div class="word-collocations">${exchHtml}</div>
+          </div>` : ''}
+        ${defsHtml}
+        ${freqHtml}
         ${usage ? `
           <div class="word-section">
             <div class="word-section-title">📝 怎么使用</div>
