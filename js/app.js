@@ -327,8 +327,8 @@ EM.path = {
     const p = EM.progress.get();
     const curStep = p.pathStep || 0;
 
-    // progress/rag/dictionary/home/media 始终允许(media为辅助学习资源)
-    if (['home', 'progress', 'rag', 'dictionary', 'media'].includes(moduleName)) return true;
+    // progress/rag/dictionary/home/media/sounds 始终允许(sounds为发音查询/练习页)
+    if (['home', 'progress', 'rag', 'dictionary', 'media', 'sounds'].includes(moduleName)) return true;
 
     // 该模块在路径中是否已出现在已完成的步骤或当前步骤
     // 即: 如果用户当前或之前任何一步用到了这个模块,就算解锁
@@ -403,6 +403,7 @@ EM.router = {
   routes: {
     home: { title: '学习中心' },
     phonics: { title: '自然拼读' },
+    sounds: { title: '发音中心' },
     vocabulary: { title: '词汇学习' },
     grammar: { title: '语法大全' },
     listening: { title: '听力训练' },
@@ -535,7 +536,7 @@ EM.updateNavLocks = () => {
   if (!all.length) return;
   document.querySelectorAll('.nav-item').forEach(el => {
     const route = el.dataset.route;
-    if (['home', 'progress', 'rag'].includes(route)) return;
+    if (['home', 'progress', 'rag', 'dictionary', 'media', 'sounds'].includes(route)) return;
     const unlocked = EM.path.isModuleUnlocked(route);
     const label = el.querySelector('.nav-label');
     if (!label) return;
@@ -785,12 +786,12 @@ EM.renderHome = async (container) => {
 
     <!-- 其他模块入口(只显示已解锁的) -->
     <div class="grid grid-3">
-      ${['phonics','vocabulary','grammar','listening','speaking','reading','media','writing','test'].map(name => {
+      ${['phonics','sounds','vocabulary','grammar','listening','speaking','reading','media','writing','test'].map(name => {
         const unlocked = EM.path.isModuleUnlocked(name);
-        const titleMap = { phonics:'自然拼读', vocabulary:'词汇学习', grammar:'语法大全',
+        const titleMap = { phonics:'自然拼读', sounds:'发音中心', vocabulary:'词汇学习', grammar:'语法大全',
           listening:'听力训练', speaking:'口语练习', reading:'阅读理解',
           media:'音视频课', writing:'写作训练', test:'自适应测试' };
-        const iconMap = { phonics:'🔤', vocabulary:'📚', grammar:'📖',
+        const iconMap = { phonics:'🔤', sounds:'📣', vocabulary:'📚', grammar:'📖',
           listening:'👂', speaking:'🗣️', reading:'📰',
           media:'🎬', writing:'✍️', test:'🎯' };
         return `

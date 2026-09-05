@@ -9,7 +9,7 @@
  */
 'use strict';
 
-const CACHE_NAME = 'english-master-v4';
+const CACHE_NAME = 'english-master-v6';
 const APP_SHELL = [
   './',
   './index.html',
@@ -19,6 +19,7 @@ const APP_SHELL = [
   './js/progress.js',
   './js/app.js',
   './js/phonics.js',
+  './js/sounds.js',
   './js/vocabulary.js',
   './js/grammar.js',
   './js/listening.js',
@@ -43,6 +44,7 @@ const APP_SHELL = [
 const DATA_FILES = [
   './data/learning_path.json',
   './data/phonics.json',
+  './data/phonics_resources.json',
   './data/grammar.json',
   './data/conversations.json',
   './data/knowledge.json'
